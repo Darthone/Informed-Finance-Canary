@@ -1,0 +1,15 @@
+        {% for entry in feed %}
+        {
+            "title": "{{ entry.title }}",
+            "author": "{{ entry.author }}",
+            "published_date": "{{ entry.published }}",
+            "summary": "{{ entry.summary|striptags }}",
+            "link": "{{ entry.link }}",
+            "id": "{{ entry.id }}",
+            "content": "{{ entry.content }}"
+        },
+        {% endfor %}
+        
+
+            
+
