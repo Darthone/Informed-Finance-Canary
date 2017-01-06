@@ -1,10 +1,13 @@
 #!/usr/bin/env python
 import json
 import nltk
-from newspaper import Article
 import os
 import requests
+
 from lxml import html
+from newspaper import Article
+from Queue import Queue
+from threading import Thread
 
 def create_urls(filename):
     json_data = {}
@@ -44,22 +47,34 @@ def url_to_articles(url):
     ret = tree.xpath('//div[@class="headlineMed"]/a/@href')
     return ret
 
+q = Queue()
+folder = "articles"
+num_worker_threads = 18
+
+def dl_worker():
+    url = q.get()
+    if url is not None:
+        for u in url_to_articles(url):
+            article_to_file(u, folder)
+        q.task_done()
+        url = q.get()
+    q.task_done()
+
 def main():
     urls = create_urls("articles.json")
-    #url ='http://www.reuters.com/article/aids-day-china-idUSL4N1DO19B'
-    folder = "articles"
     if not os.path.exists(folder) or not os.path.isdir(folder):
         os.mkdir(folder)
 
-    #urls.reverse()
-    print len(urls)
-    i = 0 # starting point
-    for url in urls[i:]:
-        print i
-        for u in url_to_articles(url):
-            article_to_file(u, folder)
-        i+=1
+    for i in range(num_worker_threads):
+        t = Thread(target=dl_worker)
+        t.daemon = True
+        t.start()
 
+    #urls.reverse()
+    for u in urls:
+        q.put(u)
+     
+    q.join()
 
 if __name__ == "__main__": 
     nltk.download('punkt')
