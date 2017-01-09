@@ -4,9 +4,6 @@ yahoo-finance
 
 Python module to get stock data from Yahoo! Finance
 
-.. image:: https://travis-ci.org/lukaszbanasiak/yahoo-finance.svg?branch=master
-    :target: https://travis-ci.org/lukaszbanasiak/yahoo-finance
-
 Yahoo! Finance backend is http://datatables.org/. If this service is down or
 has network problems you will receive errors from group YQL*,
 eg. ``YQLQueryError``.
@@ -15,22 +12,13 @@ You can monitor this service via https://www.datatables.org/healthchecker/
 
 More details https://github.com/lukaszbanasiak/yahoo-finance/issues/44
 
-Install
+Usage
 -------
-
-From PyPI with pip:
-
-.. code:: bash
-
-    $ pip install yahoo-finance
-
-From development repo (requires git)
-
-.. code:: bash
-
-    $ git clone git://github.com/lukaszbanasiak/yahoo-finance.git
-    $ cd yahoo-finance
-    $ python setup.py install
+    Install venv and activate
+    
+    Run python setup.py install
+    
+    Run python test/test_stocks.py
 
 Usage examples
 --------------
@@ -151,44 +139,6 @@ Available methods
 - ``get_last_trade_with_time()``
 - ``get_days_range()``
 - ``get_year_range()``
-
-
-
-Get currency data
-^^^^^^^^^^^^^^^^^
-
-Example: EUR/PLN (``EURPLN=X``)
-
-.. code:: python
-
-    >>> from yahoo_finance import Currency
-    >>> eur_pln = Currency('EURPLN')
-    >>> print eur_pln.get_bid()
-    '4.2007'
-    >>> print eur_pln.get_ask()
-    '4.2091'
-    >>> print eur_pln.get_rate()
-    '4.2049'
-    >>> print eur_pln.get_trade_datetime()
-    '2014-03-05 11:23:00 UTC+0000'
-
-Refresh data from market
-
-.. code:: python
-
-    >>> eur_pln.refresh()
-    >>> print eur_pln.get_rate()
-    '4.2052'
-    >>> print eur_pln.get_trade_datetime()
-    '2014-03-05 11:27:00 UTC+0000'
-
-Avalible methods
-
-- ``get_bid()``
-- ``get_ask()``
-- ``get_rate()``
-- ``get_trade_datetime()``
-- ``refresh()``
 
 Requirements
 ------------
