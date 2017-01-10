@@ -1,6 +1,7 @@
 #!/usr/bin/python
 
 # Validates if a ticker is ETF (Exchange Traded Fund)
+# this is a change
 
 import urllib2
 
