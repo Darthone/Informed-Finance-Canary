@@ -1,0 +1,9 @@
+{
+	"url" : "http://feeds.reuters.com/news/%s",
+	"titles" : [
+		"deals",
+		"wealth",
+		"economy",
+		"usmarkets"
+	]
+}
