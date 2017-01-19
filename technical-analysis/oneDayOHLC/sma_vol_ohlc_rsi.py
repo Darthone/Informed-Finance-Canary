@@ -11,6 +11,36 @@ matplotlib.rcParams.update({'font.size': 9})
 
 stocks = 'AAPL', 'FB', 'UAA'
 
+# compute the n period relative strength indicator
+# matploblib finance example
+def rsiFunction(prices, n=14):
+	deltas = np.diff(prices)
+    seed = deltas[:n+1]
+    up = seed[seed >= 0].sum()/n
+    down = -seed[seed < 0].sum()/n
+    rs = up/down
+    rsi = np.zeros_like(prices)
+    rsi[:n] = 100. - 100./(1. + rs)
+
+    for i in range(n, len(prices)):
+        delta = deltas[i - 1]  # cause the diff is 1 shorter
+
+        if delta > 0:
+            upval = delta
+            downval = 0.
+        else:
+            upval = 0.
+            downval = -delta
+
+        up = (up*(n - 1) + upval)/n
+        down = (down*(n - 1) + downval)/n
+
+        rs = up/down
+        rsi[i] = 100. - 100./(1. + rs)
+
+    return rsi
+
+
 def movingaverage(values, window):
 	weights = np.repeat(1.0, window) / window
 	# line smoothening
@@ -59,8 +89,8 @@ def graphData(stock, MA1, MA2):
 		# moving average applied to data
 		a.plot(date[-SP:], av1[-SP:], label=label_1, linewidth=1.5)
 		a.plot(date[-SP:], av2[-SP:], label=label_2, linewidth=1.5)
-		mplot.ylabel('Stock Price ($)')
-		mplot.legend(loc=3, prop={'size':7}, fancybox=True)
+		mplot.ylabel('Stock Price ($) and Volume')
+		mplot.legend(loc=9, ncol=2, prop={'size':7}, fancybox=True)
 		a.grid(True)
 
 
