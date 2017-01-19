@@ -64,8 +64,8 @@ def dl_worker():
 	
 def main():
     
-	json1 = "articles.json"
-	json2 = "articles2.json"
+	json1 = 'articles.json'
+	json2 = 'articles2.json'
 	collection = ['articles.json','articles2.json']
 	
 	for x in collection:
