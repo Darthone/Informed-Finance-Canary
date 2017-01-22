@@ -1,6 +1,6 @@
 import numpy as np
 import pandas as pd
-from sklearn import preprocessing, cross_validation, neighbors 
+from sklearn import preprocessing, cross_validation, svm
 
 def k_nearest_neighbors(data, predict, k=3.0):
 	if len(data) >= k:
@@ -37,7 +37,7 @@ for i in range(5):
 
 	X_train, X_test, y_train, y_test = cross_validation.train_test_split(X, y, test_size=0.2)
 
-	clf = neighbors.KNeighborsRegressor() 
+	clf = svm.SVR()
 	clf.fit(X_train,y_train)
 
 	accuracy = clf.score(X_test,y_test)
@@ -53,9 +53,10 @@ for i in range(5):
 print(sum(accuracies)/len(accuracies))
 
 test_set = np.array([[104,106]])
-
+ 
 test_set = test_set.reshape(len(test_set),-1)
-
+ 
 prediction = clf.predict(test_set)
-
+ 
 print prediction
+
