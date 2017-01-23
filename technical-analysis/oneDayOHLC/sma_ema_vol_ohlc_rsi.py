@@ -136,7 +136,19 @@ def graphData(stock, MA1, MA2):
 		d = mplot.subplot2grid((6,4), (5,0), sharex=a, rowspan=1, colspan=4)
 		d.tick_params(axis='x')
 		d.tick_params(axis='y')
+		nslow = 26
+		nfast = 12
+		nema = 9
 
+		emaslow, emafast, macd = computeMACD(closePrice)
+		ema9 = ema(macd, nema)
+
+		d.plot(date[-SP:], macd[-SP:])
+		d.plot(date[-SP:], ema9[-SP:])
+		d.fill_between(date[-SP:], macd[-SP:]-ema9[-SP:], 0, alpha=0.5)
+		mplot.gca().yaxis.set_major_locator(mticker.MaxNLocator(prune='upper'))
+		mplot.ylabel('MACD')
+		
 		# rotating angles by 90 degrees to fit properly
 		for label in d.xaxis.get_ticklabels():
 			label.set_rotation(45)
