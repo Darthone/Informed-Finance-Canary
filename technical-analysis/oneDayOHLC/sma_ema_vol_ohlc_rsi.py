@@ -97,6 +97,7 @@ def graphData(stock, MA1, MA2):
 		# moving average applied to data
 		a.plot(date[-SP:], av1[-SP:], label=label_1, linewidth=1.5)
 		a.plot(date[-SP:], av2[-SP:], label=label_2, linewidth=1.5)
+		mplot.gca().yaxis.set_major_locator(mticker.MaxNLocator(prune='upper'))
 		mplot.ylabel('Stock Price ($) and Volume')
 		mplot.legend(loc=9, ncol=2, prop={'size':7}, fancybox=True)
 		a.grid(True)
@@ -105,20 +106,23 @@ def graphData(stock, MA1, MA2):
 		minVolume = 0
 
 		# rsi
-		rsiCol = 'b'
+		rsiCol = '#1a8782'
+		posCol = '#386d13'
+		negCol = '#8f2020'
 		c = mplot.subplot2grid((6,4), (0,0), sharex=a, rowspan=1, colspan=4)
 		rsi = rsiFunction(closePrice)
 		c.plot(date[-SP:], rsi[-SP:], rsiCol, linewidth=1.5)
-		c.axhline(70, color=rsiCol)
-		c.axhline(30, color=rsiCol)
-		c.fill_between(date[-SP:], rsi[-SP:], 70, where=(rsi[-SP:]>=70), facecolor=rsiCol, edgecolor=rsiCol)
-		c.fill_between(date[-SP:], rsi[-SP:], 30, where=(rsi[-SP:]<=30), facecolor=rsiCol, edgecolor=rsiCol)
-
+		c.axhline(70, color=negCol)
+		c.axhline(30, color=posCol)
+		c.fill_between(date[-SP:], rsi[-SP:], 70, where=(rsi[-SP:]>=70), facecolor=negCol, edgecolor=negCol)
+		c.fill_between(date[-SP:], rsi[-SP:], 30, where=(rsi[-SP:]<=30), facecolor=posCol, edgecolor=posCol)
+		# 70 --> red, overbought
+		# 30 --> green, oversold
+		c.text(0.015, 0.95, 'RSI (14)', va='top', transform=c.transAxes)
 		c.tick_params(axis='x')
 		c.tick_params(axis='y')
 		c.set_yticks([30,70])
 		# mplot.gca().yaxis.set_major_locator(mticker.MaxNLocator(prune='lower'))
-		mplot.ylabel('RSI')
 
 		# fit 10 dates into graph and formatt properly
 		a.xaxis.set_major_locator(mticker.MaxNLocator(10))
@@ -146,8 +150,8 @@ def graphData(stock, MA1, MA2):
 		d.plot(date[-SP:], macd[-SP:])
 		d.plot(date[-SP:], ema9[-SP:])
 		d.fill_between(date[-SP:], macd[-SP:]-ema9[-SP:], 0, alpha=0.5)
-		mplot.gca().yaxis.set_major_locator(mticker.MaxNLocator(prune='upper'))
-		mplot.ylabel('MACD')
+		d.text(0.015, 0.95, 'MACD 12,26,9', va='top', transform=d.transAxes)
+		d.yaxis.set_major_locator(mticker.MaxNLocator(nbins=5, prune='upper'))
 		
 		# rotating angles by 90 degrees to fit properly
 		for label in d.xaxis.get_ticklabels():
