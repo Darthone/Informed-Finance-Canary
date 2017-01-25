@@ -8,7 +8,7 @@ import matplotlib.dates as mdates
 from matplotlib.finance import candlestick_ochl
 # custom matplotlib parameters
 matplotlib.rcParams.update({'font.size': 9})
-
+import urllib2
 stocks = 'AAPL', 'FB', 'UAA'
 
 # compute the n period relative strength indicator
@@ -64,10 +64,27 @@ def computeMACD(x, slow=26, fast=12):
 
 def graphData(stock, MA1, MA2):
 	try:
-		s = stock + '.txt'
+		try:
+			print 'pulling data on', stock
+			urlToVisit = 'http://chartapi.finance.yahoo.com/instrument/1.0/' + stock + '/chartdata;type=quote;range=1y/csv'
+			stockFile = []
+			try:
+				sourceCode = urllib2.urlopen(urlToVisit).read()
+				splitSource = sourceCode.split('\n')
+				for eachLine in splitSource:
+					splitLine = eachLine.split(',')
+					if len(splitLine) == 6:
+						if 'values' not in eachLine:
+							stockFile.append(eachLine)
+
+			except Exception, e:
+				print str(e), 'error in organization of pulled data'
+
+		except Exception, e:
+			print str(e), 'error in pulling price data'
 
 		# load values and format the date
-		date, closePrice, highPrice, lowPrice, openPrice, volume = np.loadtxt(s, delimiter=',', unpack=True, converters={0: mdates.strpdate2num('%Y%m%d')})
+		date, closePrice, highPrice, lowPrice, openPrice, volume = np.loadtxt(stockFile, delimiter=',', unpack=True, converters={0: mdates.strpdate2num('%Y%m%d')})
 
 		# add dates to data for candlestick to be plotted
 		i = 0
@@ -84,7 +101,7 @@ def graphData(stock, MA1, MA2):
 
 		# starting point, plot exactly same amount of data
 		SP = len(date[MA2-1:])
-		
+
 		label_1 = str(MA1) + ' SMA'
 		label_2 = str(MA2) + ' SMA'
 
@@ -152,7 +169,7 @@ def graphData(stock, MA1, MA2):
 		d.fill_between(date[-SP:], macd[-SP:]-ema9[-SP:], 0, alpha=0.5)
 		d.text(0.015, 0.95, 'MACD 12,26,9', va='top', transform=d.transAxes)
 		d.yaxis.set_major_locator(mticker.MaxNLocator(nbins=5, prune='upper'))
-		
+
 		# rotating angles by 90 degrees to fit properly
 		for label in d.xaxis.get_ticklabels():
 			label.set_rotation(45)
@@ -171,11 +188,11 @@ def graphData(stock, MA1, MA2):
 		mplot.show()
 
 
-		f.savefig('financial_graph.png')		
+		f.savefig('financial_graph.png')
 
 
 	except Exception, e:
 		print 'error in main:', str(e)
 
-
-graphData('AAPL', 10, 30)
+stockToUse = raw_input('Stock to chart: ')
+graphData(stockToUse, 10, 30)
