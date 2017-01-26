@@ -11,8 +11,11 @@ matplotlib.rcParams.update({'font.size': 9})
 import urllib2
 stocks = 'AAPL', 'FB', 'UAA'
 
-# compute the n period relative strength indicator
-# matploblib finance example
+'''
+compute the n period relative strength indicator
+n=14 (periods) as a default developed by J. Welles Wilder
+momentum oscillator that measures the speed and change of price movements
+'''
 def rsiFunction(prices, n=14):
 	deltas = np.diff(prices)
 	seed = deltas[:n+1]
@@ -54,9 +57,16 @@ def ema(values, window):
 	a[:window] = a[window]
 	return a
 
-# macd line = 12ema - 26ema
-# signal line = 9ema of the macd line
-# histogram = macd line - signal line
+'''
+macd line = 12ema - 26ema
+signal line = 9ema of the macd line
+histogram = macd line - signal line
+12 - two trading weeks
+26 - one trading month
+9 - one and half trading week
+http://www.forexabode.com/forex-school/technical-indicators/macd/
+5-day trading week -> 10,22,7 or 10,22,8
+'''
 def computeMACD(x, slow=26, fast=12):
 	emaslow = ema(x, slow)
 	emafast = ema(x, fast)
