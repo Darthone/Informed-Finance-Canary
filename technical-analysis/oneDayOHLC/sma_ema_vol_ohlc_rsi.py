@@ -68,9 +68,11 @@ http://www.forexabode.com/forex-school/technical-indicators/macd/
 5-day trading week -> 10,22,7 or 10,22,8
 '''
 def computeMACD(x, slow=26, fast=12):
-	emaslow = ema(x, slow)
-	emafast = ema(x, fast)
-	return emaslow, emafast, emafast-emaslow
+    slow = nslow
+    fast= nfast
+    emaslow = ema(x, slow)
+    emafast= ema(x, fast)
+    return emaslow, emafast, emafast-emaslow
 
 def graphData(stock, MA1, MA2, dateRange):
 	try:
@@ -167,9 +169,9 @@ def graphData(stock, MA1, MA2, dateRange):
 		d = mplot.subplot2grid((6,4), (5,0), sharex=a, rowspan=1, colspan=4)
 		d.tick_params(axis='x')
 		d.tick_params(axis='y')
-		nslow = 26
-		nfast = 12
-		nema = 9
+		# nslow = 26
+		# nfast = 12
+		# nema = 9
 
 		emaslow, emafast, macd = computeMACD(closePrice)
 		ema9 = ema(macd, nema)
@@ -177,7 +179,7 @@ def graphData(stock, MA1, MA2, dateRange):
 		d.plot(date[-SP:], macd[-SP:])
 		d.plot(date[-SP:], ema9[-SP:])
 		d.fill_between(date[-SP:], macd[-SP:]-ema9[-SP:], 0, alpha=0.5)
-		d.text(0.015, 0.95, 'MACD 12,26,9', va='top', transform=d.transAxes)
+		d.text(0.015, 0.95, 'MACD ' + str(nfast) + ' ' + str(nslow) + ' ' + str(nema), va='top', transform=d.transAxes)
 		d.yaxis.set_major_locator(mticker.MaxNLocator(nbins=5, prune='upper'))
 
 		# rotating angles by 90 degrees to fit properly
@@ -214,5 +216,7 @@ dateRange = raw_input('Length of Process: ') or "1y"
 nslow = raw_input('Slow EMA: ') or "26"
 nfast = raw_input('Fast EMA: ') or "12"
 nema = raw_input('EMA Signal: ') or "9"
-
+nslow = int(nslow)
+nfast = int(nfast)
+nema = int(nema)
 graphData(stockToUse, int(sma1), int(sma2), dateRange)
