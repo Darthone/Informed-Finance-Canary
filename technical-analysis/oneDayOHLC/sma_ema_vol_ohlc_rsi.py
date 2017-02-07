@@ -72,11 +72,11 @@ def computeMACD(x, slow=26, fast=12):
 	emafast = ema(x, fast)
 	return emaslow, emafast, emafast-emaslow
 
-def graphData(stock, MA1, MA2):
+def graphData(stock, MA1, MA2, dateRange):
 	try:
 		try:
 			print 'pulling data on', stock
-			urlToVisit = 'http://chartapi.finance.yahoo.com/instrument/1.0/' + stock + '/chartdata;type=quote;range=1y/csv'
+			urlToVisit = 'http://chartapi.finance.yahoo.com/instrument/1.0/' + stock + '/chartdata;type=quote;range=' + dateRange + '/csv'
 			stockFile = []
 			try:
 				sourceCode = urllib2.urlopen(urlToVisit).read()
@@ -205,4 +205,14 @@ def graphData(stock, MA1, MA2):
 		print 'error in main:', str(e)
 
 stockToUse = raw_input('Stock to chart: ')
-graphData(stockToUse, 10, 30)
+# Simple Moving Averages (SMA) - 10, 30
+sma1 = raw_input('SMA 1: ') or "10"
+sma2 = raw_input('SMA 2: ') or "30"
+# date range - 1y for 1 year, 10d for 10 days
+dateRange = raw_input('Length of Process: ') or "1y"
+# EMA Vars
+nslow = raw_input('Slow EMA: ') or "26"
+nfast = raw_input('Fast EMA: ') or "12"
+nema = raw_input('EMA Signal: ') or "9"
+
+graphData(stockToUse, int(sma1), int(sma2), dateRange)
