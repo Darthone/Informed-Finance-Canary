@@ -71,7 +71,9 @@ def handle_article_file(file_path, stock_path, other_path, bad_path):
         path = other_path if len(j['tickers']) == 0 else stock_path
         with open(os.path.join(path, base_name), 'w') as fn:
             fn.write(json.dumps(j))
-    
+
+#this is a library not a program
+"""
 q = Queue()
 num_worker_threads = 6
 
@@ -122,4 +124,4 @@ def main():
 if __name__ == "__main__":
     main()
 	
-
+"""
