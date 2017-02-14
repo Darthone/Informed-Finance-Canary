@@ -1,5 +1,3 @@
-#!/usr/bin/env python
-
 import json
 import nltk
 import os
@@ -31,14 +29,18 @@ def article_to_file(url, folder):
 		j['authors'] = a.authors
 		j['date'] = a.publish_date.strftime("%Y%m%d")
 		j['epoch'] = a.publish_date.strftime("%s")
-		formatTitle = j['title'].replace(" ", "_")
+		formatTitle = j['title'].replace(" ","_").replace("'","\\'")
+		if "'" in formatTitle:
+			
 		a.nlp()
 		j['keywords'] = a.keywords
-		filename = os.path.join(folder, "%s_%s" % (j['date'], formatTitle))
 		
+		filename = os.path.join(folder, "%s_%s" % (j['date'], formatTitle))
 		print j['date'], a.title
-		with open(filename, 'w') as f:
-			f.write(json.dumps(j))
+		
+		if not os.path.exists(filename):
+			with open(filename, 'w') as f:
+				f.write(json.dumps(j))
 	except Exception as e:
 		print e
 
@@ -51,7 +53,7 @@ def url_to_articles(url):
 
 q = Queue()
 folder = "articles"
-num_worker_threads = 18
+num_worker_threads = 6
 
 def dl_worker():
     url = q.get()
@@ -84,9 +86,8 @@ def main():
 			q.put(u)
 		 
 		q.join()
+
 	
 if __name__ == "__main__":
 	nltk.download('punkt')
 	main()
-	
-
