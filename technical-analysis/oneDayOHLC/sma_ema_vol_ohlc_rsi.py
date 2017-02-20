@@ -1,7 +1,9 @@
+#!/usr/bin/env python
+import matplotlib
+# matplotlib.use('Agg')
 import time
 import datetime
 import numpy as np
-import matplotlib
 import matplotlib.pyplot as mplot
 import matplotlib.ticker as mticker
 import matplotlib.dates as mdates
@@ -9,6 +11,7 @@ from matplotlib.finance import candlestick_ochl
 # custom matplotlib parameters
 matplotlib.rcParams.update({'font.size': 9})
 import urllib2
+
 stocks = 'AAPL', 'FB', 'UAA'
 
 '''
