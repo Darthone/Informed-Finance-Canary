@@ -1,10 +1,10 @@
+from __future__ import division
 # urllib2 opens http urls (authentication, redirections, cookies, etc.)
 import urllib2
 import os
 # print timestamp that's recognizable
 import time, datetime
 import sys
-
 stocks = 'AAPL', 'FB', 'UAA' # AAPL, FB, UAA, JCP, TGT, DIS
 stockRange = '1y' # 1y, 10d
 
@@ -16,6 +16,8 @@ def pullData(stock):
 	priceSold = 0
 	pricePrevious = 0
 	totalProfit = 0
+	tradeCount = 0
+	startingPrice = 0
 
 	try:
 		# values format -> date, close, high, low, open, volume
@@ -39,41 +41,55 @@ def pullData(stock):
 		splitSource = openedSite.split('\n')
 
 		# grab valid lines after values section
-		for l in splitSource:
-			if l[0].isdigit():
-				l_split = l.split(',')
-				price =  float(l_split[1])
-				if 'values' not in l:
-					splitLine = l.split(',')
-					if len(splitLine) == 6:
-						# most recent time? append to file
-						if int(splitLine[0]) > int(lastUnix):
-							lineToWrite = l + '\n'
-							saveFile.write(lineToWrite)
-				print price
+		try:
+			for l in splitSource:
+				if l[0].isdigit():
+					l_split = l.split(',')
+					price =  float(l_split[1])
+					if 'values' not in l:
+						splitLine = l.split(',')
+						if len(splitLine) == 6:
+							# most recent time? append to file
+							if int(splitLine[0]) > int(lastUnix):
+								lineToWrite = l + '\n'
+								saveFile.write(lineToWrite)
+					print price
 
-				# trading stances:
-				# buy when not invested and stock price drops
-				# sell when price is .2% higher than bought
-				if stance == 'none':
-					if price < pricePrevious:
-						print 'buy triggered'
-						priceBought = price
-						print 'bought stock for ', priceBought
-						stance = 'holding'
-				elif stance == 'holding':
-					if price > (priceBought * .002 + priceBought):
-						print 'sell triggered'
-						priceSold = price
-						print 'finished trade, sold for: ', priceSold
-						stance = 'none'
-						tradeProfit = priceSold - priceBought
-						totalProfit += tradeProfit
-						print totalProfit
+					# trading stances:
+					# buy when not invested and stock price drops
+					# sell when price is > .2% higher than bought
+					if stance == 'none':
+						if price < pricePrevious:
+							print 'buy triggered'
+							priceBought = price
+							print 'bought stock for ', priceBought
+							stance = 'holding'
+							if tradeCount == 0:
+								startingPrice = priceBought
+							tradeCount += 1
+					elif stance == 'holding':
+						if price > (priceBought * .002 + priceBought):
+							print 'sell triggered'
+							priceSold = price
+							print 'finished trade, sold for: ', priceSold
+							stance = 'none'
+							tradeProfit = priceSold - priceBought
+							totalProfit += tradeProfit
+							print totalProfit
+							tradeCount += 1
+					pricePrevious = price
 
-				pricePrevious = price
+				print '-- Complete --'
+				print 'Gross Profit Per Stock:', totalProfit
+				print '# of Trades:', tradeCount
 
-			print 'complete, total profit:', totalProfit
+				try:
+					grossPercentProfit = totalProfit/startingPrice * 100
+					print 'Gross percent profit:', grossPercentProfit
+				except ZeroDivisionError:
+					pass
+		except IndexError:
+			pass
 
 		saveFile.close()
 
