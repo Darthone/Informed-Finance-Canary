@@ -1,8 +1,0 @@
-this code pulls all historical articles from reuters
-
-how to use
-    install a venv and activate
-    install requirements
-    ./gather.py
-    let run for 5 days
-
