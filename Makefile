@@ -1,7 +1,10 @@
 init:
-	    pip install -r requirements.txt
+	virtualenv venv
+	source ./venv/bin/activate
+	pip install -r requirements.txt
 
 test:
-	    py.test tests
+	source ./venv/bin/activate
+	nosetests -v
 
 .PHONY: init test
