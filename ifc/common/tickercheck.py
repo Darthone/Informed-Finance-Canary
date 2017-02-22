@@ -1,21 +1,20 @@
 #!/usr/bin/python
 
-# Validates if a ticker is ETF (Exchange Traded Fund)
+import requests
 
-import urllib2
+from . import memoize
 
-def request(symbol, tag):
-	url = 'http://finance.yahoo.com/d/quotes.csv?s=%s&f=%s' % (symbol, tag)
-	response = urllib2.urlopen(url)
-	content = response.read().decode().strip().strip('"')
-	return content
+def is_valid_ticker(ticker_s):
+    return dumb_valid_ticker(ticker_s) and valid_ticker(ticker_s)
 
-def get_name(symbol):
-  return request(symbol, 'n')
+def dumb_valid_ticker(ticker):
+    return len(ticker) < 10 and len(ticker.split()) <= 4
 
+@memoize
 def valid_ticker(ticker):
-	ticker = ticker.upper()
-	print get_name(ticker)
-	return True if get_name(ticker) != 'N/A' else False
+    """ Reaches to reuters to validate a ticker symbol. 
+        Cached to save bandwith/time. Possibly error prone """ #TODO testing
+    sym = "symbol=" + ticker
+    url_base = "http://www.reuters.com/finance/stocks/overview?" + sym
+    return requests.get(url_base).url.endswith(sym)
 
-print valid_ticker('UA')

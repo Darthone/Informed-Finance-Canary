@@ -1,2 +1,5 @@
 #!/usr/bin/env bash
-daemonize /home/dario/school/senior-design/bug-free-octo-parakeet/rss_grabber/rss_gather.py -p /tmp/gather.pid -c ./ -l /tmp/gather.lock -v -e ./error.out -o ./std.out
+pushd `dirname $0` > /dev/null
+SCRIPTPATH=`pwd -P`
+popd > /dev/null
+daemonize -p /tmp/gather.pid -c ./ -l /tmp/gather.lock -v -e ./error.out -o ./std.out "$SCRIPTPATH/run_rss_watcher.sh"
