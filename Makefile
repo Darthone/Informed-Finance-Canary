@@ -1,7 +1,5 @@
 init:
-	virtualenv venv
-	source ./venv/bin/activate
-	pip install -r requirements.txt
+	setup/init.sh 
 
 test:
 	source ./venv/bin/activate
