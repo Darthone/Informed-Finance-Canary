@@ -13,8 +13,11 @@ Pillow==2.5.1
 pkg-resources==0.0.0
 pyparsing==2.1.10
 python-dateutil==2.4.0
+pytz==2016.10
 PyYAML==3.11
 requests==2.3.0
+simplejson==3.10.0
 six==1.7.3
 tldextract==1.5.1
 ujson==1.35
+yahoo-finance==1.4.0
