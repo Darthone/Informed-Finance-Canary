@@ -1,0 +1,5 @@
+Wrapper.sh 
+    - changes to this dir and adds ifc to the python path
+    - takes 1 arg - the python script to run
+Timeseries example
+    ./wrapper.sh timeseries.py
