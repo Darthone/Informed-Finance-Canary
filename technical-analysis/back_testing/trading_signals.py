@@ -1,9 +1,11 @@
+#!/usr/bin/env python
 from __future__ import division
 # urllib2 opens http urls (authentication, redirections, cookies, etc.)
 import urllib2
 import os
 # print timestamp that's recognizable
-import time, datetime
+import datetime
+import time
 import sys
 stocks = 'AAPL', 'FB', 'UAA' # AAPL, FB, UAA, JCP, TGT, DIS
 stockRange = '1y' # 1y, 10d
@@ -46,6 +48,9 @@ def pullData(stock):
 				if l[0].isdigit():
 					l_split = l.split(',')
 					price =  float(l_split[1])
+					currentDate = str(l_split[0])
+					currentDateObj = datetime.datetime.strptime(currentDate, '%Y%m%d')
+					print('Date: ' + currentDateObj.strftime('%m %d, %Y'))
 					if 'values' not in l:
 						splitLine = l.split(',')
 						if len(splitLine) == 6:
@@ -53,7 +58,7 @@ def pullData(stock):
 							if int(splitLine[0]) > int(lastUnix):
 								lineToWrite = l + '\n'
 								saveFile.write(lineToWrite)
-					print price
+					print 'Price: ', price
 
 					# trading stances:
 					# buy when not invested and stock price drops
@@ -79,9 +84,9 @@ def pullData(stock):
 							tradeCount += 1
 					pricePrevious = price
 
-				print '-- Complete --'
 				print 'Gross Profit Per Stock:', totalProfit
 				print '# of Trades:', tradeCount
+				print '------------------------------------'				
 
 				try:
 					grossPercentProfit = totalProfit/startingPrice * 100
@@ -100,5 +105,8 @@ def pullData(stock):
 		print 'error in main:', str(e)
 
 
-
-pullData('AAPL')
+stockToUse = raw_input('Stock to trade: ')
+if not stockToUse:
+	print "Please enter a valid stock ticker"
+else:
+	pullData(stockToUse)
