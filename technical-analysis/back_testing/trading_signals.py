@@ -11,7 +11,7 @@ stocks = 'AAPL', 'FB', 'UAA' # AAPL, FB, UAA, JCP, TGT, DIS
 stockRange = '1y' # 1y, 10d
 
 
-def pullData(stock):
+def pullData(stock, stockRange):
 	# none or hold for stance
 	stance = 'none'
 	priceBought = 0
@@ -109,4 +109,8 @@ stockToUse = raw_input('Stock to trade: ')
 if not stockToUse:
 	print "Please enter a valid stock ticker"
 else:
-	pullData(stockToUse)
+	stockRange = raw_input('Enter period of trading: ')
+	if not stockRange:
+		print "Please enter a valid range for trading"
+	else:
+		pullData(stockToUse, stockRange)
