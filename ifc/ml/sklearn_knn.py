@@ -1,7 +1,7 @@
 import numpy as np
 import pandas as pd
 from sklearn import preprocessing, cross_validation, neighbors 
-#test
+
 def addDailyReturn(dataset):
 	"""
 	Adding in daily return to create binary classifiers (Up or Down in relation to the previous day)
