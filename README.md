@@ -8,6 +8,7 @@ Intro
 
 Prerequisites:
 - [virtualenv](https://virtualenv.readthedocs.org/en/latest/installation.html)
+- [matplotlib](http://matplotlib.org/users/installing.html)
 
 
 
