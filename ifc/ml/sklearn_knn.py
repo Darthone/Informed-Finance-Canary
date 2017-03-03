@@ -29,12 +29,13 @@ def addDailyReturn(dataset):
 	return X_train, y_train, X_test, y_test   
 """
 
-df = pd.read_csv("AAPL.txt")
+df = pd.read_csv("GM.csv")
 #using open, high, close to determine UpDown
 df.drop(['date'], 1, inplace=True)
 df.drop(['low'], 1, inplace=True)
 df.drop(['volume'], 1, inplace=True)
 df.drop(['open'], 1, inplace=True)
+df.drop(['adj_close'],1, inplace=True)
 
 addDailyReturn(df)
 
