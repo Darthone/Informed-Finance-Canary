@@ -1,0 +1,43 @@
+A Rite Aid logo is seen outside one of their stores in New York, April 11, 2013.
+compound: 0.0,  neg: 0.0,  neu: 1.0,  pos: 0.0,  
+REUTERS/Shannon Stapleton
+
+Drugstore chain Walgreens Boots Alliance Inc (WBA.O) said its deal to buy smaller rival Rite Aid Corp (RAD.N) would now take six months longer to close and also reduced its offer price as it expects to divest more stores to gain regulatory approval.
+compound: 0.7759,  neg: 0.0,  neu: 0.864,  pos: 0.136,  
+The companies said on Monday they agreed to reduce the offer price to $6.50-$7.00 per share, valuing Rite Aid at $6.84 billion-$7.37 billion.
+compound: 0.6908,  neg: 0.0,  neu: 0.749,  pos: 0.251,  
+Walgreens had offered $9 per share in October 2015 when it first proposed the deal.
+compound: 0.296,  neg: 0.0,  neu: 0.864,  pos: 0.136,  
+Rite Aid shares closed down 17.5 percent at $5.72, easing slightly after hitting a two-year low of $5.70, on Monday.
+compound: 0.2732,  neg: 0.094,  neu: 0.717,  pos: 0.188,  
+Walgreens ended 2 cents lower at $81.48.
+compound: -0.296,  neg: 0.306,  neu: 0.694,  pos: 0.0,  
+Under the revised terms, Walgreens will now need to divest up to 1,200 Rite Aid stores, 200 more than earlier agreed.
+compound: 0.3321,  neg: 0.0,  neu: 0.894,  pos: 0.106,  
+The deal is now expected to close on July 31, compared with the previous target of Jan. 27.
+compound: 0.0,  neg: 0.0,  neu: 1.0,  pos: 0.0,  
+Walgreens had struck a deal in December to sell 865 stores to Fred's Inc (FRED.O), but a Bloomberg report last week said the U.S. antitrust regulator was not satisfied with the plan.
+compound: -0.542,  neg: 0.138,  neu: 0.862,  pos: 0.0,  
+"The one remaining uncertainty is who buys the incremental boxes as it is not clear to us that FRED has the financing capacity to do so," Evercore ISI analyst Ross Muken said in a note.
+compound: -0.555,  neg: 0.125,  neu: 0.875,  pos: 0.0,  
+Fred's confirmed that the previously agreed deal remained in effect and said it continued to work with the Federal Trade Commission (FTC), Rite Aid and Walgreens to complete the deal.
+compound: 0.2732,  neg: 0.0,  neu: 0.932,  pos: 0.068,  
+Deerfield, Illinois-based Walgreens also cut its 2017 adjusted earnings forecast to $4.90-$5.08 per share from $4.85-$5.20.
+compound: 0.0258,  neg: 0.115,  neu: 0.765,  pos: 0.12,  
+(bit.ly/2kjpNFu)
+
+Walgreens said it would pay $7.00 per share if regulators required 1,000 stores or fewer to be divested and $6.50 per share for 1,200 stores, with the offer price being adjusted on a pro-rata basis for divestitures between 1,000-1,200 stores.
+compound: 0.4588,  neg: 0.033,  neu: 0.864,  pos: 0.103,  
+The six-month extension marks the second time Walgreens has pushed out the date by which it had expected to close the deal.
+compound: 0.0,  neg: 0.0,  neu: 1.0,  pos: 0.0,  
+Walgreens Chief Executive Stefano Pessina said last week that the company was pressing on to close the deal with Rite Aid and was actively engaged in talks with the FTC.
+compound: 0.6124,  neg: 0.0,  neu: 0.848,  pos: 0.152,  
+Walgreens has 13,200 stores, nearly 60 percent of which are in the United States, while Rite Aid has 4,570 stores.
+compound: 0.4215,  neg: 0.0,  neu: 0.872,  pos: 0.128,  
+(Reporting by Siddharth Cavale, Ankur Banerjee and Gayathree Ganesan in Bengaluru; Editing by Shounak Dasgupta and Savio D'Souza)
+compound: 0.0,  neg: 0.0,  neu: 1.0,  pos: 0.0,  
+sum:
+	neg : 0.811
+	neu : 14.8
+	pos : 1.388
+	compound : 2.7667

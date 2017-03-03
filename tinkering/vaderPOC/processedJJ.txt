@@ -1,0 +1,83 @@
+ALLSCHWIL, Switzerland U.S. healthcare giant Johnson & Johnson (JNJ.N) will buy Swiss biotech company Actelion (ATLN.S) in a $30 billion all-cash deal that includes spinning off Actelion's research and development pipeline, the companies said on Thursday.
+compound: 0.0,  neg: 0.0,  neu: 1.0,  pos: 0.0,  
+The biggest European drugs takeover in 13 years gives J&J access to the Swiss group's range of high-price, high-margin medicines for rare diseases, helping it diversify its drug portfolio as its biggest product, Remicade for arthritis, faces cheaper competition.
+compound: 0.296,  neg: 0.0,  neu: 0.945,  pos: 0.055,  
+The offer to pay $280 per share, following weeks of exclusive talks, was unanimously approved by the boards of directors of both companies.
+compound: 0.6249,  neg: 0.052,  neu: 0.706,  pos: 0.242,  
+The deal represents a 23 percent premium to Actelion's closing price on Wednesday and is more than 80 percent above the Nov. 23 closing price before reports emerged that Europe's biggest biotech company had attracted takeover interest.
+compound: 0.7003,  neg: 0.0,  neu: 0.854,  pos: 0.146,  
+Actelion shares jumped 20 percent to 273.30 francs by 1350 GMT as investors welcomed the deal.
+compound: 0.5574,  neg: 0.0,  neu: 0.753,  pos: 0.247,  
+"The structure is very attractive," said Eleanor Taylor Jolidon, a fund manager at Union Bancaire Privee in Geneva, a top-40 Actelion investor.
+compound: 0.0,  neg: 0.0,  neu: 1.0,  pos: 0.0,  
+The price vindicates the strategy of cardiologist Jean-Paul Clozel, who co-founded the company with his pediatrician wife Martine and friends in 1997, and has fended off bids over the years in the belief he could increase Actelion's value by keeping it independent.
+compound: 0.8555,  neg: 0.0,  neu: 0.785,  pos: 0.215,  
+"The price is quite high at around 30 times price to estimated 2018 earnings.
+compound: 0.0,  neg: 0.0,  neu: 1.0,  pos: 0.0,  
+J&J is paying a lot and R&D is not even included, just a substantial minority stake," one Zurich-based trader said.
+compound: 0.2023,  neg: 0.0,  neu: 0.904,  pos: 0.096,  
+"But it represents only 10 percent of (J&J's) market capitalization and they are finally investing the cash they hold in Europe."
+compound: 0.0,  neg: 0.0,  neu: 1.0,  pos: 0.0,  
+Jefferies analysts said they did not expect any counterbids or competition concerns, while Berenberg analysts called it "a fantastic deal for Actelion and its shareholders" given concerns about the long-term growth prospects for its main products.
+compound: 0.8126,  neg: 0.0,  neu: 0.797,  pos: 0.203,  
+Actelion has been the subject of takeover speculation for weeks after J&J launched and then halted discussions with the Swiss company.
+compound: 0.128,  neg: 0.0,  neu: 0.93,  pos: 0.07,  
+French drugmaker Sanofi (SASY.PA) had also been interested, sources said, but was sidelined after J&J returned and began exclusive negotiations in December.
+compound: 0.3818,  neg: 0.0,  neu: 0.847,  pos: 0.153,  
+Sanofi's failure to come away with a big deal for a second time has added to pressure on its management.
+compound: -0.6705,  neg: 0.256,  neu: 0.744,  pos: 0.0,  
+Clozel said the J&J offer -- putting Actelion's established drugs into its bigger commercial organization while leaving riskier early-stage R&D assets in the new 600-employee company for Clozel to develop -- convinced him this was the right one.
+compound: 0.25,  neg: 0.057,  neu: 0.837,  pos: 0.105,  
+"With this structure it was not difficult," he told Reuters after a news conference.
+compound: 0.0,  neg: 0.0,  neu: 1.0,  pos: 0.0,  
+"It's always emotional but it's not difficult.
+compound: 0.4525,  neg: 0.0,  neu: 0.558,  pos: 0.442,  
+Because frankly it's a good solution for everybody."
+compound: 0.6369,  neg: 0.0,  neu: 0.49,  pos: 0.51,  
+The deal makes the Clozels billionaires.
+compound: 0.0,  neg: 0.0,  neu: 1.0,  pos: 0.0,  
+R&D BUSINESS
+
+J&J said it expected the transaction to be immediately accretive to its adjusted earnings per share and accelerate its revenue and earnings growth rates although synergies were set to play just a small role.
+compound: 0.7351,  neg: 0.0,  neu: 0.816,  pos: 0.184,  
+The U.S. group, which reported disappointing quarterly results this week, will fund the transaction with cash held outside the United States.
+compound: -0.1027,  neg: 0.128,  neu: 0.76,  pos: 0.112,  
+"We believe this transaction offers compelling value to both Johnson & Johnson and Actelion shareholders," Alex Gorsky, J&J chairman and chief executive, said in a statement.
+compound: 0.5106,  neg: 0.0,  neu: 0.837,  pos: 0.163,  
+Actelion will spin out its research and development unit into a standalone company based and listed in Switzerland, under the working title of R&D NewCo and led by Clozel.
+compound: 0.0,  neg: 0.0,  neu: 1.0,  pos: 0.0,  
+The break-up plan was first reported by Reuters last month.
+compound: 0.0,  neg: 0.0,  neu: 1.0,  pos: 0.0,  
+The shares of R&D NewCo will be distributed to Actelion's shareholders as a stock dividend and the new unit will be launched with 1 billion francs in cash.
+compound: 0.4019,  neg: 0.0,  neu: 0.866,  pos: 0.134,  
+Urs Beck, fund manager at EFG Asset Management that holds Actelion shares, hailed the transaction.
+compound: 0.6808,  neg: 0.0,  neu: 0.645,  pos: 0.355,  
+"J&J is a good partner with a huge distribution network.
+compound: 0.6369,  neg: 0.0,  neu: 0.536,  pos: 0.464,  
+For Actelion's founders that is certainly a good solution.
+compound: 0.765,  neg: 0.0,  neu: 0.397,  pos: 0.603,  
+Mr and Ms Clozel can do research for another 20 years and J&J has gained an interesting indication," he said.
+compound: 0.6486,  neg: 0.0,  neu: 0.773,  pos: 0.227,  
+"It's a huge deal and J&J plays in a different league from Sanofi, they can finance that without difficulties.
+compound: 0.6355,  neg: 0.0,  neu: 0.693,  pos: 0.307,  
+I don't see Sanofi stepping in with a higher offer at some point, that doesn't make sense any more," he added.
+compound: 0.0,  neg: 0.0,  neu: 1.0,  pos: 0.0,  
+J&J will initially hold a 16 percent stake in R&D NewCo and will have rights to an additional 16 percent of the company's equity through a convertible note.
+compound: 0.0,  neg: 0.0,  neu: 1.0,  pos: 0.0,  
+It agreed not to sell its stake on the open market for two years.
+compound: 0.2732,  neg: 0.0,  neu: 0.861,  pos: 0.139,  
+It will also get an option on ACT-132577, a product within R&D NewCo being developed for resistant hypertension and now in phase 2 clinical development.
+compound: 0.0,  neg: 0.0,  neu: 1.0,  pos: 0.0,  
+Lazard acted as lead financial advisor to J&J, while Bank of America Merrill Lynch was Actelion's lead advisor.
+compound: 0.0,  neg: 0.0,  neu: 1.0,  pos: 0.0,  
+The transaction is expected to close by the end of the second quarter, with J&J commencing the tender offer by mid-February.
+compound: 0.0,  neg: 0.0,  neu: 1.0,  pos: 0.0,  
+It needs to win at least 67 percent of all Actelion shares, regulatory approvals and Actelion shareholder approval of the distribution of shares of R&D NewCo.
+compound: 0.8834,  neg: 0.0,  neu: 0.661,  pos: 0.339,  
+(Additional reporting by John Revill, Silke Koltrowitz, Ben Hirschler, Rupert Pretterklieber and Caroline Humer)
+compound: 0.0,  neg: 0.0,  neu: 1.0,  pos: 0.0,  
+sum:
+	neg : 0.493
+	neu : 31.995
+	pos : 5.511
+	compound : 11.296

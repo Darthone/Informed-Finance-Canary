@@ -1,0 +1,23 @@
+The Luxottica name is reflected in a pair of sunglasses in this photo illustration taken in Rome February 4, 2016.
+compound: 0.0,  neg: 0.0,  neu: 1.0,  pos: 0.0,  
+REUTERS/Alessandro Bianchi/Illustration/File Photo
+
+MILAN Italian eyewear group Luxottica (LUX.MI) has agreed to buy Brazilian optical chain Oticas Carol in a 110 million euro ($117 million) deal that expands its retail footprint in the South American country.
+compound: 0.3612,  neg: 0.0,  neu: 0.904,  pos: 0.096,  
+Luxottica, which earlier this month signed a $50 billion merger deal with top lens maker Essilor (ESSI.PA), is already present in Brazil with a network of Sunglass Hut shops, a manufacturing plant and its wholesale business.
+compound: 0.2023,  neg: 0.0,  neu: 0.947,  pos: 0.053,  
+Oticas Carol operates a franchise of around 950 outlets selling both prescription frames and sunglasses, with annual revenue of around 200 million euros.
+compound: 0.0,  neg: 0.0,  neu: 1.0,  pos: 0.0,  
+Its main shareholders are investment funds 3i Group, Neuberger Berman and Siguler Guff & Company.
+compound: 0.0,  neg: 0.0,  neu: 1.0,  pos: 0.0,  
+Luxottica is due to report full-year sales later on Monday.
+compound: 0.0,  neg: 0.0,  neu: 1.0,  pos: 0.0,  
+($1 = 0.9413 euros)
+
+(Reporting by Valentina Za)
+compound: 0.0,  neg: 0.0,  neu: 1.0,  pos: 0.0,  
+sum:
+	neg : 0.0
+	neu : 6.851
+	pos : 0.149
+	compound : 0.5635
