@@ -1,0 +1,29 @@
+The company logo of Sony Cooperation is seen at the CP+ camera and photo trade fair in Yokohama, Japan, February 25, 2016.
+compound: 0.3182,  neg: 0.0,  neu: 0.901,  pos: 0.099,  
+REUTERS/Thomas Peter/File Photo
+
+TOKYO Sony Corp (6758.T) said it booked an impairment charge of 112.1 billion yen ($976 million) on the goodwill value of its movie segment in the quarter ended December, as online streaming services sapped demand for movie DVDs.
+compound: 0.2263,  neg: 0.035,  neu: 0.909,  pos: 0.056,  
+The impairment charge came as Sony cut its outlook for profits from DVD, blu-ray discs and other home entertainment operations in line with a broader market decline, the company said in statement on Monday.
+compound: 0.5574,  neg: 0.056,  neu: 0.794,  pos: 0.151,  
+Sony has been working to revive its movie business.
+compound: 0.34,  neg: 0.0,  neu: 0.769,  pos: 0.231,  
+In November, the Japanese conglomerate's chief financial officer, Kenichiro Yoshida, said a turnaround was "progressing, but it takes time for the benefit to be realized".
+compound: 0.6124,  neg: 0.0,  neu: 0.852,  pos: 0.148,  
+Earlier this month, the Japanese conglomerate said Michael Lynton, the chief executive of its movie and television unit Sony Entertainment, will step down from the position in February.
+compound: 0.4215,  neg: 0.0,  neu: 0.906,  pos: 0.094,  
+He will remain at Sony for six months to help find a successor.
+compound: 0.5574,  neg: 0.0,  neu: 0.685,  pos: 0.315,  
+In its latest statement, Sony also said it would cut its stake in M3 Inc (2413.T), operator of membership-based medical-related online services, to 34 percent from 39.3 percent in a bid to strengthen its financial standing.
+compound: 0.0516,  neg: 0.056,  neu: 0.882,  pos: 0.061,  
+It expects to record a gain within operating income of about 37 billion yen from the sale during the fourth quarter of the fiscal year ending March 31, Sony added.
+compound: 0.5267,  neg: 0.0,  neu: 0.892,  pos: 0.108,  
+Sony said the impact of the impairment charge and stake sale on the group's earnings outlook for the current fiscal year is being evaluated and will be disclosed when it releases its third-quarter results on Feb. 2.
+compound: 0.0,  neg: 0.0,  neu: 1.0,  pos: 0.0,  
+(Reporting by Makiko Yamazaki; Editing by Himani Sarkar, Bernard Orr)
+compound: 0.0,  neg: 0.0,  neu: 1.0,  pos: 0.0,  
+sum:
+	neg : 0.147
+	neu : 9.59
+	pos : 1.263
+	compound : 3.6115

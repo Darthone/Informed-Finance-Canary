@@ -1,0 +1,41 @@
+Attendees wait for the program to begin during the presentation of new Google hardware in San Francisco, California, U.S. October 4, 2016.
+compound: 0.0,  neg: 0.0,  neu: 1.0,  pos: 0.0,  
+REUTERS/Beck Diefenbach
+
+Alphabet Inc's (GOOGL.O) core advertising business remained strong and its smartphone and home-automation products were gaining traction, analysts said a day after the company missed profit expectations, hurt by a higher tax rate.
+compound: 0.5267,  neg: 0.131,  neu: 0.657,  pos: 0.211,  
+Shares were down 1 percent at $849.40 in early trading on Friday, after hitting a record high earlier.
+compound: 0.296,  neg: 0.0,  neu: 0.872,  pos: 0.128,  
+At least 11 brokerages raised their price targets on Alphabet's stock, which now has a median price target of $992.50 - indicating a 15.8 percent upside to the stock's Thursday close.
+compound: 0.0,  neg: 0.0,  neu: 1.0,  pos: 0.0,  
+"From a capital allocation standpoint, we appreciate Alphabet is investing in strategic, promising areas like Google Assistant and hardware, while pausing investment in less rewarding areas like Fiber," Jefferies analysts said.
+compound: 0.9101,  neg: 0.0,  neu: 0.649,  pos: 0.351,  
+Alphabet still gets most of its revenue from its advertising business, which rose 17.4 percent to $22.4 billion in the quarter.
+compound: 0.0,  neg: 0.0,  neu: 1.0,  pos: 0.0,  
+"As we reflect upon longer-term trends impacting the company's core advertising business, trends seem pretty clear with Google reinforcing its co-hegemonic position alongside Facebook (FB.O) on an ongoing basis," Pivotal Research Group analyst Brian Wieser
+
+Over the past few quarters, the company has highlighted its hardware business and Other Bets, which includes broadband business Google Fiber, home automation products Nest, self-driving technology company Waymo, and X, a research facility that works on "moon shot" ventures.
+compound: 0.7003,  neg: 0.0,  neu: 0.925,  pos: 0.075,  
+Operating loss in Other Bets narrowed to $1.09 billion from $1.21 billion in the fourth quarter ended Dec 31, while capital expenses rose to $504 million from $193 million a year earlier.
+compound: -0.3182,  neg: 0.071,  neu: 0.929,  pos: 0.0,  
+"Alphabet is taking control of software and hardware which we think is necessary to ensure an optimal user experience on Android," said Mizuho Securities analyst Neil Doshi, who estimated that the company sold about 1.5 million Pixels, above his estimate of 1 million.
+compound: 0.743,  neg: 0.0,  neu: 0.842,  pos: 0.158,  
+Doshi also said he expects YouTube to generate $14 billion to $15 billion in gross revenue this year, making it a possible catalyst for the stock.
+compound: -0.4767,  neg: 0.114,  neu: 0.886,  pos: 0.0,  
+He cut his price target by $1 to $1,024, to adjust for a slight dip in his 2017 profit expectations.
+compound: 0.2023,  neg: 0.095,  neu: 0.773,  pos: 0.132,  
+Alphabet's shares have climbed nearly 17 percent over the past twelve months.
+compound: 0.296,  neg: 0.0,  neu: 0.833,  pos: 0.167,  
+Of the 49 brokerages that cover Alphabet, 47 of them have a "buy" or higher rating.
+compound: 0.0,  neg: 0.0,  neu: 1.0,  pos: 0.0,  
+The stock trades at roughly 21 times forward earnings, compared with Facebook Inc's (FB.O) price-to-earnings ratio of 32 and Microsoft Corp's (MSFT.O) 22.
+compound: 0.0,  neg: 0.0,  neu: 1.0,  pos: 0.0,  
+Shares of Microsoft, which on Thursday reported a 3.6 percent rise in fiscal second-quarter profit, rose 2 percent to an all-time high of $65.64.
+compound: 0.6249,  neg: 0.0,  neu: 0.797,  pos: 0.203,  
+(Reporting by Rishika Sadam in Bengaluru; Editing by Sayantani Ghosh)
+compound: 0.0,  neg: 0.0,  neu: 1.0,  pos: 0.0,  
+sum:
+	neg : 0.411
+	neu : 14.163
+	pos : 1.425
+	compound : 3.5044

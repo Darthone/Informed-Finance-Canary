@@ -1,0 +1,43 @@
+Facebook CEO Mark Zuckerberg is seen on stage during a town hall at Facebook's headquarters in Menlo Park, California September 27, 2015.
+compound: 0.0,  neg: 0.0,  neu: 1.0,  pos: 0.0,  
+REUTERS/Stephen Lam/File Photo
+
+Facing mounting criticism from islanders and local lawmakers, Facebook (FB.O) CEO Mark Zuckerberg on Friday revealed he was dropping his legal gambit to force the sale of land tracts on his seafront property on the island of Kauai that are claimed by native Hawaiians.
+compound: -0.34,  neg: 0.059,  neu: 0.911,  pos: 0.03,  
+"Upon reflection, I regret that I did not take the time to fully understand the quiet title process and its history before we moved ahead," Zuckerberg wrote in Kauai newspaper The Garden Island.
+compound: -0.4215,  neg: 0.085,  neu: 0.915,  pos: 0.0,  
+"Now that I understand the issues better, it's clear we made a mistake," the billionaire added.
+compound: 0.6705,  neg: 0.0,  neu: 0.686,  pos: 0.314,  
+Zuckerberg had previously tried to secure parcels of land within the property by filing quiet title actions, a legal mechanism used to establish ownership and force a sale of land where inheritance rights stretch back generations and formal documentation is lacking.
+compound: 0.4404,  neg: 0.0,  neu: 0.905,  pos: 0.095,  
+Hawaii state representative Kaniela Ing, a Democrat, in response to the controversy this week introduced a bill that would require mediation in similar disputes involving native Hawaiians.
+compound: -0.2732,  neg: 0.08,  neu: 0.92,  pos: 0.0,  
+At the time, the lawmaker likened Zuckerberg's plans to those of sugar barons who took land from native Hawaiians in the 1800s.
+compound: 0.0,  neg: 0.0,  neu: 1.0,  pos: 0.0,  
+Business Insider reported some Hawaii residents planned to protest at Zuckerberg's property on Saturday.
+compound: -0.25,  neg: 0.133,  neu: 0.867,  pos: 0.0,  
+The local news article at the top bore the names of Zuckerberg and his wife, Priscilla Chan, as co-authors but it only had Zuckerberg's name listed at the bottom.
+compound: -0.0258,  neg: 0.05,  neu: 0.903,  pos: 0.047,  
+"The right path is to sit down and discuss how to best move forward," their article said.
+compound: 0.6369,  neg: 0.0,  neu: 0.792,  pos: 0.208,  
+Forbes reported Zuckerberg paid close to $100 million for the 700 acres (283 hectares) on the secluded north shores of Kauai in 2014.
+compound: 0.0,  neg: 0.0,  neu: 1.0,  pos: 0.0,  
+"I've got to give him (Zuckerberg) the benefit of the doubt and say it looks like he's sincere and trying to reach out to the community," Ing said.
+compound: 0.7003,  neg: 0.072,  neu: 0.661,  pos: 0.267,  
+But the lawmaker added that he will not withdraw his bill, saying it was needed to help improve Hawaii's outdated land laws.
+compound: 0.6808,  neg: 0.0,  neu: 0.781,  pos: 0.219,  
+A representative for Zuckerberg could not immediately be reached for further comment.
+compound: -0.0762,  neg: 0.115,  neu: 0.885,  pos: 0.0,  
+Zuckerberg in a previous statement said the estate is made up of several properties and while he worked with majority owners of the tracts to reach a fair deal, he filed the actions to identify all partial owners.
+compound: 0.34,  neg: 0.0,  neu: 0.909,  pos: 0.091,  
+"For most of these folks, they will now receive money for something they never even knew they had.
+compound: 0.0,  neg: 0.0,  neu: 1.0,  pos: 0.0,  
+No one will be forced off the land," Zuckerberg wrote in the previous statement.
+compound: -0.6369,  neg: 0.302,  neu: 0.698,  pos: 0.0,  
+(Reporting by Alex Dobuzinskis in Los Angeles; Editing by David Gregorio)
+compound: 0.0,  neg: 0.0,  neu: 1.0,  pos: 0.0,  
+sum:
+	neg : 0.896
+	neu : 15.833
+	pos : 1.271
+	compound : 1.4453

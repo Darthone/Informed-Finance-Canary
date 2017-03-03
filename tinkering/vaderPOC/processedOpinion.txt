@@ -1,0 +1,83 @@
+At the heart of President Trump’s foreign policy team lies a glaring contradiction.
+compound: -0.5859,  neg: 0.324,  neu: 0.676,  pos: 0.0,  
+On the one hand, it is composed of men of experience, judgment and traditionalism.
+compound: 0.4939,  neg: 0.0,  neu: 0.802,  pos: 0.198,  
+Meaning, they are all very much within the parameters of mainstream American internationalism as practiced since 1945.
+compound: 0.0,  neg: 0.0,  neu: 1.0,  pos: 0.0,  
+Practically every member of the team — the heads of State, Homeland Security, the CIA, and most especially Defense Secretary Jim Mattis and national security adviser H.R.
+compound: 0.707,  neg: 0.0,  neu: 0.777,  pos: 0.223,  
+McMaster — could fit in a Cabinet put together by, say, Hillary Clinton.
+compound: 0.3612,  neg: 0.0,  neu: 0.815,  pos: 0.185,  
+The commander in chief, on the other hand, is quite the opposite — inexperienced, untraditional, unbounded.
+compound: 0.4939,  neg: 0.0,  neu: 0.824,  pos: 0.176,  
+His pronouncements on everything from the one-China policy to the two-state (Arab-Israeli) solution, from NATO obsolescence to the ravages of free trade, continue to confound and, as we say today, disrupt.
+compound: 0.6808,  neg: 0.0,  neu: 0.838,  pos: 0.162,  
+The obvious question is: Can this arrangement possibly work?
+compound: 0.0,  neg: 0.0,  neu: 1.0,  pos: 0.0,  
+The answer thus far, surprisingly, is: perhaps.
+compound: 0.296,  neg: 0.0,  neu: 0.732,  pos: 0.268,  
+The sample size is tiny but take, for example, the German excursion.
+compound: 0.0,  neg: 0.0,  neu: 1.0,  pos: 0.0,  
+Trump dispatched his grown-ups — Vice President Pence, Defense Secretary Mattis, Secretary of Homeland Security John Kelly and Secretary of State Rex Tillerson — to various international confabs in Germany to reassure allies with the usual pieties about America’s commitment to European security.
+compound: 0.8519,  neg: 0.0,  neu: 0.771,  pos: 0.229,  
+They did drop a few hints to Trump’s loud complaints about allied parasitism, in particular shirking their share of the defense burden.
+compound: -0.6124,  neg: 0.281,  neu: 0.584,  pos: 0.135,  
+Within days, Germany announced a 20,000-troop expansion of its military.
+compound: 0.0,  neg: 0.0,  neu: 1.0,  pos: 0.0,  
+Smaller European countries are likely to take note of the new setup.
+compound: 0.0,  neg: 0.0,  neu: 1.0,  pos: 0.0,  
+It’s classic good-cop, bad-cop: The secretaries represent foreign policy continuity but their boss preaches America First.
+compound: 0.0,  neg: 0.0,  neu: 1.0,  pos: 0.0,  
+Message: Shape up.
+compound: 0.0,  neg: 0.0,  neu: 1.0,  pos: 0.0,  
+John Hannah of the Foundation for Defense of Democracies suggests that the push-pull effect might work on foes as well as friends.
+compound: 0.4019,  neg: 0.108,  neu: 0.65,  pos: 0.242,  
+On Saturday, China announced a cutoff of all coal imports from North Korea for the rest of 2017.
+compound: 0.0,  neg: 0.0,  neu: 1.0,  pos: 0.0,  
+Constituting more than one-third of all North Korean exports, this is a major blow to its economy.
+compound: 0.0,  neg: 0.0,  neu: 1.0,  pos: 0.0,  
+True, part of the reason could be Chinese ire at the brazen assassination of Kim Jong Un’s half brother, who had been under Chinese protection.
+compound: -0.2732,  neg: 0.131,  neu: 0.774,  pos: 0.094,  
+Nonetheless, the boycott was declared just days after a provocative North Korean missile launch — and shortly into the term of a new American president who has shown that he can be erratic and quite disdainful of Chinese sensibilities.
+compound: -0.3182,  neg: 0.06,  neu: 0.94,  pos: 0.0,  
+His wavering on the one-China policy took Beijing by surprise.
+compound: 0.128,  neg: 0.137,  neu: 0.684,  pos: 0.179,  
+Trump also strongly denounced Chinese expansion in the South China Sea and conducted an ostentatious love-in with Japan’s prime minister, something guaranteed to rankle the Chinese.
+compound: 0.2732,  neg: 0.0,  neu: 0.923,  pos: 0.077,  
+Beijing’s boycott of Pyongyang is many things, among them a nod to Washington.
+compound: -0.3182,  neg: 0.173,  neu: 0.827,  pos: 0.0,  
+This suggests that the peculiar and discordant makeup of the U.S. national security team — traditionalist lieutenants, disruptive boss — might reproduce the old Nixonian “madman theory.” That’s when adversaries tread carefully because they suspect the U.S. president of being unpredictable, occasionally reckless and potentially crazy dangerous.
+compound: -0.8363,  neg: 0.249,  neu: 0.656,  pos: 0.095,  
+Henry Kissinger, with Nixon’s collaboration, tried more than once to exploit this perception to pressure adversaries.
+compound: -0.5574,  neg: 0.301,  neu: 0.699,  pos: 0.0,  
+Trump’s people have already shown a delicate touch in dealing with his bouts of loopiness.
+compound: 0.0516,  neg: 0.0,  neu: 0.915,  pos: 0.085,  
+Trump has gone on for years about how we should have taken Iraq’s oil for ourselves.
+compound: 0.0,  neg: 0.0,  neu: 1.0,  pos: 0.0,  
+Sunday in Baghdad, Mattis wryly backed off, telling his hosts that “All of us in America have generally paid for our gas and oil all along, and I am sure we will continue to do so in the future.” Yet sometimes an off-center comment can have its uses.
+compound: 0.34,  neg: 0.0,  neu: 0.93,  pos: 0.07,  
+Take Trump’s casual dismissal of a U.S. commitment to a two-state solution in the Middle East.
+compound: 0.6908,  neg: 0.0,  neu: 0.621,  pos: 0.379,  
+The next day, U.S. policy was brought back in line by his own U.N. ambassador.
+compound: 0.0,  neg: 0.0,  neu: 1.0,  pos: 0.0,  
+But this diversion might prove salutary.
+compound: 0.0,  neg: 0.0,  neu: 1.0,  pos: 0.0,  
+It’s a message to the Palestinians that their decades of rejectionism may not continue to pay off with an inexorable march toward statehood — that there may actually be a price to pay for making no concessions and simply waiting for the U.S. to deliver them a Palestinian state.
+compound: -0.1551,  neg: 0.046,  neu: 0.9,  pos: 0.054,  
+To be sure, a two-track, two-policy, two-reality foreign policy is risky, unsettling and has the potential to go totally off the rails.
+compound: 0.128,  neg: 0.078,  neu: 0.823,  pos: 0.1,  
+This is not how you would draw it up in advance.
+compound: 0.0,  neg: 0.0,  neu: 1.0,  pos: 0.0,  
+It’s unstable and confusing.
+compound: -0.5267,  neg: 0.688,  neu: 0.313,  pos: 0.0,  
+But the experience of the first month suggests that, with prudence and luck, it can yield the occasional benefit — that the combination of radical rhetoric and conventional policy may induce better behavior both in friend and foe.
+compound: 0.8481,  neg: 0.06,  neu: 0.688,  pos: 0.252,  
+Alas, there is also a worst-case scenario.
+compound: -0.2732,  neg: 0.296,  neu: 0.704,  pos: 0.0,  
+It needs no elaboration.
+compound: -0.296,  neg: 0.423,  neu: 0.577,  pos: 0.0,  
+sum:
+	neg : 3.355
+	neu : 32.443
+	pos : 3.203
+	compound : 1.9937

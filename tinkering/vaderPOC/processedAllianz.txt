@@ -1,0 +1,51 @@
+The logo of Europe's biggest insurer Allianz SE is seen on the company tower at La Defense business and financial district in Courbevoie near Paris, France, March 2, 2016.
+compound: 0.128,  neg: 0.0,  neu: 0.949,  pos: 0.051,  
+REUTERS/Jacky Naegelen/File Photo
+
+SYDNEY/FRANKFURT Germany's Allianz (ALVG.DE) has made an informal takeover approach to QBE Insurance (QBE.AX), Australia's biggest insurer, but has not named a price, sources told Reuters on Monday.
+compound: 0.0,  neg: 0.0,  neu: 1.0,  pos: 0.0,  
+Shares in QBE closed flat after rising by up to 5 percent, while Allianz was down 1.6 pct at 1230 GMT after German newspaper Handelsblatt on Sunday reported it had floated an A$15 per share bid, valuing QBE at A$20 billion ($15 billion).
+compound: 0.7003,  neg: 0.0,  neu: 0.852,  pos: 0.148,  
+QBE, one of the world's 20 biggest insurers, operates in North America and Europe as well as in Australia and New Zealand.
+compound: 0.2732,  neg: 0.0,  neu: 0.909,  pos: 0.091,  
+It said in a statement it was not in talks with Allianz or any other potential buyer.
+compound: 0.0,  neg: 0.0,  neu: 1.0,  pos: 0.0,  
+Allianz, Europe's largest insurer by market capitalization and number two by booked premiums, declined to comment.
+compound: 0.0772,  neg: 0.0,  neu: 0.92,  pos: 0.08,  
+M&A in the insurance sector is expected to remain lively after a bumper year in 2015, driven by competition and new money entering the market and driving down returns.
+compound: 0.4404,  neg: 0.0,  neu: 0.903,  pos: 0.097,  
+Australia is attractive because the population and economy are growing faster than in most other developed countries and the regulatory regime is more stable than in emerging markets.
+compound: 0.7264,  neg: 0.0,  neu: 0.779,  pos: 0.221,  
+QBE's share price crashed after a profit warning last summer, but has recovered by a third since a September low.
+compound: -0.2023,  neg: 0.208,  neu: 0.622,  pos: 0.17,  
+"Allianz has been in contact with QBE about a potential deal.
+compound: 0.0,  neg: 0.0,  neu: 1.0,  pos: 0.0,  
+But it's only one of a handful of targets," one of the sources told Reuters.
+compound: 0.0,  neg: 0.0,  neu: 1.0,  pos: 0.0,  
+Allianz is also seen as a likely buyer of any assets that may be sold if Italy's Generali (GASI.MI) and Intesa Sanpaolo (ISP.MI) combine.
+compound: 0.1779,  neg: 0.0,  neu: 0.928,  pos: 0.072,  
+OPENING GAMBIT
+
+QBE would fit Allianz's focus of growing in property and casualty, whereas potential targets such as Zurich (ZURN.S) are less attractive due to their life insurance focus, one of the sources said.
+compound: 0.3415,  neg: 0.085,  neu: 0.746,  pos: 0.169,  
+Allianz, which was in talks with Zurich more than a year ago but put the project on the back burner, has hired Morgan Stanley (MS.N) to advise on potential acquisitions, sources said, adding that Goldman Sachs (GS.N) was acting as defense adviser for QBE.
+compound: 0.1901,  neg: 0.0,  neu: 0.96,  pos: 0.04,  
+Investment bankers said a A$15 bid for QBE - a 20 percent premium to Friday's close - would be an opening shot.
+compound: 0.0,  neg: 0.0,  neu: 1.0,  pos: 0.0,  
+"That would be high enough to provoke a reaction from QBE," one said, but QBE was unlikely to agree to a such a price.
+compound: 0.34,  neg: 0.077,  neu: 0.788,  pos: 0.135,  
+Allianz Chief Executive Oliver Baete - who analysts estimate has 9 billion euros to spend - has said the German insurer was looking for acquisitions, but that it was not easy to find attractive targets at a reasonable price.
+compound: 0.1879,  neg: 0.078,  neu: 0.826,  pos: 0.096,  
+He told investors in November he would be willing to pay a large premium if it were able to close a gap in Allianz's global footprint.
+compound: -0.1027,  neg: 0.057,  neu: 0.943,  pos: 0.0,  
+Earlier this month, he said that all of Allianz's past acquisitions were friendly, with integration risks too big in a large hostile deal.
+compound: -0.128,  neg: 0.175,  neu: 0.706,  pos: 0.119,  
+Allianz has said it could return 2.5 billion euros ($2.7 billion) from its acquisition budget to shareholders in the form of share buybacks.
+compound: 0.296,  neg: 0.0,  neu: 0.909,  pos: 0.091,  
+(Additional reporting by Alexander Huebner; Editing by Catherine Evans, Stephen Coates and Alexander Smith)
+compound: 0.0,  neg: 0.0,  neu: 1.0,  pos: 0.0,  
+sum:
+	neg : 0.68
+	neu : 18.74
+	pos : 1.58
+	compound : 3.4459

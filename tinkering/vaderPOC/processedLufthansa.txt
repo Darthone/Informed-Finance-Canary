@@ -1,0 +1,17 @@
+BERLIN The German cartel office on Monday approved plans by Lufthansa (LHAG.DE) to lease 38 crewed planes from smaller rival Air Berlin (AB1.DE), a deal which had drawn criticism from rival Ryanair (RYA.I).
+compound: -0.0258,  neg: 0.081,  neu: 0.84,  pos: 0.078,  
+The deal, agreed last year, brings a much needed financial lifeline to loss-making Air Berlin, which is part-owned by Abu Dhabi-based Etihad Airways, and allows Lufthansa to quickly expand its Eurowings budget unit.
+compound: 0.5267,  neg: 0.0,  neu: 0.872,  pos: 0.128,  
+Ryanair had raised objections to the deal, with CEO Michael O'Leary telling Reuters it was a "fig leaf" to mask Lufthansa's acquisition of its main domestic competitor.
+compound: 0.0,  neg: 0.0,  neu: 1.0,  pos: 0.0,  
+The cartel office said on Monday that the wet lease deal had to be viewed differently to a takeover and that Lufthansa was only taking on planes, but not slots.
+compound: 0.0,  neg: 0.0,  neu: 1.0,  pos: 0.0,  
+"Lufthansa has the chance to expand with these planes but that growth is not enough to block the deal," Andreas Mundt, head of the cartel office, said in a statement.
+compound: 0.8252,  neg: 0.0,  neu: 0.721,  pos: 0.279,  
+(Reporting by Victoria Bryan; Editing by Arno Schuetze)
+compound: 0.0,  neg: 0.0,  neu: 1.0,  pos: 0.0,  
+sum:
+	neg : 0.081
+	neu : 5.433
+	pos : 0.485
+	compound : 1.3261
