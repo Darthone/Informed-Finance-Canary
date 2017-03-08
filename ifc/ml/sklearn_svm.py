@@ -28,32 +28,38 @@ def addDailyReturn(dataset):
 
 	return X_train, y_train, X_test, y_test   
 """
+accuracies = []
 
-df = pd.read_csv("GM.csv")
-#using open, high, close to determine UpDown
-df.drop(['date'], 1, inplace=True)
-df.drop(['low'], 1, inplace=True)
-df.drop(['volume'], 1, inplace=True)
-df.drop(['open'], 1, inplace=True)
-df.drop(['adj_close'],1, inplace=True)
+for i in range(100):
+	df = pd.read_csv("GM.csv")
+	addDailyReturn(df)
+	#using open, high, close to determine UpDown
+	df.drop(['date'], 1, inplace=True)
+	df.drop(['low'], 1, inplace=True)
+	#df.drop(['volume'], 1, inplace=True)
+	df.drop(['open'], 1, inplace=True)
+	df.drop(['adj_close'],1, inplace=True)
+	#df.drop(['close'],1, inplace=True)
+	df.drop(['high'],1, inplace=True)
 
-addDailyReturn(df)
+	X = np.array(df.drop(['UpDown'],1))
+	y = np.array(df['UpDown'])
+	print y
 
-X = np.array(df.drop(['UpDown'],1))
-y = np.array(df['UpDown'])
-print y
+	X_train, X_test, y_train, y_test = cross_validation.train_test_split(X, y, test_size=0.2)
 
-X_train, X_test, y_train, y_test = cross_validation.train_test_split(X, y, test_size=0.2)
+	clf = svm.SVC() 
+	clf.fit(X_train,y_train)
 
-clf = svm.SVC() 
-clf.fit(X_train,y_train)
+	accuracy = clf.score(X_test,y_test)
 
-accuracy = clf.score(X_test,y_test)
+	print accuracy
+	accuracies.append(accuracy)	
 
-print accuracy
+	test_set = np.array([[104,106]])
 
-test_set = np.array([[104,106]])
+	prediction = clf.predict(test_set)
 
-prediction = clf.predict(test_set)
+	print prediction
 
-print prediction
+print sum(accuracies)/len(accuracies)
