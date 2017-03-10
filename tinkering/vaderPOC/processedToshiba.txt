@@ -1,0 +1,33 @@
+Toshiba Corp chairman Shigenori Shiga attends a news conference at the company headquarters in Tokyo, Japan May 6, 2016.
+compound: 0.0,  neg: 0.0,  neu: 1.0,  pos: 0.0,  
+REUTERS/Issei Kato
+
+TOKYO Toshiba Corp (6502.T) Chairman Shigenori Shiga is ready to step down to take responsibility for the huge writedowns looming over the Japanese group's U.S. nuclear power unit Westinghouse Electric Co LLC, the Nikkei business daily reported.
+compound: 0.5106,  neg: 0.035,  neu: 0.851,  pos: 0.113,  
+Shiga was chairman of Westinghouse when the unit booked charges of $930 million in fiscal 2012 and $390 million in fiscal 2013, which Toshiba failed to flag at the time in violation of the Tokyo bourse's disclosure rules.
+compound: -0.8225,  neg: 0.197,  neu: 0.803,  pos: 0.0,  
+The Japanese conglomerate's nomination committee will decide on the matter of Shiga's resignation and an announcement could come as soon as Feb. 14, the Nikkei reported earlier.
+compound: -0.2732,  neg: 0.078,  neu: 0.883,  pos: 0.039,  
+Westinghouse Chairman Danny Roderick is also expected to resign as president of Toshiba's in-house energy systems and solutions company, the Japanese business daily reported.
+compound: 0.1027,  neg: 0.088,  neu: 0.772,  pos: 0.14,  
+Toshiba said Saturday that nothing had been decided in regards to Shiga and Roderick's positions.
+compound: 0.0,  neg: 0.0,  neu: 1.0,  pos: 0.0,  
+On Friday, the company said it would sell a minority stake in its memory chip business as it urgently seeks funds to offset an imminent multi-billion dollar writedown, adding that its overseas nuclear division - the cause of its woes - was now under review.
+compound: -0.4404,  neg: 0.066,  neu: 0.934,  pos: 0.0,  
+The drastic measures are set to be just some of the tough choices the Japanese conglomerate will have to take as proceeds from the sale are likely to only cover part of charges that domestic media have put at $6 billion.
+compound: -0.3818,  neg: 0.085,  neu: 0.915,  pos: 0.0,  
+Still battered by a 2015 accounting scandal, Toshiba was plunged back into crisis when it emerged late last year that it had to account for huge cost overruns at a U.S. power plant construction business recently acquired by its Westinghouse division.
+compound: -0.6908,  neg: 0.155,  neu: 0.795,  pos: 0.051,  
+Describing the nuclear division as no longer a central business focus for the firm, Chief Executive Satoshi Tsunakawa said Toshiba will review Westinghouse's role in new projects and whether it will embark on new power plant construction.
+compound: -0.296,  neg: 0.059,  neu: 0.941,  pos: 0.0,  
+Executives on Friday declined to comment on the size of the writedown, which will be announced on Feb. 14 when Toshiba reports third-quarter results.
+compound: 0.0,  neg: 0.0,  neu: 1.0,  pos: 0.0,  
+Shares in Toshiba have lost almost a third of their value in the past three months.
+compound: 0.3182,  neg: 0.122,  neu: 0.635,  pos: 0.243,  
+(Reporting by Makiko Yamazaki and Osamu Tsukimori in TOKYO and Anya George Tharakan in Bengaluru; Editing by Shounak Dasgupta and Lincoln Feast)
+compound: 0.0,  neg: 0.0,  neu: 1.0,  pos: 0.0,  
+sum:
+	neg : 0.885
+	neu : 11.529
+	pos : 0.586
+	compound : -1.9732

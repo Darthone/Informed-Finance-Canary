@@ -1,0 +1,47 @@
+A man is reflected on a window at Honda Motor's showroom in Tokyo, Japan, May 13, 2016.
+compound: 0.0,  neg: 0.0,  neu: 1.0,  pos: 0.0,  
+REUTERS/Toru Hanai/File Photo
+
+The GM logo is seen in Warren, Michigan, U.S. on October 26, 2015.
+compound: 0.0,  neg: 0.0,  neu: 1.0,  pos: 0.0,  
+REUTERS/Rebecca Cook/File Photo
+
+TOKYO/DETROIT Honda Motor Co Ltd and General Motors Co (GM) will jointly produce pollution-free hydrogen fuel cell power systems in the United States from around 2020, the companies said Monday, despite President Donald Trump's promises to dismantle U.S. environmental regulations intended to spur green car demand.
+compound: 0.5994,  neg: 0.028,  neu: 0.87,  pos: 0.102,  
+At a briefing in Detroit, GM executive Mark Reuss said the fuel cells could be used in autonomous vehicles, as well by ride-sharing companies, such as GM affiliate Lyft.
+compound: 0.2732,  neg: 0.0,  neu: 0.928,  pos: 0.072,  
+He also said fuel cells could have aerospace and military applications.
+compound: 0.0,  neg: 0.0,  neu: 1.0,  pos: 0.0,  
+The companies on Monday said they will invest $85 million to add a production line at a GM battery plant in Brownstown, Michigan, and create 100 jobs.
+compound: 0.2732,  neg: 0.0,  neu: 0.92,  pos: 0.08,  
+The fuel cell production line will be partly automated and is designed to be quickly scaled up if demand warrants.
+compound: -0.128,  neg: 0.073,  neu: 0.927,  pos: 0.0,  
+The companies' U.S. investment plan is the latest this month from the auto industry after Trump urged car makers to raise production in the United States and vowed to cut regulations, including environmental ones, and taxes to make the U.S. more business friendly.
+compound: 0.6344,  neg: 0.043,  neu: 0.827,  pos: 0.13,  
+Honda on Monday said fuel cell vehicles (FCVs) remained central to new-energy cars making up two-thirds of its line-up by 2030 from around 5 percent now.
+compound: 0.0,  neg: 0.0,  neu: 1.0,  pos: 0.0,  
+"The United States is where demand for fuel cell vehicles is going to be among the highest so we've decided to consolidate our manufacturing operations into one location there," Honda spokesman Teruhiko Tatebe said at a joint news briefing in Tokyo.
+compound: 0.3182,  neg: 0.035,  neu: 0.898,  pos: 0.066,  
+Honda is among a handful of automakers to develop FCVs, which combine hydrogen and oxygen to produce electricity and emit only water.
+compound: 0.0,  neg: 0.0,  neu: 1.0,  pos: 0.0,  
+But limited fuelling infrastructure has limited demand while in the United States while low petrol prices have pushed consumer preference toward sport utility vehicles and pick-up trucks.
+compound: -0.3818,  neg: 0.23,  neu: 0.683,  pos: 0.087,  
+Honda has produced just 118 of its Clarity Fuel Cell cars since its U.S. and Japan launch last year at a relatively high price of 7.66 million yen ($66,795).
+compound: 0.4019,  neg: 0.0,  neu: 0.909,  pos: 0.091,  
+Honda makes that vehicle's components in Japan but on Monday said it would eventually shift production of fuel cell power systems to the U.S. to cut costs.
+compound: -0.3919,  neg: 0.092,  neu: 0.908,  pos: 0.0,  
+It said it had not decided whether to continue assembling FCVs at home in the longer term.
+compound: 0.0,  neg: 0.0,  neu: 1.0,  pos: 0.0,  
+At GM, research into hydrogen as a fuel stretches as far back as the mid-1960s with a modified Chevrolet Corvair minivan.
+compound: 0.0,  neg: 0.0,  neu: 1.0,  pos: 0.0,  
+As part of a development partnership forged in 2013, the latest agreement will see GM and Honda each hold 50 percent of newly formed Fuel Cell System Manufacturing LLC.
+compound: 0.4939,  neg: 0.0,  neu: 0.894,  pos: 0.106,  
+Their future FCVs will share the same power system from around 2020.
+compound: 0.296,  neg: 0.0,  neu: 0.833,  pos: 0.167,  
+(Reporting by Naomi Tajitsu in Tokyo and Paul Lienert in Detroit; Editing by Christopher Cushing and Cynthia Osterman)
+compound: 0.0,  neg: 0.0,  neu: 1.0,  pos: 0.0,  
+sum:
+	neg : 0.501
+	neu : 17.597
+	pos : 0.901
+	compound : 2.3885

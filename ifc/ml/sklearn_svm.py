@@ -1,62 +1,65 @@
 import numpy as np
 import pandas as pd
-from sklearn import preprocessing, cross_validation, svm
+from sklearn import preprocessing, cross_validation, neighbors, svm 
 
-def k_nearest_neighbors(data, predict, k=3.0):
-	if len(data) >= k:
-		warnings.warn('K is a value less than total groups')
+def addDailyReturn(dataset):
+	"""
+	Adding in daily return to create binary classifiers (Up or Down in relation to the previous day)
+	"""
 
-	distances = []
-	for group in data:
-		for features in data[group]:
-			#calculating euclidian distance
-			e_distance = np.linalg.norm(np.array(features)-np.array(predict))
-			distances.append([e_distance, group])
+	#will normalize labels
+	le = preprocessing.LabelEncoder()
 
-	votes = [i[1] for i in sorted(distances)[:k]]
-	#print(Counter(votes).most_common(1))
-	vote_result = Counter(votes).most_common(1)[0][0]
-	confidence = float(Counter(votes).most_common(1)[0][1]) / k
-	
-	#print(vote_result, confidence)
+	dataset['UpDown'] = (dataset['close']-dataset['close'].shift(-1))/dataset['close'].shift(-1)
+	dataset.UpDown[dataset.UpDown >= 0] = 'Up'
+	dataset.UpDown[dataset.UpDown < 0] = 'Down'
+	dataset.UpDown = le.fit(dataset.UpDown).transform(dataset.UpDown)
 
-	#knnalgos
-	return vote_result, confidence
+"""
+	features = dataset.columns[1:-1]
+	X = dataset[features]    
+	y = dataset.UpDown    
 
+	X_train = X[X.index < start_test]
+	y_train = y[y.index < start_test]              
+
+	X_test = X[X.index >= start_test]    
+	y_test = y[y.index >= start_test]
+
+	return X_train, y_train, X_test, y_test   
+"""
 accuracies = []
 
-for i in range(5):
-	df = pd.read_csv("AAPL.txt")
-	#df.replace('?',-99999, inplace=True)
+for i in range(100):
+	df = pd.read_csv("GM.csv")
+	addDailyReturn(df)
+	#using open, high, close to determine UpDown
 	df.drop(['date'], 1, inplace=True)
 	df.drop(['low'], 1, inplace=True)
-	df.drop(['volume'], 1, inplace=True)
+	#df.drop(['volume'], 1, inplace=True)
+	df.drop(['open'], 1, inplace=True)
+	df.drop(['adj_close'],1, inplace=True)
+	#df.drop(['close'],1, inplace=True)
+	df.drop(['high'],1, inplace=True)
 
-	X = np.array(df.drop(['open'],1))
-	y = np.array(df['open'])
+	X = np.array(df.drop(['UpDown'],1))
+	y = np.array(df['UpDown'])
+	print y
 
 	X_train, X_test, y_train, y_test = cross_validation.train_test_split(X, y, test_size=0.2)
 
-	clf = svm.SVR()
+	clf = svm.SVC() 
 	clf.fit(X_train,y_train)
 
 	accuracy = clf.score(X_test,y_test)
 
-	"""
-	print correct
-	print total 
-	print percent_correct
-	"""
+	print accuracy
+	accuracies.append(accuracy)	
 
-	accuracies.append(accuracy)
+	test_set = np.array([[104,106]])
 
-print(sum(accuracies)/len(accuracies))
+	prediction = clf.predict(test_set)
 
-test_set = np.array([[104,106]])
- 
-test_set = test_set.reshape(len(test_set),-1)
- 
-prediction = clf.predict(test_set)
- 
-print prediction
+	print prediction
 
+print sum(accuracies)/len(accuracies)
