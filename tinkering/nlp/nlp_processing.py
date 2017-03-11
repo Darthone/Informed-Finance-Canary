@@ -11,16 +11,15 @@ train_text = open("target1.txt")
 train_text2 = open("target2.txt")
 
 temp_train_text = train_text.readlines()
-print temp_train_text
+#print temp_train_text
 str1 = ''.join(temp_train_text)
 #print type(temp_train_text)
 temp_train_text2 = train_text2.readlines()
 str2 = ''.join(temp_train_text2)
-
 #preprocessing
 #tokenize by word - this is the Bag of Words
-tokenized = word_tokenize(str1)
-tokenized2 = word_tokenize(str2)
+#tokenized = word_tokenize(str1)
+#tokenized2 = word_tokenize(str2)
 
 corpus = [str1, str2]
 
@@ -29,7 +28,7 @@ corpus = [str1, str2]
 #discard any stop words - saves on processing
 stopset = set(stopwords.words('english'))
 
-vectorizer = TfidfVectorizer(stop_words=stopset, use_idf=True)
+vectorizer = TfidfVectorizer(stop_words=stopset, use_idf=True, ngram_range=(2,2))
 
 X = vectorizer.fit_transform(corpus)
 
