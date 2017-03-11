@@ -192,7 +192,7 @@ def graphData(stock, MA1, MA2, dateRange):
 		# subplot profile parameters
 		mplot.subplots_adjust(left=.10, bottom=.19, right=.93, top=.95, wspace=.20, hspace=.07)
 		# plot profiling
-		mplot.xlabel('Date (YYY-MM-DD)')
+		mplot.xlabel('Date (YYYY-MM-DD)')
 		# mplot.ylabel('Stock Price ($)')
 		mplot.suptitle(stock + ' Stock Price')
 		# remove x axis from first graph, used at bottom already
