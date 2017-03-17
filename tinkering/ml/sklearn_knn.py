@@ -10,11 +10,12 @@ def addDailyReturn(dataset):
 	#will normalize labels
 	le = preprocessing.LabelEncoder()
 
-	dataset['UpDown'] = (dataset['close']-dataset['close'].shift(-1))/dataset['close'].shift(-1)
-	dataset.UpDown[dataset.UpDown >= 0] = 'Up'
+	dataset['UpDown'] = -(dataset['adj_close']-dataset['adj_close'].shift(-1))/dataset['adj_close'].shift(-1)
+	print dataset['UpDown']
+	dataset.UpDown[dataset.UpDown >= 0] = 'Up' 
 	dataset.UpDown[dataset.UpDown < 0] = 'Down'
 	dataset.UpDown = le.fit(dataset.UpDown).transform(dataset.UpDown)
-
+	#print dataset['UpDown']
 """
 	features = dataset.columns[1:-1]
 	X = dataset[features]    
@@ -30,25 +31,32 @@ def addDailyReturn(dataset):
 """
 accuracies = []
 
-for i in range(100):
-	df = pd.read_csv("GM.csv")
+def preProcessing(csv):
+	df = pd.read_csv(csv)
 	addDailyReturn(df)
-	#using open, high, close to determine UpDown
+	
 	df.drop(['date'], 1, inplace=True)
 	df.drop(['low'], 1, inplace=True)
-	#df.drop(['volume'], 1, inplace=True)
-	df.drop(['open'], 1, inplace=True)
+	df.drop(['volume'], 1, inplace=True)
+	#df.drop(['open'], 1, inplace=True)
 	df.drop(['adj_close'],1, inplace=True)
 	#df.drop(['close'],1, inplace=True)
 	df.drop(['high'],1, inplace=True)
+	
+	return df
 
-	X = np.array(df.drop(['UpDown'],1))
-	y = np.array(df['UpDown'])
-	print y
+for i in range(100):
+	train_df = preProcessing('GM_14_15.csv')
+	test_df = preProcessing('GM_16_17.csv')
 
-	X_train, X_test, y_train, y_test = cross_validation.train_test_split(X, y, test_size=0.2)
+	X_train = np.array(train_df.drop(['UpDown'],1))
+	y_train = np.array(train_df['UpDown'])
+	X_test = np.array(test_df.drop(['UpDown'],1))
+	y_test = np.array(test_df['UpDown'])
+	
+	#X_train, X_test, y_train, y_test = cross_validation.train_test_split(X, y, test_size=0.5)
 
-	clf = svm.SVC() 
+	clf = neighbors.KNeighborsClassifier() 
 	clf.fit(X_train,y_train)
 
 	accuracy = clf.score(X_test,y_test)
