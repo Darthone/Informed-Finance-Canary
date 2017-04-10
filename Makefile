@@ -4,4 +4,7 @@ init:
 test:
 	nosetests -v
 
+style:
+	pep8 ./ifc
+
 .PHONY: init test
