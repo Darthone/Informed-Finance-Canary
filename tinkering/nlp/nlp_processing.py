@@ -7,8 +7,8 @@ from sklearn.decomposition import TruncatedSVD
 import pandas as pd
 
 #State of the Union Addresses
-train_text = open("target1.txt") 
-train_text2 = open("target2.txt")
+train_text = open("GM1.txt") 
+train_text2 = open("GM2.txt")
 
 temp_train_text = train_text.readlines()
 #print temp_train_text
@@ -23,19 +23,28 @@ str2 = ''.join(temp_train_text2)
 
 corpus = [str1, str2]
 
-#print corpus[0]
+print corpus[0]
 
 #discard any stop words - saves on processing
-stopset = set(stopwords.words('english'))
+stopset = list(stopwords.words('english'))
 
-vectorizer = TfidfVectorizer(stop_words=stopset, use_idf=True, ngram_range=(2,2))
+stopset.append('000')
+for i in range(9999):
+	stopset.append(str(i))
 
+vectorizer = TfidfVectorizer(stop_words=stopset, use_idf=True, ngram_range=(2,3))
+
+#matrix of input set
 X = vectorizer.fit_transform(corpus)
+#X = X.toarray()
+print sorted(X[0])
 
-print X[0]
+print sorted(vectorizer.inverse_transform(X[0]))
 
 size_matrix = X.shape[0] 
 
+
+"""
 lsa = TruncatedSVD(n_components=size_matrix, n_iter=100)
 lsa.fit(X)
 
@@ -49,3 +58,4 @@ for i, comp in enumerate(lsa.components_):
 	for term in sortedTerms:
 		print term[0]
 	print "   "
+"""
