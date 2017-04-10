@@ -36,6 +36,7 @@ vectorizer = TfidfVectorizer(stop_words=stopset, use_idf=True, ngram_range=(2,3)
 
 #matrix of input set
 X = vectorizer.fit_transform(corpus)
+print X
 #X = X.toarray()
 print sorted(X[0])
 
