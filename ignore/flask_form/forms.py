@@ -1,4 +1,4 @@
-# pythonspot.com
+#!/usr/bin/env python
 from flask import Flask, render_template, flash, request
 from wtforms import Form, TextField, TextAreaField, validators, StringField, SubmitField
  
@@ -34,4 +34,4 @@ def hello():
     return render_template('hello.html', form=form)
  
 if __name__ == "__main__":
-    app.run()
+    app.run(host='0.0.0.0', port=8001)
