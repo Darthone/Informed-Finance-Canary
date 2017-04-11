@@ -9,7 +9,8 @@ app.config.from_object(__name__)
 app.config['SECRET_KEY'] = '7d441f27d441f27567d441f2b6176a'
 
 class ReusableForm(Form):
-	name = TextField('Name:', validators=[validators.required()])
+	tickerName = TextField('Ticker Name:', validators=[validators.required()])
+	sma1 = TextField('Simple Moving Average 1 (SMA) (eg 10):', validators=[validators.required()])
 
 @app.route("/", methods=['GET', 'POST'])
 def hello():
@@ -17,15 +18,17 @@ def hello():
 
 	print form.errors
 	if request.method == 'POST':
-		name = request.form['name']
-		print name
+		tickerName = request.form['tickerName']
+		sma1 = request.form['sma1']
+		print tickerName, sma1
 		
 		if form.validate():
-			flash('Hello ' + name)
+			flash('Ticker Name: ' + tickerName)
+			flash('Simple Moving Average 1 (SMA) (eg 10): ' + sma1)
 		else:
 			flash('Error: All the form fields are required. ')
 
-	return render_template('hello.html', form=form)
+	return render_template('index.html', form=form)
 
 if __name__ == "__main__":
-	app.run(host='0.0.0.0', port=8001)
+	app.run(host='0.0.0.0', port=8000)
