@@ -1,106 +1,105 @@
 #!/usr/bin/python
 
-import peewee
 from peewee import *
 
-database = MySQLDatabase("ifc", host="192.168.1.128", port=3306, user="", passwd="")
+db = MySQLDatabase("ifc", host="127.0.0.1", port=3306, user="", passwd="")
 
-class Author(peewee.Model):
-	author_id = peewee.CharField(primary_key="true")
-	name = peewee.CharField()
-	
-	class Meta:
-		database = database
-		
-class Stock(peewee.Model):
-	stock_id = peewee.CharField(primary_key="true")
-	ticker = peewee.CharField()
-	name = peewee.CharField()
-	
-	class Meta:
-		database = database
+class BaseModel(Model):
+    """ Base Model which is extended in each model """
+    class Meta:
+        database = db
 
-class StockFeature(peewee.Model):
-	stock_id = peewee.CharField(primary_key="true")
-	date = peewee.DateField()
-	high = peewee.CharField()
-	low = peewee.CharField()
-	volume = peewee.CharField()
-	opening = peewee.CharField()
-	closing = peewee.CharField()
-	rsi = peewee.CharField()
-	macd = peewee.CharField()
-	sma = peewee.CharField()
-	ema = peewee.CharField()
-	
-	class Meta:
-		database = database
 
-class ArticleFeature(peewee.Model):
-	article_feature_id = peewee.IntegerField(primary_key="true")
-	positive = peewee.CharField()
-	negative = peewee.CharField()
-	article_id = peewee.CharField()
-	
-	class Meta:
-		database = database
+class Author(BaseModel):
+    """ Author information """
+    name = CharField(unique=True)
+    
+        
+class Stock(BaseModel):
+    """ Stock name and ticker symbol """
+    ticker = CharField(unique=True)
+    name = CharField(unique=True)
+    
 
-class ArticleFeatureStockFeature(peewee.Model):
-	article_feature_id = peewee.IntegerField(primary_key="true")
-	stock_id = peewee.CharField()
-	date = peewee.DateField()
-	
-	class Meta:
-		database = database
+class StockFeature(BaseModel):
+    """ Model storing info about stock prices """
+    id = IntegerField()
+    stock = ForeignKeyField(Stock, related_name='stock_name')
+    date = DateField()
+    high = DecimalField()
+    low = DecimalField()
+    volume = DecimalField()
+    opening = DecimalField()
+    closing = DecimalField()
+    rsi = DecimalField()
+    macd = DecimalField()
+    sma = DecimalField()
+    ema = DecimalField()
+    
+    class Meta:
+        primary_key = CompositeKey('id', 'stock', 'date')
 
-class Article(peewee.Model):
-	article_id = peewee.CharField(primary_key="true")
-	stock_id = peewee.CharField()
-	date = peewee.CharField()
-	title = peewee.CharField()
-	content = peewee.CharField()
-	stock_prices = peewee.CharField()
-	feature_set = peewee.CharField()
-	web_source = peewee.CharField()
-	author_id = peewee.CharField()
-	
-	class Meta:
-		database = database
+    
+""" I'm not sure if we need this, I think it's just a join and filter
+class ArticleFeatureStockFeature(BaseModel):
+    article = 
+    stock =
+    date = DateField()
 
-class StockArticle(peewee.Model):
-	stock_id = peewee.CharField(primary_key="true")
-	article_id = peewee.CharField()
-	
-	class Meta:
-		database = database
+    class Meta:
+        primary_key = CompositeKey(
+   """ 
+
+class Article(BaseModel):
+    """ Contains content from an article """
+    author = ForeignKeyField(Author, related_name='author')
+    date = DateField()
+    title = CharField()
+    content = TextField()
+    source = CharField()
+
+
+class ArticleFeature(BaseModel):
+    """ Relationship for showing which article relates to the extracted feasture """
+    article = ForeignKeyField(Article, related_name="article", primary_key=True)
+    positive = DecimalField()
+    negative = DecimalField()
+    other = TextField()
+
+
+class StockArticle(BaseModel):
+    """ many-to-many relationship showing which stocks were found in an article """
+    stock = ForeignKeyField(Stock)
+    article = ForeignKeyField(Article)
+    
 
 if __name__ == "__main__":
-	try:
-		Author.create_table()
-	except peewee.OperationalError:
-			print "Author table already exists"
-	try:
-		Stock.create_table()
-	except peewee.OperationalError:
-			print "Stock table already exists"
-	try:
-		StockFeature.create_table()
-	except peewee.OperationalError:
-			print "Stock_feature table already exists"
-	try:
-		ArticleFeature.create_table()
-	except peewee.OperationalError:
-			print "Article_feature table already exists"
-	try:
-		ArticleFeatureStockFeature.create_table()
-	except peewee.OperationalError:
-			print "Article_feature_stock_feature table already exists"
-	try:
-		Article.create_table()
-	except peewee.OperationalError:
-			print "Article table already exists"
-	try:
-		StockArticle.create_table()
-	except peewee.OperationalError:
-			print "Stock_article table already exists"
-	
+    try:
+        Author.create_table()
+    except OperationalError:
+        print "Author table already exists"
+    try:
+        Stock.create_table()
+    except OperationalError:
+        print "Stock table already exists"
+    try:
+        StockFeature.create_table()
+    except OperationalError:
+        print "Stock_feature table already exists"
+    try:
+        Article.create_table()
+    except OperationalError:
+        print "Article table already exists"
+    try:
+        StockArticle.create_table()
+    except OperationalError:
+        print "Stock_article table already exists"
+    try:
+        ArticleFeature.create_table()
+    except OperationalError:
+        print "Article_feature table already exists"
+    #try:
+    #    ArticleFeatureStockFeature.create_table()
+    #except OperationalError:
+    #    print "Article_feature_stock_feature table already exists"
+    
