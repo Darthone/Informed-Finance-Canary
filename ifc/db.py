@@ -5,14 +5,14 @@ from peewee import *
 
 database = MySQLDatabase("ifc", host="192.168.1.128", port=3306, user="", passwd="")
 
-class author(peewee.Model):
+class Author(peewee.Model):
 	author_id = peewee.CharField(primary_key="true")
 	name = peewee.CharField()
 	
 	class Meta:
 		database = database
 		
-class stock(peewee.Model):
+class Stock(peewee.Model):
 	stock_id = peewee.CharField(primary_key="true")
 	ticker = peewee.CharField()
 	name = peewee.CharField()
@@ -20,7 +20,7 @@ class stock(peewee.Model):
 	class Meta:
 		database = database
 
-class stock_feature(peewee.Model):
+class StockFeature(peewee.Model):
 	stock_id = peewee.CharField(primary_key="true")
 	date = peewee.DateField()
 	high = peewee.CharField()
@@ -36,7 +36,7 @@ class stock_feature(peewee.Model):
 	class Meta:
 		database = database
 
-class article_feature(peewee.Model):
+class ArticleFeature(peewee.Model):
 	article_feature_id = peewee.IntegerField(primary_key="true")
 	positive = peewee.CharField()
 	negative = peewee.CharField()
@@ -45,7 +45,7 @@ class article_feature(peewee.Model):
 	class Meta:
 		database = database
 
-class article_feature_stock_feature(peewee.Model):
+class ArticleFeatureStockFeature(peewee.Model):
 	article_feature_id = peewee.IntegerField(primary_key="true")
 	stock_id = peewee.CharField()
 	date = peewee.DateField()
@@ -53,7 +53,7 @@ class article_feature_stock_feature(peewee.Model):
 	class Meta:
 		database = database
 
-class article(peewee.Model):
+class Article(peewee.Model):
 	article_id = peewee.CharField(primary_key="true")
 	stock_id = peewee.CharField()
 	date = peewee.CharField()
@@ -67,7 +67,7 @@ class article(peewee.Model):
 	class Meta:
 		database = database
 
-class stock_article(peewee.Model):
+class StockArticle(peewee.Model):
 	stock_id = peewee.CharField(primary_key="true")
 	article_id = peewee.CharField()
 	
@@ -76,31 +76,31 @@ class stock_article(peewee.Model):
 
 if __name__ == "__main__":
 	try:
-		author.create_table()
+		Author.create_table()
 	except peewee.OperationalError:
 			print "Author table already exists"
 	try:
-		stock.create_table()
+		Stock.create_table()
 	except peewee.OperationalError:
 			print "Stock table already exists"
 	try:
-		stock_feature.create_table()
+		StockFeature.create_table()
 	except peewee.OperationalError:
 			print "Stock_feature table already exists"
 	try:
-		article_feature.create_table()
+		ArticleFeature.create_table()
 	except peewee.OperationalError:
 			print "Article_feature table already exists"
 	try:
-		article_feature_stock_feature.create_table()
+		ArticleFeatureStockFeature.create_table()
 	except peewee.OperationalError:
 			print "Article_feature_stock_feature table already exists"
 	try:
-		article.create_table()
+		Article.create_table()
 	except peewee.OperationalError:
 			print "Article table already exists"
 	try:
-		stock_article.create_table()
+		StockArticle.create_table()
 	except peewee.OperationalError:
 			print "Stock_article table already exists"
 	
