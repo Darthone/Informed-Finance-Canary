@@ -8,7 +8,7 @@ docutils==0.13.1
 feedfinder2==0.0.1
 feedparser==5.1.3
 functools32==3.2.3.post2
--e git+https://github.com/Darthone/bug-free-octo-parakeet.git@be16a40b9f4c1d3ac2763fa38e0cc304ed3dd154#egg=ifc
+-e git+https://github.com/Darthone/bug-free-octo-parakeet.git@HEAD#egg=ifc
 imagesize==0.7.1
 jieba==0.35
 Jinja2==2.9.5
