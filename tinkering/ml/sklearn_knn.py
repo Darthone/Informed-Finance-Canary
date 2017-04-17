@@ -1,6 +1,10 @@
 import numpy as np
 import pandas as pd
 from sklearn import preprocessing, cross_validation, neighbors, svm 
+import peewee
+from peewee import *
+
+database = MySQLDatabase("ifc", host="192.168.1.128", port=3306, user="", passwd="")
 
 def addDailyReturn(dataset):
 	"""
@@ -45,7 +49,7 @@ def preProcessing(csv):
 	
 	return df
 
-for i in range(100):
+for i in range(3):
 	train_df = preProcessing('GM_14_15.csv')
 	test_df = preProcessing('GM_16_17.csv')
 

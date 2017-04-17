@@ -5,6 +5,10 @@ from collections import Counter
 #style.use('fivethirtyeight')
 import warnings
 import random
+import peewee
+from peewee import *
+
+database = MySQLDatabase("ifc", host="192.168.1.128", port=3306, user="", passwd="")
 
 def k_nearest_neighbors(data, predict, k=3):
 	if len(data) >= k:
