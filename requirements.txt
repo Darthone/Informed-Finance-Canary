@@ -1,5 +1,6 @@
 alabaster==0.7.10
 appdirs==1.4.0
+argh==0.26.2
 Babel==2.3.4
 beautifulsoup4==4.3.2
 cssselect==0.9.1
@@ -23,6 +24,7 @@ numpy==1.12.0
 numpydoc==0.6.0
 packaging==16.8
 pandas==0.19.2
+pathtools==0.1.2
 peewee==2.9.2
 pep8==1.7.0
 Pillow==2.5.1
@@ -44,3 +46,4 @@ subprocess32==3.2.7
 tldextract==1.5.1
 ujson==1.35
 yahoo-finance==1.4.0
+watchdog==0.8.3
