@@ -1,6 +1,12 @@
 #!/usr/bin/env python
+from __future__ import division
 from flask import Flask, render_template, flash, request
 from wtforms import Form, TextField, TextAreaField, validators, StringField, SubmitField
+import urllib2
+import os
+import time
+import sys
+stockRange = '1y'
 
 # app config
 DEBUG = True
@@ -40,6 +46,7 @@ def hello():
 			flash('Slow EMA (eg 26): ' + nslow)
 			flash('Fast EMA (eg 12): ' + nfast)
 			flash('EMA Signal Line (eg 9): ' + nema)
+			pullData(tickerName, dateRange)
 		else:
 			flash('Error: All the form fields are required. ')
 
@@ -62,13 +69,16 @@ def pullData(stock, stockRange):
 
 		try:
 			# if the file exists, open file and grab latest unix timestamp
-			existingFile = open(f,'r').read()
+			existingFile = open(stock + '.txt','r').read()
 			splitExisting = existingFile.split('\n')
-			mostRecentLine = splitExisting[-2]
-			lastUnix = mostRecentLine.split(',')[0]
+			#mostRecentLine = splitExisting[-2]
+			#lastUnix = mostRecentLine.split(',')[0]
 
-		except Exception,e:
-			flash('error in inner try:', str (e))
+		except Exception as e:
+			exc_type, exc_obj, exc_tb = sys.exc_info()
+			fname = os.path.split(exc_tb.tb_frame.f_code.co_filename)[1]
+			print(exc_type, fname, exc_tb.tb_lineno)
+			#print('error in inner try:' + str(e))
 			lastUnix = 0
 
 		# append new lines from site to existing file
