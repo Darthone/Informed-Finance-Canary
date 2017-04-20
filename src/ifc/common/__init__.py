@@ -5,8 +5,13 @@ import ujson as json
 
 def create_dir(path):
     """ basically mkdir -p """
-    if not os.path.exists(path):
-        os.mkdir(path)
+    try:
+        os.makedirs(path)
+    except OSError as exc:  # Python >2.5
+        if os.path.isdir(path):
+            pass
+        else:
+            raise
 
 def get_files(file_path):
     """ returns all files in a given file_path """
