@@ -7,8 +7,8 @@ from lxml import html
 from gather import Gatherer, daterange, create_urls
 
 class RGatherer(Gatherer):
-    def __init__(self, startDate, endDate, config=None, dlPath="./articles", numThreads=8):
-        Gatherer.__init__(self, startDate, endDate, config, dlPath, numThreads)
+    def __init__(self, startDate, endDate, storage_config, config=None, dlPath="./articles", numThreads=8):
+        Gatherer.__init__(self, startDate, endDate, storage_config, config, dlPath, numThreads)
         if config is None:
             raise Exception("Config cannot be none")
         self.url_template = config["url_template"]

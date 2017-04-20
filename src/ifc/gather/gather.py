@@ -7,8 +7,7 @@ from threading import Thread
 
 import ujson as json
 
-import ifc.gather.reuters as reuters
-from ifc.articles import article_to_file
+from ifc.articles import article_to_file, handle_article_file
 
 def create_urls(url_template, subs=[]):
     """ creates a list of urls given a template and the subsitutions """
@@ -31,7 +30,7 @@ def str_to_date(date_str, str_format="%Y%m%d"):
 	return datetime.strptime(date_str, str_format)
 
 class Gatherer(Thread):
-    def __init__(self, startDate, endDate, config=None, dlPath="./articles", numThreads=8):
+    def __init__(self, startDate, endDate, storage_config, config=None, dlPath="./articles", numThreads=8):
         super(Gatherer, self).__init__()
         self.daemon = True
         self.startDate = startDate
@@ -39,6 +38,7 @@ class Gatherer(Thread):
         self.queue = Queue()
         self.dlPath = dlPath
         self.numThreads = numThreads
+        self.storage_config = storage_config
 
     def find_all_articles(self):
         """ place all article in the queue """
@@ -50,7 +50,8 @@ class Gatherer(Thread):
             url = self.queue.get()
             try:
                 logging.debug("downloading url %s", url)
-                article_to_file(url, self.dlPath)
+                path = article_to_file(url, self.dlPath)
+                handle_article_file(path, self.storage_config)
             except Exception as e:
                 logging.error("failed to download article %s: %s", url, e)
             self.queue.task_done()

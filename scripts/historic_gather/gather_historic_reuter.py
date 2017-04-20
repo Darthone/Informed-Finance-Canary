@@ -3,7 +3,7 @@ import os
 import sys
 import argparse
 
-import ifc.gather.reuters as reuters
+from ifc.gather import reuters, rss
 from ifc import common
 
 def parse_args():
@@ -19,8 +19,20 @@ def main():
     config = common.load_config_file(args.config)
     common.create_dir(config["folder"])
 
+    base_path = config["basePath"]
+    stock_path = os.path.join(base_path, "stock")
+    other_path = os.path.join(base_path, "other")
+    bad_path = os.path.join(base_path, "bad")
+    error_path = os.path.join(base_path, "error")
+    common.create_dir(error_path)
+    common.create_dir(bad_path)
+    common.create_dir(stock_path)
+    common.create_dir(other_path)
+
+    storage_cfg = rss.ArticleStorageConfig(stock_path, other_path, bad_path, error_path)
+
     # create gatherers
-    gather = reuters.RGatherer(config["start"], config["stop"], config['reuters'],
+    gather = reuters.RGatherer(config["start"], config["stop"], storage_cfg, config['reuters'],
                                config["folder"], config["numThreads"])
     #Start them
     gather.start()
@@ -28,6 +40,6 @@ def main():
     #wait for them to finish
     gather.join()
 
-if __name__ == "__main__": 
+if __name__ == "__main__":
     main()
 
