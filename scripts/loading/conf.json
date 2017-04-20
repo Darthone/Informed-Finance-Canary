@@ -1,0 +1,7 @@
+{
+    "watch": [
+        "../../work/handled/stock/"
+    ],
+    "done_prefix": "../../work/loaded/handled",
+    "error": "../../work/loaded/error"
+}
