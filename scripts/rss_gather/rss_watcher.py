@@ -30,7 +30,6 @@ def parse_args():
     return args
 
 def main():
-    sys.path.append("../")
     args = parse_args()
     config = common.load_config_file(args.config)
 

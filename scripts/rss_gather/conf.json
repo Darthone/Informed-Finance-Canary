@@ -1,6 +1,7 @@
 {
-    "articlesPath":"./articles",
+    "articlesPath":"../../work/rss_articles",
     "basePath":"/hostname/senior-design/handled",
+    "basePath":"../../work/handled",
     "sites" : [
         {
             "url" : "http://feeds.reuters.com/news/%s",
