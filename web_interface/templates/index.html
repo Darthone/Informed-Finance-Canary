@@ -20,7 +20,7 @@
 		<label for="sma2">Simple Moving Average 2 (SMA) (eg 30):</label>
 		<input type="number" class="form-control" id="sma2" name="sma2" placeholder="Second Simple Moving Average (eg 30)">
 
-		<label for="dateRange">Length of Process: </label>
+		<label for="dateRange">Length of Process (1y = 1 year, 10d = 10 days): </label>
 		<input type="text" class="form-control" id="dateRange" name="dateRange" placeholder="Period of simulation (1y for 1 year or 10d for 10 days)">
 
 		<label for="nslow">Slow EMA (eg 26): </label>
@@ -40,11 +40,10 @@
 	{% with messages = get_flashed_messages(with_categories=true) %}
 		{% if messages %}
 			{% for message in messages %}
-				<!--{{ mdebug("debug: ") }}
-				{{ mdebug(message|string) }}-->
 				{% if "Error" not in message[1]|string %}
-					<div class="alert alert-info">
-						<strong> Success! </strong> {{ message[1]|string }}
+					<div>
+						{{ mdebug(message[1]) }}
+						{{ message[1]|string }}
 					</div>
 				{% endif %}
 
