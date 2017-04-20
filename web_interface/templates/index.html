@@ -40,15 +40,17 @@
 	{% with messages = get_flashed_messages(with_categories=true) %}
 		{% if messages %}
 			{% for message in messages %}
-				{% if "Error" not in message[1]: %}
+				<!--{{ mdebug("debug: ") }}
+				{{ mdebug(message|string) }}-->
+				{% if "Error" not in message[1]|string %}
 					<div class="alert alert-info">
-						<strong> Success! </strong> {{ message[1] }}
+						<strong> Success! </strong> {{ message[1]|string }}
 					</div>
 				{% endif %}
 
-				{% if "Error" in message[1]: %}
+				{% if "Error" in message[1]|string %}
 					<div class="alert alert-warning">
-						{{ message[1] }}
+						{{ message[1]|string }}
 					</div>
 				{% endif %}
 			{% endfor %}
