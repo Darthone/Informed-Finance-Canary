@@ -5,11 +5,15 @@ from wtforms import Form, TextField, TextAreaField, validators, StringField, Sub
 import urllib2
 import os
 import time
+import datetime
 import sys
+from decimal import Decimal
+import jinja2
 stockRange = '1y'
 
 # app config
 DEBUG = True
+TEMPLATE_DEBUG = False
 app = Flask(__name__)
 app.config.from_object(__name__)
 app.config['SECRET_KEY'] = '7d441f27d441f27567d441f2b6176a'
@@ -22,6 +26,13 @@ class ReusableForm(Form):
 	nslow = TextField('Slow EMA (eg 26): ', validators=[validators.required()])
 	nfast = TextField('Fast EMA (eg 12): ', validators=[validators.required()])
 	nema = TextField('EMA Signal Line (eg 9): ', validators=[validators.required()])
+
+@app.context_processor
+def utility_functions():
+	def print_in_console(message):
+		print str(message)
+
+	return dict(mdebug=print_in_console)
 
 @app.route("/", methods=['GET', 'POST'])
 def hello():
@@ -71,14 +82,14 @@ def pullData(stock, stockRange):
 			# if the file exists, open file and grab latest unix timestamp
 			existingFile = open(stock + '.txt','r').read()
 			splitExisting = existingFile.split('\n')
-			#mostRecentLine = splitExisting[-2]
-			#lastUnix = mostRecentLine.split(',')[0]
+			mostRecentLine = splitExisting[-2]
+			lastUnix = mostRecentLine.split(',')[0]
 
 		except Exception as e:
 			exc_type, exc_obj, exc_tb = sys.exc_info()
 			fname = os.path.split(exc_tb.tb_frame.f_code.co_filename)[1]
 			print(exc_type, fname, exc_tb.tb_lineno)
-			#print('error in inner try:' + str(e))
+			print('error in inner try:' + str(e))
 			lastUnix = 0
 
 		# append new lines from site to existing file
@@ -102,7 +113,7 @@ def pullData(stock, stockRange):
 							if int(splitLine[0]) > int(lastUnix):
 								lineToWrite = l + '\n'
 								saveFile.write(lineToWrite)
-					flash('Price: ', price)
+					flash('Price: ', str(price))
 
 					# trading stances:
 					# buy when not invested and stock price drops
@@ -128,13 +139,13 @@ def pullData(stock, stockRange):
 							tradeCount += 1
 					pricePrevious = price
 
-				flash('Gross Profit Per Stock:', totalProfit)
-				flash('# of Trades:', tradeCount)
+				flash('Gross Profit Per Stock:', str(totalProfit))
+				flash('# of Trades:', str(tradeCount))
 				flash('------------------------------------')				
 
 				try:
 					grossPercentProfit = totalProfit/startingPrice * 100
-					flash('Gross percent profit:', grossPercentProfit)
+					flash('Gross percent profit:', str(grossPercentProfit))
 				except ZeroDivisionError:
 					pass
 		except IndexError:
@@ -142,10 +153,14 @@ def pullData(stock, stockRange):
 
 		saveFile.close()
 
-		flash('Pulled', stock)
+		flash('Pulled', str(stock))
 		flash(str(datetime.datetime.fromtimestamp(time.time()).strftime('%Y-%m-%d %H:%S')))
 
-	except Exception, e:
+	except Exception as e:
+		exc_type, exc_obj, exc_tb = sys.exc_info()
+		fname = os.path.split(exc_tb.tb_frame.f_code.co_filename)[1]
+		print(exc_type, fname, exc_tb.tb_lineno)
+		print 'error in main:', str(e)
 		flash('error in main:', str(e))
 
 
