@@ -42,8 +42,7 @@ class RssGatherer(Thread):
             for url in self.page_content_to_articles(req.content):
                 try:
                     f_path = article_to_file(url, self.folder)
-                    handle_article_file(f_path, self.storage_cfg.stock_path,
-                                        self.storage_cfg.other_path, self.storage_cfg.bad_path)
+                    handle_article_file(f_path, self.storage_cfg)
                 except Exception as e:
                     logging.error(e)
                     # log errros somewhere TODO

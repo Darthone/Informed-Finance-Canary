@@ -22,31 +22,31 @@ def parse_args():
     return args
 
 def load_article(path, handled_path, error_path):
+    """ Loads an article into the db """
     base_name = os.path.basename(path)
     try:
         obj = {}
         with open(path, 'r') as f:
             obj = json.loads(f.read())
-        author = db.Author.get_or_create(name=obj["authors"][0])
+        (author, _) = db.Author.get_or_create(name=obj["authors"][0])
         author.save()
-        text = preprocess_article(obj['text'])
+        text = preprocess_article(str(obj['text'].encode('ascii', 'ignore')))
         d = date(int(obj['date'][:4]), int(obj['date'][4:6]), int(obj['date'][6:]))
-        article = db.Article(author=author, date=d, title=obj['title'], content=text, source=['url'])
+        (article, _) = db.Article.get_or_create(author=author, date=d, title=obj['title'], content=text, source=['url'])
         article.save()
 
         for t in obj['tickers']: # maps relation of tickers to article
-            stock = db.Stock.get_or_create(ticker=t, name=t)
+            (stock, _) = db.Stock.get_or_create(ticker=t, name=t)
             stock.save()
-            sa = db.StockArticle.get_or_create(stock=stock, article=article)
+            (sa, _) = db.StockArticle.get_or_create(stock=stock, article=article)
             sa.save()
 
         # move to handled location
         os.rename(path, os.path.join(handled_path, base_name))
 
     except Exception as e:
-        print e
-        #logging.error(e)
-        #os.rename(path, os.path.join(error_path, base_name))
+        logging.error(e)
+        os.rename(path, os.path.join(error_path, base_name))
 
 class ArticleHandler(FileSystemEventHandler):
     """ File event handler which loads new articles into the DB """

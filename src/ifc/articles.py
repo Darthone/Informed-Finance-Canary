@@ -71,5 +71,5 @@ def article_to_file(url, folder):
 
 def preprocess_article(text):
     """ Changes an articles text to lowercase, removes punctuation """
-    return text.lower().replace("\n", "").translate(None, string.punctuation)
+    return text.encode('ascii', 'ignore').lower().replace("\n", "").translate(None, string.punctuation)
 
