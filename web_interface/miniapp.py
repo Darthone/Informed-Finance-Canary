@@ -5,7 +5,9 @@ from wtforms import Form, TextField, TextAreaField, validators, StringField, Sub
 import urllib2
 import os
 import time
+import datetime
 import sys
+from decimal import Decimal
 stockRange = '1y'
 
 # app config
@@ -71,14 +73,14 @@ def pullData(stock, stockRange):
 			# if the file exists, open file and grab latest unix timestamp
 			existingFile = open(stock + '.txt','r').read()
 			splitExisting = existingFile.split('\n')
-			#mostRecentLine = splitExisting[-2]
-			#lastUnix = mostRecentLine.split(',')[0]
+			mostRecentLine = splitExisting[-2]
+			lastUnix = mostRecentLine.split(',')[0]
 
 		except Exception as e:
 			exc_type, exc_obj, exc_tb = sys.exc_info()
 			fname = os.path.split(exc_tb.tb_frame.f_code.co_filename)[1]
 			print(exc_type, fname, exc_tb.tb_lineno)
-			#print('error in inner try:' + str(e))
+			print('error in inner try:' + str(e))
 			lastUnix = 0
 
 		# append new lines from site to existing file
@@ -145,7 +147,11 @@ def pullData(stock, stockRange):
 		flash('Pulled', stock)
 		flash(str(datetime.datetime.fromtimestamp(time.time()).strftime('%Y-%m-%d %H:%S')))
 
-	except Exception, e:
+	except Exception as e:
+		exc_type, exc_obj, exc_tb = sys.exc_info()
+		fname = os.path.split(exc_tb.tb_frame.f_code.co_filename)[1]
+		print(exc_type, fname, exc_tb.tb_lineno)
+		print 'error in main:', str(e)
 		flash('error in main:', str(e))
 
 
