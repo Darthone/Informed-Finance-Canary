@@ -2,7 +2,7 @@
 
 from peewee import *
 
-db = MySQLDatabase("ifc", host="127.0.0.1", port=3306, user="", passwd="")
+db = MySQLDatabase("ifc", host="127.0.0.1", port=3306, user="dario", passwd="SecurePassword08!")
 
 class BaseModel(Model):
     """ Base Model which is extended in each model """
