@@ -1,7 +1,7 @@
 {
     "start":"20170220",
     "stop": "20170221",
-    "folder": "./articles",
+    "folder": "../../work/historic_articles",
     "numThreads": 8,
     "reuters": {
         "url_template": "http://www.reuters.com/resources/archive/us/%s.html"
