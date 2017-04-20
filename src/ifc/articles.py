@@ -2,6 +2,7 @@
 import os
 import re
 import ujson as json
+import string
 
 from lxml import html
 from newspaper import Article
@@ -23,16 +24,16 @@ def find_stock_tickers(text):
             ret.add(t)
     return list(ret)
 
-def handle_article_file(file_path, stock_path, other_path, bad_path):
+def handle_article_file(file_path, storage_config):
     """ Processed a file by extracting a ticker(s) and then moving it to an appropriate dir """
     base_name = os.path.basename(file_path)
     with open(file_path, 'rw') as f:
         j = json.loads(f.read())
         if "an error has occured" in j['title'].lower():
-            copyfile(file_path, os.path.join(bad_path, base_name))
+            copyfile(file_path, os.path.join(storage_config.bad_path, base_name))
             return
         j['tickers'] = find_stock_tickers(j['text'])
-        path = other_path if len(j['tickers']) == 0 else stock_path
+        path = storage_config.other_path if len(j['tickers']) == 0 else storage_config.stock_path
         with open(os.path.join(path, base_name), 'w') as fn:
             fn.write(json.dumps(j))
             
@@ -67,4 +68,8 @@ def article_to_file(url, folder):
         return filename   
     except Exception as e:
         print "Bad article: ", url
+
+def preprocess_article(text):
+    """ Changes an articles text to lowercase, removes punctuation """
+    return text.lower().replace("\n", "").translate(None, string.punctuation)
 
