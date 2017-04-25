@@ -6,8 +6,6 @@ import peewee
 from peewee import *
 import ifc.ta as ta
 
-database = MySQLDatabase("ifc", host="192.168.1.128", port=3306, user="", passwd="")
-
 def addDailyReturn(dataset):
 	"""
 	Adding in daily return to create binary classifiers (Up or Down in relation to the previous day)
@@ -17,24 +15,12 @@ def addDailyReturn(dataset):
 	le = preprocessing.LabelEncoder()
 
 	dataset['UpDown'] = -(dataset['Adj_Close']-dataset['Adj_Close'].shift(-1))/dataset['Adj_Close'].shift(-1)
-	print dataset['UpDown']
+	#print dataset['UpDown']
 	dataset.UpDown[dataset.UpDown >= 0] = 'Up' 
 	dataset.UpDown[dataset.UpDown < 0] = 'Down'
 	dataset.UpDown = le.fit(dataset.UpDown).transform(dataset.UpDown)
 	#print dataset['UpDown']
-"""
-	features = dataset.columns[1:-1]
-	X = dataset[features]    
-	y = dataset.UpDown    
 
-	X_train = X[X.index < start_test]
-	y_train = y[y.index < start_test]              
-
-	X_test = X[X.index >= start_test]    
-	y_test = y[y.index >= start_test]
-
-	return X_train, y_train, X_test, y_test   
-"""
 accuracies = []
 
 def preProcessing(start_date, end_date):
