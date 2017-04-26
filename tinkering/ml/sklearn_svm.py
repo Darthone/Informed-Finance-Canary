@@ -6,8 +6,6 @@ import peewee
 from peewee import *
 import ifc.ta as ta
 
-database = MySQLDatabase("ifc", host="192.168.1.128", port=3306, user="", passwd="")
-
 def addDailyReturn(dataset):
 	"""
 	Adding in daily return to create binary classifiers (Up or Down in relation to the previous day)
@@ -17,40 +15,34 @@ def addDailyReturn(dataset):
 	le = preprocessing.LabelEncoder()
 
 	dataset['UpDown'] = -(dataset['Adj_Close']-dataset['Adj_Close'].shift(-1))/dataset['Adj_Close'].shift(-1)
-	print dataset['UpDown']
-	dataset.UpDown[dataset.UpDown >= 0] = 'Up' 
-	dataset.UpDown[dataset.UpDown < 0] = 'Down'
+	print dataset['UpDown'][:5]
+	# will be denoted by 2 when transformed
+	dataset.UpDown[dataset.UpDown >= 0] = "up"
+	# will be denoted by 1 when transformed 
+	dataset.UpDown[dataset.UpDown < 0] = "down"
 	dataset.UpDown = le.fit(dataset.UpDown).transform(dataset.UpDown)
-	#print dataset['UpDown']
-"""
-	features = dataset.columns[1:-1]
-	X = dataset[features]    
-	y = dataset.UpDown    
+	print dataset['UpDown'][:5]
 
-	X_train = X[X.index < start_test]
-	y_train = y[y.index < start_test]              
-
-	X_test = X[X.index >= start_test]    
-	y_test = y[y.index >= start_test]
-
-	return X_train, y_train, X_test, y_test   
-"""
 accuracies = []
 
-def preProcessing(start_date, end_date):
-	x = ta.get_series("TGT", start_date, end_date)
+def preProcessing(stock_name, start_date, end_date):
+	"""
+	Clean up data to allow for classifiers to prict
+	"""
+	x = ta.get_series(stock_name, start_date, end_date)
 	x.run_calculations()                            
 	x.trim_fat()                                    
 	df = x.df
 	#df = pd.read_csv(csv)
 	addDailyReturn(df)
 	
+	#The columns left will be the ones that are being used to predict
 	df.drop(['Date'], 1, inplace=True)
 	df.drop(['Low'], 1, inplace=True)
 	df.drop(['Volume'], 1, inplace=True)
-	#df.drop(['open'], 1, inplace=True)
+	#df.drop(['Open'], 1, inplace=True)
 	df.drop(['Adj_Close'],1, inplace=True)
-	#df.drop(['close'],1, inplace=True)
+	#df.drop(['Close'],1, inplace=True)
 	df.drop(['High'],1, inplace=True)
 	df.drop(['mavg_10'],1, inplace=True)
 	df.drop(['mavg_30'],1, inplace=True)
@@ -59,9 +51,11 @@ def preProcessing(start_date, end_date):
 	return df
 
 for i in range(3):
-	train_df = preProcessing("2015-04-17", "2016-04-17")
-	test_df = preProcessing("2016-04-17", "2017-04-17")
+	#calling in date ranges plus stock name to be pulled
+	train_df = preProcessing("TGT", "2015-04-17", "2016-04-17")
+	test_df = preProcessing("TGT", "2016-04-17", "2017-04-17")
 
+	# separating the binary predictor into different arryays so the algo knows what to predict on
 	X_train = np.array(train_df.drop(['UpDown'],1))
 	y_train = np.array(train_df['UpDown'])
 	X_test = np.array(test_df.drop(['UpDown'],1))
@@ -69,14 +63,17 @@ for i in range(3):
 	
 	#X_train, X_test, y_train, y_test = cross_validation.train_test_split(X, y, test_size=0.5)
 
-	clf = svm.SVC()
+	# performing the classifier
+	clf = svm.SVC
 	clf.fit(X_train,y_train)
 
 	accuracy = clf.score(X_test,y_test)
 
+	# iterate and print average accuracy rate
 	print accuracy
 	accuracies.append(accuracy)	
 
+	# test value
 	test_set = np.array([[104,106]])
 
 	prediction = clf.predict(test_set)
