@@ -5,7 +5,7 @@
 import ifc.ta as ta
 #database = MySQLDatabase("ifc", host="192.168.1.128", port=3306, user="", passwd="")
 print dir(ta)
-x = ta.get_series("TGT", "2015-04-17", "2016-04-17")
+x = ta.get_series("TGT", "2016-04-17", "2017-04-17")
 x.run_calculations()                            
 x.trim_fat()                                    
 print x.df

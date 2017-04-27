@@ -15,13 +15,13 @@ def addDailyReturn(dataset):
 	le = preprocessing.LabelEncoder()
 
 	dataset['UpDown'] = -(dataset['Adj_Close']-dataset['Adj_Close'].shift(-1))/dataset['Adj_Close'].shift(-1)
-	print dataset['UpDown'][:5]
+	print dataset['UpDown']
 	# will be denoted by 2 when transformed
 	dataset.UpDown[dataset.UpDown >= 0] = "up"
 	# will be denoted by 1 when transformed 
 	dataset.UpDown[dataset.UpDown < 0] = "down"
 	dataset.UpDown = le.fit(dataset.UpDown).transform(dataset.UpDown)
-	print dataset['UpDown'][:5]
+	print dataset['UpDown']
 
 accuracies = []
 
@@ -64,7 +64,7 @@ for i in range(3):
 	#X_train, X_test, y_train, y_test = cross_validation.train_test_split(X, y, test_size=0.5)
 
 	# performing the classifier
-	clf = svm.SVC
+	clf = svm.SVC()
 	clf.fit(X_train,y_train)
 
 	accuracy = clf.score(X_test,y_test)

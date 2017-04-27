@@ -14,17 +14,24 @@ def addDailyReturn(dataset):
 	#will normalize labels
 	le = preprocessing.LabelEncoder()
 
-	dataset['UpDown'] = (-(dataset['Adj_Close']-dataset['Adj_Close'].shift(-1))/dataset['Adj_Close'].shift(-1))
-	#dataset['UpDown'] = '%.4f'%(daily_return)
+	print "dataset['Adj_Close']\n", dataset['Adj_Close'][:5]
+	
+	print "dataset['Adj_Close'].shift(-1)\n", dataset['Adj_Close'].shift(1)[:5]
+
+	dataset['UpDown'] = (dataset['Adj_Close']-dataset['Adj_Close'].shift(1))/dataset['Adj_Close'].shift(1)
 	print dataset['UpDown'][:5]
+	# will be denoted by 2 when transformed
+	dataset.UpDown[dataset.UpDown >= 0] = "up"
+	# will be denoted by 1 when transformed 
+	dataset.UpDown[dataset.UpDown < 0] = "down"
 	dataset.UpDown = le.fit(dataset.UpDown).transform(dataset.UpDown)
-	print dataset['UpDown'][:5]
+	#print dataset['UpDown']
 
 accuracies = []
 
 def preProcessing(stock_name, start_date, end_date):
 	"""
-	Clean up data to allow for classifiers to prict
+	Clean up data to allow for classifiers to predict
 	"""
 	x = ta.get_series(stock_name, start_date, end_date)
 	x.run_calculations()                            
@@ -38,8 +45,8 @@ def preProcessing(stock_name, start_date, end_date):
 	df.drop(['Low'], 1, inplace=True)
 	df.drop(['Volume'], 1, inplace=True)
 	#df.drop(['Open'], 1, inplace=True)
-	df.drop(['Adj_Close'],1, inplace=True)
-	#df.drop(['Close'],1, inplace=True)
+	#df.drop(['Adj_Close'],1, inplace=True)
+	df.drop(['Close'],1, inplace=True)
 	df.drop(['High'],1, inplace=True)
 	df.drop(['mavg_10'],1, inplace=True)
 	df.drop(['mavg_30'],1, inplace=True)
@@ -47,10 +54,12 @@ def preProcessing(stock_name, start_date, end_date):
 	
 	return df
 
-for i in range(3):
+for i in range(1):
 	#calling in date ranges plus stock name to be pulled
 	train_df = preProcessing("TGT", "2015-04-17", "2016-04-17")
 	test_df = preProcessing("TGT", "2016-04-17", "2017-04-17")
+
+	print test_df[:5]	
 
 	# separating the binary predictor into different arryays so the algo knows what to predict on
 	X_train = np.array(train_df.drop(['UpDown'],1))
@@ -71,7 +80,7 @@ for i in range(3):
 	accuracies.append(accuracy)	
 
 	# test value
-	test_set = np.array([[104,106]])
+	test_set = np.array([[288,108],[75,82]])
 
 	prediction = clf.predict(test_set)
 
