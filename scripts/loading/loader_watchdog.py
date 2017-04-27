@@ -32,7 +32,7 @@ def load_article(path, handled_path, error_path):
         author.save()
         text = preprocess_article(str(obj['text'].encode('ascii', 'ignore')))
         d = date(int(obj['date'][:4]), int(obj['date'][4:6]), int(obj['date'][6:]))
-        (article, _) = db.Article.get_or_create(author=author, date=d, title=obj['title'], content=text, source=['url'])
+        (article, _) = db.Article.get_or_create(author=author, date=d, title=obj['title'], content=text, source=obj['url'])
         article.save()
 
         for t in obj['tickers']: # maps relation of tickers to article
