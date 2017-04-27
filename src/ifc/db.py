@@ -54,7 +54,7 @@ class Article(BaseModel):
     """ Contains content from an article """
     author = ForeignKeyField(Author, related_name='author')
     date = DateField()
-    title = CharField()
+    title = CharField(unique=True)
     content = TextField()
     source = CharField()
 
