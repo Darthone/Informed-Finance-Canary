@@ -4,7 +4,7 @@ import time
 import logging
 import argparse
 import ujson as json
-from datetime import date
+from datetime import datetime
 
 from ifc import common
 from ifc.gather import rss
@@ -28,18 +28,17 @@ def load_article(path, handled_path, error_path):
         obj = {}
         with open(path, 'r') as f:
             obj = json.loads(f.read())
-        (author, _) = db.Author.get_or_create(name=obj["authors"][0])
-        author.save()
-        text = preprocess_article(str(obj['text'].encode('ascii', 'ignore')))
-        d = date(int(obj['date'][:4]), int(obj['date'][4:6]), int(obj['date'][6:]))
-        (article, _) = db.Article.get_or_create(author=author, date=d, title=obj['title'], content=text, source=obj['url'])
-        article.save()
 
-        for t in obj['tickers']: # maps relation of tickers to article
-            (stock, _) = db.Stock.get_or_create(ticker=t, name=t)
-            stock.save()
-            (sa, _) = db.StockArticle.get_or_create(stock=stock, article=article)
-            sa.save()
+        text = preprocess_article(str(obj['text'].encode('ascii', 'ignore')))
+
+        with db.db.atomic():
+            (author, _) = db.Author.get_or_create(name=obj["authors"][0]) #TODO
+            article = db.Article.create(author=author,
+                                        date=datetime.strptime(obj['date'], "%Y%m%d").date(),
+                                        title=obj['title'], content=text, source=obj['url'])
+            for t in obj['tickers']: # maps relation of tickers to article
+                (stock, _) = db.Stock.get_or_create(ticker=t, name=t)
+                sa = db.StockArticle.create(stock=stock, article=article)
 
         # move to handled location
         os.rename(path, os.path.join(handled_path, base_name))
