@@ -1,10 +1,31 @@
+WORKDIR="./work/"
+ROOT=`pwd`
+
 init:
-	setup/init.sh 
+	mkdir -p $(WORKDIR)
+	pip install -r ./requirements.txt
+	python $(ROOT)/src/ifc/db.py
 
 test:
-	nosetests -v
+	cd $(ROOT)/src/ifc/ && nosetests -v
 
 style:
-	pep8 ./ifc
+	pep8 ./src/ifc
 
-.PHONY: init test
+build:
+	cd ./web/frontend/ && grunt build
+
+docs:
+	cd ./docs/ && make gen html
+
+clean:
+	rm -rf $(WORKDIR)
+
+run:
+	#todo
+	#launch loader
+	#launch gather
+	#launch web server
+
+.PHONY: init test style build docs clean run
+
