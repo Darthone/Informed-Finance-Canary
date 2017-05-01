@@ -74,7 +74,10 @@ for i in range(1):
 	y_train = np.array(train_df['UpDown'])
 	X_test = np.array(test_df.drop(['UpDown'],1))
 	y_test = np.array(test_df['UpDown'])
-	
+
+	print test_df[:240]
+
+		
 	#X_train, X_test, y_train, y_test = cross_validation.train_test_split(X, y, test_size=0.5)
 
 	# performing the algorithm 
@@ -88,7 +91,7 @@ for i in range(1):
 	accuracies.append(accuracy)	
 
 	# test value
-	test_set = np.array([[39,38],[8,7]])
+	test_set = np.array([[39,38],[100,101]])
 
 	prediction = clf.predict(test_set)
 
