@@ -20,6 +20,7 @@ def addDailyReturn(dataset):
 
 	dataset['UpDown'] = (dataset['Adj_Close']-dataset['Adj_Close'].shift(1))/dataset['Adj_Close'].shift(1)
 	print dataset['UpDown'][:5]
+
 	# will be denoted by 2 when transformed
 	dataset.UpDown[dataset.UpDown >= 0] = "up"
 	# will be denoted by 1 when transformed 
@@ -56,8 +57,10 @@ def preProcessing(stock_name, start_date, end_date):
 
 for i in range(1):
 	#calling in date ranges plus stock name to be pulled
-	train_df = preProcessing("TGT", "2015-04-17", "2016-04-17")
-	test_df = preProcessing("TGT", "2016-04-17", "2017-04-17")
+	ticker = raw_input('Enter a stock ticker then press "Enter":\n')	
+
+	train_df = preProcessing(ticker, "2015-04-17", "2016-04-17")
+	test_df = preProcessing(ticker, "2016-04-17", "2017-04-17")
 
 	print test_df[:5]	
 
