@@ -1,4 +1,4 @@
-#!/usr/bin/env python
+#!/usr/bin/env python -W ignore::DeprecationWarning
 import numpy as np
 import pandas as pd
 from sklearn import preprocessing, cross_validation, neighbors, svm 
@@ -15,12 +15,12 @@ def addDailyReturn(dataset):
 	#will normalize labels
 	le = preprocessing.LabelEncoder()
 
-	print "dataset['Adj_Close']\n", dataset['Adj_Close'][:5]
+	#print "dataset['Adj_Close']\n", dataset['Adj_Close'][:5]
 	
-	print "dataset['Adj_Close'].shift(-1)\n", dataset['Adj_Close'].shift(1)[:5]
+	#print "dataset['Adj_Close'].shift(-1)\n", dataset['Adj_Close'].shift(1)[:5]
 
 	dataset['UpDown'] = (dataset['Adj_Close']-dataset['Adj_Close'].shift(1))/dataset['Adj_Close'].shift(1)
-	print dataset['UpDown'][240:]
+	#print dataset['UpDown'][240:]
 
 	# will be denoted by 3 when transformed
 	dataset.UpDown[dataset.UpDown > 0] = "sell"
@@ -67,6 +67,8 @@ for i in range(1):
 	train_df = preProcessing(ticker, "2015-04-17", "2016-04-17")
 	test_df = preProcessing(ticker, "2016-04-17", "2017-04-17")
 
+	print "-----------------------------------------"
+	print "test_df[:5]:"
 	print test_df[:5]	
 
 	# separating the binary predictor into different arryays so the algo knows what to predict on
@@ -87,6 +89,8 @@ for i in range(1):
 	accuracy = clf.score(X_test,y_test)
 
 	# iterate and print average accuracy rate
+	print "---------------------------------------"
+	print "accuracy: "
 	print accuracy
 	accuracies.append(accuracy)	
 
@@ -94,7 +98,9 @@ for i in range(1):
 	test_set = np.array([[39,38],[100,101]])
 
 	prediction = clf.predict(test_set)
-
+	
+	print "--------------------------------------"
+	print "prediction: "
 	print prediction
 
 #print sum(accuracies)/len(accuracies)

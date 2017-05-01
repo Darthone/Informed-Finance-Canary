@@ -73,7 +73,7 @@ def pullData(stock, stockRange):
 								startingPrice = priceBought
 							tradeCount += 1
 					elif stance == 'holding':
-						if price > (priceBought * .002 + priceBought):
+						if price > (priceBought * 1.002):
 							print 'sell triggered'
 							priceSold = price
 							print 'finished trade, sold for: ', priceSold
