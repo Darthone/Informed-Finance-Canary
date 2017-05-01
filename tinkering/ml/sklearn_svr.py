@@ -20,15 +20,17 @@ def addDailyReturn(dataset):
 	print "dataset['Adj_Close'].shift(-1)\n", dataset['Adj_Close'].shift(1)[:5]
 
 	dataset['UpDown'] = (dataset['Adj_Close']-dataset['Adj_Close'].shift(1))/dataset['Adj_Close'].shift(1)
-	print dataset['UpDown'][:5]
+	print dataset['UpDown'][240:]
 
-	# will be denoted by 2 when transformed
+	# will be denoted by 3 when transformed
 	dataset.UpDown[dataset.UpDown > 0] = "sell"
 
 	dataset.UpDown[dataset.UpDown == 0] = "hold"
 
 	dataset.UpDown[dataset.UpDown < 0] = "buy"
+	#print dataset['UpDown'][:10]
 	dataset.UpDown = le.fit(dataset.UpDown).transform(dataset.UpDown)
+
 	#print dataset['UpDown']
 
 accuracies = []
@@ -75,7 +77,7 @@ for i in range(1):
 	
 	#X_train, X_test, y_train, y_test = cross_validation.train_test_split(X, y, test_size=0.5)
 
-	# performing the classifier
+	# performing the algorithm 
 	clf = svm.SVR()
 	clf.fit(X_train,y_train)
 
@@ -86,10 +88,10 @@ for i in range(1):
 	accuracies.append(accuracy)	
 
 	# test value
-	test_set = np.array([[288,108],[75,82]])
+	test_set = np.array([[39,38],[8,7]])
 
 	prediction = clf.predict(test_set)
 
 	print prediction
 
-print sum(accuracies)/len(accuracies)
+#print sum(accuracies)/len(accuracies)
