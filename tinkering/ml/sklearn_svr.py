@@ -5,6 +5,7 @@ from sklearn import preprocessing, cross_validation, neighbors, svm
 import peewee
 from peewee import *
 import ifc.ta as ta
+import math
 
 def addDailyReturn(dataset):
 	"""
@@ -22,9 +23,11 @@ def addDailyReturn(dataset):
 	print dataset['UpDown'][:5]
 
 	# will be denoted by 2 when transformed
-	dataset.UpDown[dataset.UpDown >= 0] = "up"
-	# will be denoted by 1 when transformed 
-	dataset.UpDown[dataset.UpDown < 0] = "down"
+	dataset.UpDown[dataset.UpDown > 0] = "sell"
+
+	dataset.UpDown[dataset.UpDown == 0] = "hold"
+
+	dataset.UpDown[dataset.UpDown < 0] = "buy"
 	dataset.UpDown = le.fit(dataset.UpDown).transform(dataset.UpDown)
 	#print dataset['UpDown']
 
