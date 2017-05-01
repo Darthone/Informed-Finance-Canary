@@ -20,8 +20,9 @@ def addDailyReturn(dataset):
 	dataset.UpDown[dataset.UpDown >= 0] = "up"
 	# will be denoted by 1 when transformed 
 	dataset.UpDown[dataset.UpDown < 0] = "down"
+	print dataset['UpDown'] 
 	dataset.UpDown = le.fit(dataset.UpDown).transform(dataset.UpDown)
-	print dataset['UpDown'][:5]
+#	print dataset['UpDown'][:5]
 
 accuracies = []
 
