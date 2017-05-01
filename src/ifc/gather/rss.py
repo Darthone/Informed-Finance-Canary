@@ -32,6 +32,7 @@ class RssGatherer(Thread):
         self.folder = folder
         self.storage_cfg = storage_cfg
         self.sleep_time = sleep_time
+        self.handled = set()
 
     def run(self):
         while (True):
@@ -40,13 +41,15 @@ class RssGatherer(Thread):
                 #log
                 break
             for url in self.page_content_to_articles(req.content):
-                try:
-                    f_path = article_to_file(url, self.folder)
-                    handle_article_file(f_path, self.storage_cfg)
-                except Exception as e:
-                    logging.error(e)
-                    # log errros somewhere TODO
-                    pass
+                if url not in self.handled:
+                    try:
+                        f_path = article_to_file(url, self.folder)
+                        handle_article_file(f_path, self.storage_cfg)
+                    except Exception as e:
+                        logging.error(e)
+                        # log errros somewhere TODO
+                        pass
+                    self.handled.add(url)
             time.sleep(self.sleep_time) # wait to reload the articles list
 
     def page_content_to_articles(self, page_content):

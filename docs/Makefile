@@ -20,4 +20,4 @@ help:
 	@$(SPHINXBUILD) -M $@ "$(SOURCEDIR)" "$(BUILDDIR)" $(SPHINXOPTS) $(O)
 
 gen:
-	sphinx-apidoc -f -o ./source ../ifc 
+	sphinx-apidoc -f -o ./source ../src/ifc/ 

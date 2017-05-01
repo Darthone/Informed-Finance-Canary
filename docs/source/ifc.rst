@@ -8,7 +8,6 @@ Subpackages
 
     ifc.common
     ifc.gather
-    ifc.nlp
     ifc.ta
     ifc.tests
 
@@ -19,6 +18,14 @@ ifc.articles module
 -------------------
 
 .. automodule:: ifc.articles
+    :members:
+    :undoc-members:
+    :show-inheritance:
+
+ifc.db module
+-------------
+
+.. automodule:: ifc.db
     :members:
     :undoc-members:
     :show-inheritance:

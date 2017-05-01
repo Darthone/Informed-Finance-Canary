@@ -35,8 +35,8 @@ class Series(object):
         """ runs a set of default calculations """ 
         for w in self.mavg:
             self.calculate_mavg(w)
-        #for w in self.macd:
-        #    self.calculate_macd(w[0], w[1], w[2])
+        for w in self.macd:
+            self.calculate_macd(w[0], w[1], w[2])
         for w in self.ema:
             self.calculate_ema(w)
         for w in self.rsi:
@@ -73,19 +73,18 @@ class Series(object):
         self.set_max_win(window)
         if name is None:
             name = "ema_%s" % (window)
-        self.df[name] = self.df[col].ewm(span=window, min_periods=window)
+        self.df[name] = pd.ewma(self.df[col], span=window, min_periods=window)
 
     def calculate_macd(self, signal=9, fast=12, slow=26, col='Adj_Close'):
         """ MACD """
-        self.set_max_win(window)
+        self.set_max_win(slow)
         signal_name = "signal_%s" % (signal)
-        #self.calculate_ema(signal, signal_name)
-
-        fast_ema = self.df[col].ewm(span=fast, min_periods=fast)
-        slow_ema = self.df[col].ewm(span=slow, min_periods=slow)
+        # ignore warnings for now # TODO
+        fast_ema = pd.ewma(self.df[col], span=fast, min_periods=fast)
+        slow_ema = pd.ewma(self.df[col], span=slow, min_periods=slow)
         name = "macd_%s_%s" % (fast, slow)
-        self.df[name] = pd.Series(fast_ema) - pd.Series(slow_ema)
-        self.calculate_ema(signal, col=name)
+        self.df[name] = fast_ema - slow_ema
+        self.calculate_ema(signal, col=name, name=signal_name)
 
     def calculate_mom(self, col='Adj_Close', window=1):
         """ Momentum Measures the change in price
@@ -118,7 +117,7 @@ class Series(object):
                      self.df.get_value(i, 'Adj_Close'))  
             tr_l.append(tr)  
         name = 'atr_%s' % (window)
-        self.df[name] = pd.Series(tr_l).ewm(span=window, min_periods=window)
+        self.df[name] = pd.ewma(pd.Series(tr_l), span=window, min_periods=window)
 
     def calculate_mfi(self, window=14):
         """ Money Flow Index Relates typical price with Volume 
@@ -140,7 +139,7 @@ class Series(object):
         PosMF = pd.Series(PosMF)  
         TotMF = tp * self.df['Volume']  
         MFR = pd.Series(PosMF / TotMF)  
-        self.df[name] = pd.Series(pd.rolling_mean(MFR, window))  
+        self.df[name] = MFR.rolling(window=window).mean()
 
     def calculate_adx(self, window=14, window_adx=14):
         """ Average Directional Index Discover if trend is developing
@@ -164,8 +163,8 @@ class Series(object):
             i = i + 1  
         atr_name = "atr_%s" % (window)
         self.calculate_atr(window)
-        PosDI = pd.Series(UpI).ewm(span=window, min_periods=window-1) / self.df[atr_name]
-        NegDI = pd.Series(DoI).ewm(span=window, min_periods=window-1) / self.df[atr_name]
+        PosDI = pd.ewma(pd.Series(UpI), span=window, min_periods=window-1) / self.df[atr_name]
+        NegDI = pd.ewma(pd.Series(DoI), span=window, min_periods=window-1) / self.df[atr_name]
         name = "adx_%s_%s" % (window, window_adx)
         self.df[name] = pd.Series(pd.ewma(abs(PosDI - NegDI) / (PosDI + NegDI), span=window_adx, min_periods=window_adx-1))
 
@@ -179,16 +178,15 @@ class Series(object):
         self.set_max_win(window)
         tp = (self.df['High'] + self.df['Low'] + self.df['Adj_Close']) / 3
         name = "cci_%s" % (window)
-        self.df[name] = pd.Series((tp - pd.rolling_mean(tp, window)) / pd.rolling_std(tp, window))
+        self.df[name] = pd.Series((tp - tp.rolling(window=window).mean()) / tp.rolling(window=window, center=False).std())
 
     def calculate_obv(self, col='Adj_Close', window=14):
         """ On Balance Volume is a momentum indicator that uses volume flow
                 OBV(t) = OBV(t-1) +/-Volume(t)
         """
         self.set_max_win(window)
-        i = 0  
         obv = [0]  
-        for i in range(len(self.df.index[-1])):  
+        for i in range(1, len(self.df.index) - 1):  
             if self.df.get_value(i + 1, col) - self.df.get_value(i, col) > 0:  
                 obv.append(self.df.get_value(i + 1, 'Volume'))  
             if self.df.get_value(i + 1, col) - self.df.get_value(i, col) == 0:  
@@ -204,15 +202,14 @@ class Series(object):
                 TR(t) = EMA(EMA(EMA(Price(t)))) over n days period
         """
         self.set_max_win(window)
-        ema = self.df['Adj_Close'].ewm(span=window, min_periods=window-1)
-        ema = ema.ewm(span=window, min_periods=window-1)
-        ema = ema.ewm(span=window, min_periods=window-1)
+        #ignore produced warnings for now #TODO
+        ema = pd.ewma(self.df['Adj_Close'], span=window, min_periods=window-1)
+        ema = pd.ewma(ema, span=window, min_periods=window-1)
+        ema = pd.ewma(ema, span=window, min_periods=window-1)
 
-        i = 0  
         roc_l = [0]  
-        while i + 1 <= self.df.index[-1]:  
+        for i in range(1, len(self.df.index) - 1):  
             roc_l.append((ema[i + 1] - ema[i]) / ema[i])  
-            i += 1  
 
         name = "trix_%s" % (window)
         self.df[name] = pd.Series(roc_l)
