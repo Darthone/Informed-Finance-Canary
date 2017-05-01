@@ -2,4 +2,6 @@
 pushd `dirname $0` > /dev/null
 SCRIPTPATH=`pwd -P`
 popd > /dev/null
-daemonize -p /tmp/gather.pid -c ./ -l /tmp/gather.lock -v -e ./error.out -o ./std.out "$SCRIPTPATH/run_rss_watcher.sh"
+WORK=./work/proc/rss
+mkdir -p $WORK
+daemonize -p $WORK/gather.pid -c ./ -l $WORK/gather.lock -v -e $WORK/error.out -o $WORK/std.out "$SCRIPTPATH/run_rss_watcher.sh"

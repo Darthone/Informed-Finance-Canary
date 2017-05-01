@@ -22,10 +22,9 @@ clean:
 	rm -rf $(WORKDIR)
 
 run:
-	#todo
-	#launch loader
-	#launch gather
-	#launch web server
+	./scripts/loading/start_daemon.sh # Start article to db loader
+	./scripts/rss_gather/start_daemon.sh # Start RSS watcher
+	#launch web server stuff
 
 .PHONY: init test style build docs clean run
 
