@@ -1,0 +1,27 @@
+<div class="container">
+    <div class="row">
+        <div class="col-md-7" style="border-right: 2px solid #333">
+          <label> Date Range</label>
+          <i class="glyphicon glyphicon-calendar fa fa-calendar"></i>&nbsp;
+          <input type="daterange" ng-model="datePicker.date" ranges="ranges" placeholder="Pick Date Range"/>
+          <br/>
+          <hr/>
+          <br/>
+          <highchart id="chart1" config="chartConfig" class="span10"></highchart>
+          <br/>
+          <hr/>
+          <br/>
+        </div>
+        <div class="col-md-5">
+          <h1>Related Articles</h1>
+          <hr/>
+    <a href="#" ng-model="collapsed" ng-click="collapsed=!collapsed">Click here to <strong>Toggle (show/hide)</strong> description</a>
+
+    <div ng-show="collapsed">I am description for the above title, which was collapsed by default</div>
+        </div>
+    </div>
+</div>
+
+
+<div class="row">
+</div>
