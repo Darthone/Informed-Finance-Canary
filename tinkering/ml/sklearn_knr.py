@@ -91,7 +91,7 @@ for i in range(1):
 	accuracies.append(accuracy)	
 
 	# test value
-	test_set = np.array([31,38])
+	test_set = np.array([[31,38],[100,101],[7,7],[34,31]])
 
 	prediction = clf.predict(test_set)
 
