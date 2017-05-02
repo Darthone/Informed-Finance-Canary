@@ -77,13 +77,13 @@ for i in range(1):
 	X_test = np.array(test_df.drop(['UpDown'],1))
 	y_test = np.array(test_df['UpDown'])
 
-	print test_df[:240]
+	#print test_df[:240]
 
 		
 	#X_train, X_test, y_train, y_test = cross_validation.train_test_split(X, y, test_size=0.5)
 
 	# performing the algorithm 
-	clf = svm.SVR()
+	clf = svm.SVR(kernel='linear',C=1e3,gamma=0.1)
 	clf.fit(X_train,y_train)
 
 	accuracy = clf.score(X_test,y_test)
@@ -95,8 +95,9 @@ for i in range(1):
 	accuracies.append(accuracy)	
 
 	# test value
-	test_set = np.array([[39,38],[100,101]])
-
+	test_set = np.array([[0,100],[100,0],[5, 71],[6,6]])
+	print "--------------------------------------"
+	print "np.array([0,100],[100,0],[5,71],[6,6]])"
 	prediction = clf.predict(test_set)
 	
 	print "--------------------------------------"
