@@ -1,7 +1,7 @@
 #!/usr/bin/env python
 import numpy as np
 import pandas as pd
-from sklearn import preprocessing, cross_validation, neighbors, svm 
+from sklearn import preprocessing, cross_validation, neighbors, svm, metrics
 import peewee
 from peewee import *
 import ifc.ta as ta
@@ -33,7 +33,7 @@ def addDailyReturn(dataset):
 
 	#print dataset['UpDown']
 
-accuracies = []
+variances = []
 
 def preProcessing(stock_name, start_date, end_date):
 	"""
@@ -75,20 +75,22 @@ for i in range(1):
 	X_test = np.array(test_df.drop(['UpDown'],1))
 	y_test = np.array(test_df['UpDown'])
 
-	print test_df[:240]
+	print test_df[200:]
 
-		
 	#X_train, X_test, y_train, y_test = cross_validation.train_test_split(X, y, test_size=0.5)
 
 	# performing the algorithm 
 	clf = neighbors.KNeighborsRegressor()
 	clf.fit(X_train,y_train)
 
-	accuracy = clf.score(X_test,y_test)
+	y_pred = clf.predict(X_test)
+	print "\nSTART\n"
+	print y_pred
+	variance = abs(metrics.explained_variance_score(y_test, y_pred))
 
 	# iterate and print average accuracy rate
-	print accuracy
-	accuracies.append(accuracy)	
+	print "Variance:\n" + str(variance)
+	variances.append(variance)	
 
 	# test value
 	test_set = np.array([[31,38],[100,101],[7,7],[34,31]])

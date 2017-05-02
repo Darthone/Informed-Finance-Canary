@@ -1,7 +1,7 @@
 #!/usr/bin/env python -W ignore::DeprecationWarning
 import numpy as np
 import pandas as pd
-from sklearn import preprocessing, cross_validation, neighbors, svm 
+from sklearn import preprocessing, cross_validation, neighbors, svm, metrics
 import peewee
 from peewee import *
 import ifc.ta as ta
@@ -83,15 +83,18 @@ for i in range(1):
 	#X_train, X_test, y_train, y_test = cross_validation.train_test_split(X, y, test_size=0.5)
 
 	# performing the algorithm 
-	clf = svm.SVR(kernel='linear',C=1e3,gamma=0.1)
+	clf = svm.SVR()
 	clf.fit(X_train,y_train)
 
-	accuracy = clf.score(X_test,y_test)
+	y_pred = clf.predict(X_test)
+
+	accuracy = abs(clf.score(X_test,y_test))
+	variance = abs(metrics.explained_variance_score(y_test, y_pred))
 
 	# iterate and print average accuracy rate
 	print "---------------------------------------"
-	print "accuracy: "
-	print accuracy
+	print "accuracy: " + str(accuracy)
+	print "\nvariance: " + str(variance)
 	accuracies.append(accuracy)	
 
 	# test value
