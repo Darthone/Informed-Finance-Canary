@@ -66,17 +66,50 @@ def trade(array):
 	"""	
 	#converting array to list to compare algo indicator
 	trade_list = array.tolist()
-	money = 0.0 #using to keep track of gains/losses
- 	for i in trade_list:
-		if i[2] < 1.5: #buy stock condition
-			#check first if we have enough money
-			if i[0] <= money:
-				
-		else if i[2] > 2.5:
-			#sell stock
-		else:
-			#hold
-	
+	stance = 'none'
+	price_bought = 0
+	price_sold = 0
+	price_previous = 0
+	total_profit = 0
+	trade_count = 0
+	starting_price = 0
+ 	
+	try:
+		for i in trade_list:
+			current_price = i[0]
+			current_updown = i[1]
+			if stance == 'none':
+				if current_updown < 1.5: #buy stock condition
+					#check first if we have enough money
+					print 'buy triggered'
+					price_bought = current_price
+					print 'bought stock for: ', price_bought
+					stance = 'holding'
+					if trade_count == 0:
+						starting_price = price_bought
+					trade_count += 1
+			elif stance == 'holding'
+				if current_updown > 2.5: #sell stock condition
+					print 'sell triggered'
+					price_sold = current_price
+					print 'finihsed trade, sold for: ', price_sold
+					stance = 'none'
+					trade_profit = price_sold - price_bought
+					trade_profit += trade_profit
+					trade_count += 1
+			price_previous = current_price
+
+			print 'Gross Profit Per Stock: ', total_profit
+			print '# of Trades: ', trade_count
+			print'----------------------------------------'
+
+			try:
+				gross_percent_profit = (total_profit/starting_price) *100
+				print 'Gross percent profit: ', gross_percent_profit
+			except ZeroDivisionError:
+				pass
+	except IndexError:
+		pass
 
 for i in range(1):
 	#calling in date ranges plus stock name to be pulled
@@ -93,7 +126,7 @@ for i in range(1):
 	X_test = np.array(test_df.drop(['UpDown'],1))
 	y_test = np.array(test_df['UpDown'])
 
-	trade_array = np.array(train_df)
+	trade_array = np.array(train_df.drop(['Open'],1))
 	trade(trade_array)
 	
 	# performing the algorithm 
