@@ -60,6 +60,24 @@ def preProcessing(stock_name, start_date, end_date):
 	
 	return df
 
+def trade(array):
+	"""
+	Once the algo has made its predictions we want to be able to trade
+	"""	
+	#converting array to list to compare algo indicator
+	trade_list = array.tolist()
+	money = 0.0 #using to keep track of gains/losses
+ 	for i in trade_list:
+		if i[2] < 1.5: #buy stock condition
+			#check first if we have enough money
+			if i[0] <= money:
+				
+		else if i[2] > 2.5:
+			#sell stock
+		else:
+			#hold
+	
+
 for i in range(1):
 	#calling in date ranges plus stock name to be pulled
 	ticker = raw_input('Enter a stock ticker then press "Enter":\n')	
@@ -75,10 +93,9 @@ for i in range(1):
 	X_test = np.array(test_df.drop(['UpDown'],1))
 	y_test = np.array(test_df['UpDown'])
 
-	print test_df[200:]
-
-	#X_train, X_test, y_train, y_test = cross_validation.train_test_split(X, y, test_size=0.5)
-
+	trade_array = np.array(train_df)
+	trade(trade_array)
+	
 	# performing the algorithm 
 	clf = neighbors.KNeighborsRegressor()
 	clf.fit(X_train,y_train)
