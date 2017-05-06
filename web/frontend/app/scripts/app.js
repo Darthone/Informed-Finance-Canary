@@ -19,7 +19,8 @@ angular
     'ngSanitize',
     'ngTouch',
     'highcharts-ng',
-    'ngBootstrap'
+    'ngBootstrap',
+    'ui.select'
   ])
   .config(function ($routeProvider) {
     $routeProvider
