@@ -88,11 +88,11 @@ def trade(array):
 					if trade_count == 0:
 						starting_price = price_bought
 					trade_count += 1
-			elif stance == 'holding'
+			elif stance == 'holding':
 				if current_updown > 2.5: #sell stock condition
 					print 'sell triggered'
 					price_sold = current_price
-					print 'finihsed trade, sold for: ', price_sold
+					print 'finished trade, sold for: ', price_sold
 					stance = 'none'
 					trade_profit = price_sold - price_bought
 					trade_profit += trade_profit
