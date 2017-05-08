@@ -95,7 +95,8 @@ def trade(array):
 					print 'finished trade, sold for: ', price_sold
 					stance = 'none'
 					trade_profit = price_sold - price_bought
-					trade_profit += trade_profit
+					total_profit += trade_profit
+					print total_profit
 					trade_count += 1
 			price_previous = current_price
 
@@ -127,6 +128,8 @@ for i in range(1):
 	y_test = np.array(test_df['UpDown'])
 
 	trade_array = np.array(train_df.drop(['Open'],1))
+	print '\nLSKJDF:L\n'
+	print trade_array
 	trade(trade_array)
 	
 	# performing the algorithm 
