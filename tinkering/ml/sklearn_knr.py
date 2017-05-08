@@ -78,6 +78,8 @@ def trade(array):
 		for i in trade_list:
 			current_price = i[0]
 			current_updown = i[1]
+			print 'Price: ', current_price
+			print 'Daily Return Idicator: ', current_updown
 			if stance == 'none':
 				if current_updown < 1.5: #buy stock condition
 					#check first if we have enough money
@@ -90,25 +92,29 @@ def trade(array):
 					trade_count += 1
 			elif stance == 'holding':
 				if current_updown > 2.5: #sell stock condition
-					print 'sell triggered'
-					price_sold = current_price
-					print 'finished trade, sold for: ', price_sold
-					stance = 'none'
-					trade_profit = price_sold - price_bought
-					total_profit += trade_profit
-					print total_profit
-					trade_count += 1
+					if current_price > price_bought:
+						print 'sell triggered'
+						price_sold = current_price
+						print 'finished trade, sold for: ', price_sold
+						stance = 'none'
+						print 'price sold: ', price_sold
+						print 'price bought: ', price_bought
+						trade_profit = price_sold - price_bought
+						print 'trade profit: ', trade_profit
+						total_profit += trade_profit
+						print 'Total Profit: ', total_profit
+						trade_count += 1
 			price_previous = current_price
 
 			print 'Gross Profit Per Stock: ', total_profit
 			print '# of Trades: ', trade_count
 			print'----------------------------------------'
 
-			try:
-				gross_percent_profit = (total_profit/starting_price) *100
-				print 'Gross percent profit: ', gross_percent_profit
-			except ZeroDivisionError:
-				pass
+		try:
+			gross_percent_profit = (total_profit/starting_price) *100
+			print 'Gross percent profit: ', gross_percent_profit
+		except ZeroDivisionError:
+			pass
 	except IndexError:
 		pass
 
@@ -128,7 +134,6 @@ for i in range(1):
 	y_test = np.array(test_df['UpDown'])
 
 	trade_array = np.array(train_df.drop(['Open'],1))
-	print '\nLSKJDF:L\n'
 	print trade_array
 	trade(trade_array)
 	
