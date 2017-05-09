@@ -33,7 +33,7 @@ str4 = ''.join(temp_train_text4)
 
 corpus = [str1, str2, str3, str4]
 
-print corpus[0]
+print corpus
 
 #discard any stop words - saves on processing
 stopset = list(stopwords.words('english'))
