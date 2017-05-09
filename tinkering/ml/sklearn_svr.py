@@ -1,7 +1,7 @@
 #!/usr/bin/env python -W ignore::DeprecationWarning
 import numpy as np
 import pandas as pd
-from sklearn import preprocessing, cross_validation, neighbors, svm, metrics
+from sklearn import preprocessing, cross_validation, neighbors, svm, metrics, grid_search
 import peewee
 from peewee import *
 import ifc.ta as ta
@@ -60,6 +60,21 @@ def preProcessing(stock_name, start_date, end_date):
 	
 	return df
 
+def regressorOp(x, y):
+	regr_rbf = svm.SVR(kernel="rbf")
+	C = [1000, 10, 1]
+	gamma = [0.005, 0.004, 0.003, 0.002, 0.001]
+	epsilon = [0.1, 0.01]
+	parameters = {"C":C, "gamma":gamma, "epsilon":epsilon}
+	
+	gs = grid_search.GridSearchCV(regr_rbf, parameters, scoring="r2")
+	
+	gs.fit(x, y)
+
+	print "Best Estimator:\n", gs.best_estimator_
+	print "Type: ", type(gs.best_estimator_)
+	return gs.best_estimator_
+
 for i in range(1):
 	#calling in date ranges plus stock name to be pulled
 	ticker = raw_input('Enter a stock ticker then press "Enter":\n')	
@@ -81,15 +96,15 @@ for i in range(1):
 
 		
 	#X_train, X_test, y_train, y_test = cross_validation.train_test_split(X, y, test_size=0.5)
-
-	# performing the algorithm 
-	clf = svm.SVR()
+	
+	# regression optimization 
+	clf = regressorOp(X_train, y_train)
 	clf.fit(X_train,y_train)
-
+	
 	y_pred = clf.predict(X_test)
 
-	accuracy = abs(clf.score(X_test,y_test))
-	variance = abs(metrics.explained_variance_score(y_test, y_pred))
+	accuracy = clf.score(X_test,y_test)
+	variance = metrics.explained_variance_score(y_test, y_pred)
 
 	# iterate and print average accuracy rate
 	print "---------------------------------------"
@@ -98,13 +113,13 @@ for i in range(1):
 	accuracies.append(accuracy)	
 
 	# test value
-	test_set = np.array([[0,100],[100,0],[5, 71],[6,6]])
+	test_set = np.array([[100,100],[0,0],[45, 42],[6,6]])
 	print "--------------------------------------"
-	print "np.array([0,100],[100,0],[5,71],[6,6]])"
+	print "np.array([100,100],[0,0],[45, 42],[6,6]])"
 	prediction = clf.predict(test_set)
 	
 	print "--------------------------------------"
 	print "prediction: "
 	print prediction
-
+	
 #print sum(accuracies)/len(accuracies)
