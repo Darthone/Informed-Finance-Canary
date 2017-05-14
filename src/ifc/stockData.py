@@ -19,7 +19,7 @@ def get_data_for_sym_from_yahoo(ticker_sym, start, end):
 
 #@memoize
 def get_data_for_sym(ticker_sym, start, end):
-    return get_data_for_sym_from_yahoo(ticker_sym, start, end)
+    return list(reversed(get_data_for_sym_from_yahoo(ticker_sym, start, end)))
 	#res = StockFeature.select().where(Relationship.from_user == self))
 
 """
