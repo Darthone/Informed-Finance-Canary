@@ -8,35 +8,8 @@
  * Controller of the ifcApp
  */
 angular.module('ifcApp')
-  .controller('MainCtrl', ['$scope', function ($scope) {
-
-		$scope.articles = {data:[
-      {
-        title: 'foo',
-        date: '20140313T00:00:00',
-        text: "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nullam sit amet enim ac lectus pellentesque lobortis ac eu lorem. Suspendisse auctor massa mi, id dapibus odio suscipit nec. Aenean maximus accumsan accumsan. Donec maximus suscipit dolor, vitae finibus nibh dictum in. Vestibulum fringilla pretium purus in maximus. Nam semper congue arcu, convallis interdum nibh placerat ac. Fusce scelerisque lobortis elit eu blandit. Etiam volutpat accumsan leo viverra malesuada. Aliquam erat volutpat. Duis metus quam, tempor vel porta vel, feugiat a ex. Sed sollicitudin, neque vel feugiat molestie, turpis nulla blandit felis, quis cursus magna lacus eu mi.          Aliquam erat volutpat. Duis nec tempus turpis. Curabitur ultrices, augue ut tempus sollicitudin, urna mauris viverra odio, quis vestibulum dui risus vel velit. Aliquam urna nisl, pretium sit amet condimentum a, tempus sit amet purus. Donec quam odio, faucibus non vehicula ac, dignissim volutpat magna. Donec placerat libero sem, eu luctus nulla faucibus in. Ut feugiat lectus et enim ultrices accumsan. Duis cursus enim at nunc scelerisque, vel blandit odio rutrum. Ut tempus nulla nibh, ac vestibulum orci auctor in. Duis tincidunt elementum finibus. Maecenas eget risus vel dui efficitur convallis non ut justo. Integer faucibus nisi quis auctor elementum. Morbi rutrum odio pretium, feugiat lorem eget, tempor risus. Cras porttitor placerat malesuada.          Integer cursus ultricies consectetur. In sapien ex, condimentum vitae mattis id, fringilla id ex. Aenean eget ex volutpat, tincidunt nibh eu, egestas sem. Quisque id ante aliquet, elementum lectus at, convallis ipsum. Aenean luctus, ex ut pharetra imperdiet, velit nibh semper tellus, vel semper ligula diam sit amet tortor. Quisque mattis elit ex, at ornare lectus porta aliquet. Sed orci est, pellentesque quis egestas tempus, rutrum sit amet urna. Fusce eu mi nisl.",
-        keywords: ['Curabitur ultrices', 'vel blandit', 'tortor', 'faucibus'],
-        url: 'https://www.google.com'
-      },
-	    {
-        title: 'Some really long and important Title',
-        date: '20170413T00',
-        text: 'this is just a really short article',
-        keywords: ['short'],
-        url: 'https://www.youtube.com'
-      }
-    ]};
-
-    /*$scope.hoverIn = function(){
-				this.hoverEdit = true;
-		};
-
-		$scope.hoverOut = function(){
-				this.hoverEdit = false;
-		};
-*/
-    //$scope.show = false;
-
+  .controller('MainCtrl', ['$scope', 'data', function ($scope, data) {
+    // Contols what options pop up on the calendar
     $scope.ranges =  {
          'Last 30 Days': [moment().subtract(29, 'days'), moment()],
          'Last 90 Days': [moment().subtract(89, 'days'), moment()],
@@ -44,14 +17,8 @@ angular.module('ifcApp')
          'Last 5 Years': [moment().subtract(5, 'years'), moment()],
     } 
 
-    $scope.selected = {ticker:null, calcs:[]}
-
-    $scope.tickers = {data:[{sym:'TGT', name:'Target Corporation'}, {sym:'GM', name:'General Motors Company'}, {sym:'UAA', name:'Under Armour Inc Class A'}]};
-
-    //TODO BACKEND
-    //$scope.tickers.data = getTickers();
-
-		$scope.calcOpts = [
+    // options to add calculations
+    $scope.calcOpts = [ 
       {name: 'mavg', prop: {window: 10}, description:"Simple moving average"},
       {name: 'rsi', prop: {window: 14}, description:"Relative Strength Index is a momentum oscillator that measures the speed and change of price movements"},
       {name: 'ema', prop: {window: 12}, description:"Exponential moving average"},
@@ -65,6 +32,41 @@ angular.module('ifcApp')
       {name: 'obv', prop: {window: 14}, description:"On Balance Volume is a momentum indicator that uses volume flow"},
       {name: 'trix', prop: {window: 15 }, description:"Triple Exponential Moving Average Smooth the insignificant movements"}
     ]
+
+
+    $scope.selected = {ticker:null, calcs:[]}
+    $scope.tickers = {data: data.getTickers()};
+
+    $scope.articles = {data: []};
+    $scope.getArticles = function() {
+      if ($scope.selected.ticker == null) 
+        return;
+
+      if ($scope.showChart == true){
+				$scope.createChart(); // updated chart on date change
+			}
+      var start, end;
+      try {
+        start = moment($scope.datePicker.date.startDate).format("YYYY-MM-DD");
+        end = moment($scope.datePicker.date.endDate.endDate).format("YYYY-MM-DD");
+      } catch (err) {
+        console.log(err)
+        start =  $scope.datePicker.date.startDate.format("YYYY-MM-DD");
+        end =  $scope.datePicker.date.endDate.format("YYYY-MM-DD");
+      }
+
+      data.getArticles(start, end, $scope.selected.ticker.sym).then(function (response) {
+        $scope.articles.data = response.data.data;
+      });
+
+    }
+
+    $scope.copyCalc = function (ind) {
+      var cur = $scope.selected.calcs[ind];
+      var dupe = angular.copy(cur);
+      dupe.id = ind; // this is a hack
+      $scope.selected.calcs.splice(ind + 1, 0, dupe);
+    }
 
     $scope.addBasicCalcs = function () {
       $scope.selected.calcs.push($scope.calcOpts[0]); //sma
@@ -84,37 +86,126 @@ angular.module('ifcApp')
     }
 
     $scope.datePicker = {date: null};
-    $scope.datePicker.date = {startDate: moment().subtract(29, 'days'), endDate: moment()};
+    $scope.datePicker.date = {
+      startDate: moment().subtract(29, 'days'),
+      endDate: moment()
+    };
 
-    $scope.chartConfig = {
-				options: {
-						chart: {
-								type: 'line',
-								zoomType: 'x'
-						}
-				},
-				series: [{
-						data: [10, 15, 12, 8, 7, 1, 1, 19, 15, 10]
-				}],
-				title: {
-						text: 'Hello'
-				},
-				xAxis: {currentMin: 0, currentMax: 10, minRange: 1},
-				loading: true,
-				useHighStocks: true,
+    var groupingUnits = [
+      [
+        'week', // unit name
+        [1, 2, 3] // allowed multiples
+      ], [
+        'month',
+        [1, 2, 3, 4, 6]
+      ]
+    ];
 
-		};
+    var chart = {
+      chart:{
+        zoomType: 'x',
+        height: '65%'
+      },
+      title: {
+          text: 'Hello'
+      },
+      yAxis: [
+        {
+          labels: {
+            align: 'right',
+            x: -3
+          },
+          title: {
+            text: 'OHLC'
+          },
+          height: '60%',
+          lineWidth: 2
+        }, {
+          labels: {
+            align: 'right',
+            x: -3
+          },
+          title: {
+            text: 'Volume'
+          } ,
+          top: '65%',
+          height: '35%',
+          offset: 0,
+          lineWidth: 2
+        }
+      ],
+      foo: [{
+        name: 'Stock',
+        type: 'candlestick',
+        data: [],
+        tooltip: {
+          valueDecimals: 2
+        },
+				indicators: [],
+        dataGrouping: {
+          units: groupingUnits
+        }
+      }, {
+        type: 'column',
+        name: 'Volume',
+        data: [],
+        yAxis: 1,
+        dataGrouping: {
+          units: groupingUnits
+        }
+      }],
+      tooltip: {
+				split: true
+			},
+      plotOptions: {
+			  candlestick: {
+					color: 'red',
+					upColor: 'green'
+			  }
+      },
+    };
+  
 
     $scope.showChart = false;
+    $scope.showGears = false;
 
     $scope.createChart = function () {
-      $scope.showChart = true;
-      //TODO
-      //backend stuff
-      setTimeout(myFunction, 3000);
-				setTimeout(function(){ 
-					//$scope.chartConfig.loading = false;
-				}, 3000);  
+      $scope.showGears = true;
+      $scope.showChart = !$scope.showChart;
+
+      var start, end;
+      var params = [];
+      angular.forEach($scope.selected.calcs, function (item) {
+        params.push({type: item.name, param: item.prop});
+      });
+
+      try {
+        start = moment($scope.datePicker.date.startDate).format("YYYY-MM-DD");
+        end = moment($scope.datePicker.date.endDate.endDate).format("YYYY-MM-DD");
+      } catch (err) {
+        console.log(err);
+        start =  $scope.datePicker.date.startDate.format("YYYY-MM-DD");
+        end =  $scope.datePicker.date.endDate.format("YYYY-MM-DD");
+      }
+
+      data.getStockData(start, end, $scope.selected.ticker.sym, params).then(function (response) {
+        chart.title.text = $scope.selected.ticker.name;
+        chart.series = chart.foo;
+        chart.series[0].data = response.data.ohlc;
+        chart.series[1].data = response.data.volume;
+        angular.forEach(response.data.columns, function(col) {
+          chart.series.push({
+            type: 'line',
+            name: col,
+            data: response.data[col],
+            dataGrouping: { units: groupingUnits}
+          });
+        });
+        $scope.showGears = false;
+        $scope.showChart = true; // something funky happens here 
+        // Removed for now. See https://stackoverflow.com/questions/16216722/highcharts-hidden-charts-dont-get-re-size-properly
+        $('#myChart').highcharts('StockChart', chart);
+      });
     }
       
   }]);

@@ -3,13 +3,18 @@
     background-color: rgba(142,109,155,0.2);
     font-weight:    bold;
   }
+	.progress-label {
+    float: left;
+    margin-right: 1em;
+	}
 </style>
+
 <div class="container">
     <div class="row">
         <div class="col-md-7" style="border-right: 1px solid #aaa">
           <label class="col-sm-1"> Ticker: </label>
           <div class="col-md-4">
-							<ui-select ng-model="selected.ticker" theme="bootstrap">
+							<ui-select ng-model="selected.ticker" theme="bootstrap" ng-change="getArticles()">
 								<ui-select-match placeholder="Select or search for a ticker..."> {{$select.selected.sym}} </ui-select-match>
 								<ui-select-choices repeat="item in tickers.data | filter: $select.search">
 									<div ng-bind-html="item.name | highlight: $select.search"></div>
@@ -19,13 +24,13 @@
 	        </div>
           <div class="col-md-6">
           <label > Date Range: 
-						<input type="daterange" ng-model="datePicker.date" ranges="ranges" placeholder="Pick Date Range"/>
+						<input type="daterange" ng-model="datePicker.date" ranges="ranges" placeholder="Pick Date Range" ng-change="getArticles()"/>
             </label>
 					</div>
           <br/>
           <hr/>
 
-          <div class="row">
+           <div class="row" ng-show="selected.ticker!=null">
             <button ng-click="addBasicCalcs()" class="btn btn-default">
                 Add Basic Calculations
                 <i class="glyphicon glyphicon-plus-sign"></i>
@@ -34,26 +39,25 @@
                 Add Advanced Calculations
                 <i class="glyphicon glyphicon-plus-sign"></i>
             </button>
-<!--            <button ng-click="selected.calcs.push({})" class="btn btn-default">
-                Add Custom Calculation
+<!--            <button ng-click="addCustomCalc()" class="btn btn-default pull-right">
+                Add Individual Calculation
                 <i class="glyphicon glyphicon-plus-sign"></i>
 </button> -->
+          <button type="button" class="btn btn-primary pull-right" 
+            ng-click="createChart()" 
+            ng-show="selected.ticker!=null"
+            style="margin-right: 50px;">Chart</button>
           </div>
 
           <hr/>
-					<ul class="list-group">
+					<ul class="list-group" ng-show="selected.ticker!=null">
             <li ng-repeat="calc in selected.calcs" class="list-group-item" style="min-height: 70px" data-placement="left" title="{{calc.description}}" onmouseenter="$(this).tooltip('show')">
-              <label class="col-sm-2"> {{calc.name | uppercase}} </label>
+              <label class="col-sm-1"> {{calc.name | uppercase}} </label>
               <label ng-repeat="(name, data) in calc.prop" class="col-sm-3 text-capitalize">  
-                {{name}} &nbsp;
-                <input type="number" min="0" ng-model="calc.prop[name]" placeholder="{{data}}" style="max-width: 60px"> 
+                {{name}}
+                <input type="number" min="0" ng-model="calc.prop[name]" placeholder="{{data}}" style="max-width: 40px" > days </input>
               </label>
               <!--
-              <div>
-              <div class="col-sm-1">
-                <label>Type:
-                </label>
-              </div>
               <div class="col-sm-3">
                 <ui-select ng-model="calc" theme="bootstrap">
                   <ui-select-match placeholder="Select a calculation..."> {{$select.selected.name | uppercase }} </ui-select-match>
@@ -67,40 +71,73 @@
                 {{p.keys}}
                 <input/>
               </div> -->
+                <button class="btn btn-default pull-right" ng-click="copyCalc($index)">
+                    <i class="glyphicon glyphicon-duplicate"></i>
+                </button>
                 <button class="btn btn-default pull-right" ng-click="selected.calcs.splice($index, 1)">
-                      <i class="glyphicon glyphicon-minus-sign"></i>
+                    <i class="glyphicon glyphicon-minus-sign"></i>
                 </button>
 						</li>
-
 					</ul>
+          <img src="img/gears.gif" ng-show="showGears" class="img-responsive center-block"/>
+          <div id="myChart"/>
+          <hr ng-show="showChart"/>
           <br/>
-          <button type="button" class="btn btn-primary" ng-click="createChart()">Chart</button>
-          <br/>
-          <br/>
-          <highchart id="chart1" config="chartConfig" ng-show="showChart"></highchart>
-          <br/>
-          <hr/>
-          <br/>
+          <div class="panel panel-primary" ng-show="!showGears && showChart">
+						<div class="panel-heading"> Back Testing Results </div>
+						<div class="panel-body">
+							Panel content
+						</div>
+					</div>
         </div>
         <div class="col-md-5">
+          <div class="panel panel-info" ng-show="!showGears && showChart">
+						<div class="panel-heading"> Summary  </div>
+						<div class="panel-body">
+							Panel content
+						</div>
+					</div>
+          <hr/>
           <h1>Related Articles</h1>
           <hr/>
           <div class="panel-group">
           <div ng-repeat="article in articles.data" class="panel panel-default">
             <div class="panel-heading" ng-click="show= !show">
-                <h4 class="panel-title">
+                <h1 class="panel-title">
                   <label> {{article.date | date:'MM-dd-yyyy'}} - {{article.title}} </label>
                   <i ng-show="!show" class="glyphicon glyphicon-chevron-down pull-right"></i>
                   <i ng-show="show" class="glyphicon glyphicon-chevron-up pull-right"></i>
                 </h4>
             </div>
             <div ng-show="show" class="panel-body">
-               <label> Content: </label> 
-               <div highlight="article.text" keywords="article.keywords.join(',')"/>
+              <label> Content: </label> 
+              <div highlight="article.content" keywords="article.keywords.join(',')"/>
 
-               <label> Keywords: </label> 
-               <p>{{article.keywords}}</p>
-               <label> Source: </label> <a href="{{article.url}}">{{article.url}}</a>
+              <label> Keywords: </label> 
+              <p>{{article.keywords}}</p>
+              <label> Source: </label> <p><a href="{{article.source}}">{{article.source}}</a></p>
+              <label> Sentiment: </label>
+							</br>
+							Positive	
+              <div class="progress">
+								<div class="progress-bar progress-bar-success" role="progressbar" aria-valuenow="50" aria-valuemin="0" aria-valuemax="100" style="width: 80%">
+								</div>
+							</div>
+							Neutral
+              <div class="progress">
+								<div class="progress-bar progress-bar-warning" role="progressbar" aria-valuenow="50" aria-valuemin="0" aria-valuemax="100" style="width: 80%">
+								</div>
+							</div>
+							Negative
+              <div class="progress">
+								<div class="progress-bar progress-bar-danger" role="progressbar" aria-valuenow="50" aria-valuemin="0" aria-valuemax="100" style="width: 80%">
+								</div>
+							</div>
+							Compound
+              <div class="progress">
+								<div class="progress-bar progress-bar-info" role="progressbar" aria-valuenow="50" aria-valuemin="0" aria-valuemax="100" style="width: 80%">
+								</div>
+							</div>
             </div>
           </div>
     </div>

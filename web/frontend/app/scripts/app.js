@@ -18,7 +18,6 @@ angular
     'ngRoute',
     'ngSanitize',
     'ngTouch',
-    'highcharts-ng',
     'ngBootstrap',
     'ui.select'
   ])
