@@ -9,6 +9,7 @@ def dicts_to_df(list_of_dicts):
     df = pd.DataFrame(list_of_dicts)
     df.drop('Symbol', axis=1, inplace=True)
     df['Date'] = pd.to_datetime(df['Date'])
+    df['epoch'] = (df['Date'] - datetime(1970,1,1)).dt.total_seconds() * 1000
     df.set_index('Date')
     cols = ['High', 'Low', 'Volume', 'Open', 'Close', 'Adj_Close']
     for c in cols:
@@ -56,6 +57,7 @@ class Series(object):
         self.set_max_win(window)
         name = "mavg_%s" % (window)
         self.df[name] = self.df['Adj_Close'].rolling(window=window).mean()
+        return name
 
     def calculate_rsi(self, window=14, col='Adj_Close'):
         self.set_max_win(window)
@@ -68,12 +70,14 @@ class Series(object):
         name = "rsi_%s" % (window)
         RS = RolUp / RolDown
         self.df[name] = 100.0 - (100.0 / (1.0 + RS))
+        return name
 
     def calculate_ema(self, window, name=None, col='Adj_Close'):
         self.set_max_win(window)
         if name is None:
             name = "ema_%s" % (window)
         self.df[name] = pd.ewma(self.df[col], span=window, min_periods=window)
+        return name
 
     def calculate_macd(self, signal=9, fast=12, slow=26, col='Adj_Close'):
         """ MACD """
@@ -85,6 +89,7 @@ class Series(object):
         name = "macd_%s_%s" % (fast, slow)
         self.df[name] = fast_ema - slow_ema
         self.calculate_ema(signal, col=name, name=signal_name)
+        return name
 
     def calculate_mom(self, col='Adj_Close', window=1):
         """ Momentum Measures the change in price
@@ -93,6 +98,7 @@ class Series(object):
         self.set_max_win(window)
         name = "mom_%s" % (window)
         self.df[name] = self.df[col] - self.df[col].shift(window)
+        return name
 
     def calculate_rocr(self, window=3, col='Adj_Close'):
         """ Rate of Change Compute rate of change 
@@ -102,6 +108,7 @@ class Series(object):
         self.set_max_win(window)
         name = "rocr_%s" % (window)
         self.df[name] = (self.df[col] / self.df[col].shift(window)) * 100
+        return name
 
     def calculate_atr(self, window=14):
         """ Average True Range Shows volatility of market 
@@ -118,6 +125,7 @@ class Series(object):
             tr_l.append(tr)  
         name = 'atr_%s' % (window)
         self.df[name] = pd.ewma(pd.Series(tr_l), span=window, min_periods=window)
+        return name
 
     def calculate_mfi(self, window=14):
         """ Money Flow Index Relates typical price with Volume 
@@ -140,6 +148,7 @@ class Series(object):
         TotMF = tp * self.df['Volume']  
         MFR = pd.Series(PosMF / TotMF)  
         self.df[name] = MFR.rolling(window=window).mean()
+        return name
 
     def calculate_adx(self, window=14, window_adx=14):
         """ Average Directional Index Discover if trend is developing
@@ -167,6 +176,7 @@ class Series(object):
         NegDI = pd.ewma(pd.Series(DoI), span=window, min_periods=window-1) / self.df[atr_name]
         name = "adx_%s_%s" % (window, window_adx)
         self.df[name] = pd.Series(pd.ewma(abs(PosDI - NegDI) / (PosDI + NegDI), span=window_adx, min_periods=window_adx-1))
+        return name
 
     def calculate_cci(self, window=12):
         """ Commodity Channel Index Identifies cyclical turns in stock price 
@@ -179,6 +189,7 @@ class Series(object):
         tp = (self.df['High'] + self.df['Low'] + self.df['Adj_Close']) / 3
         name = "cci_%s" % (window)
         self.df[name] = pd.Series((tp - tp.rolling(window=window).mean()) / tp.rolling(window=window, center=False).std())
+        return name
 
     def calculate_obv(self, col='Adj_Close', window=14):
         """ On Balance Volume is a momentum indicator that uses volume flow
@@ -195,6 +206,7 @@ class Series(object):
                 obv.append(-self.df.get_value(i + 1, 'Volume'))  
         name = "obv_%s" % (window)
         self.df[name] = pd.Series(obv).rolling(window=window).mean()
+        return name
 
     def calculate_trix(self, window=15):
         """ Triple Exponential Moving Average Smooth the insignificant movements 
@@ -213,4 +225,5 @@ class Series(object):
 
         name = "trix_%s" % (window)
         self.df[name] = pd.Series(roc_l)
+        return name
 

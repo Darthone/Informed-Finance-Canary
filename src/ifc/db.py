@@ -63,7 +63,9 @@ class ArticleFeature(BaseModel):
     """ Relationship for showing which article relates to the extracted feasture """
     article = ForeignKeyField(Article, related_name="article", primary_key=True)
     positive = DecimalField()
+    neutral = DecimalField()
     negative = DecimalField()
+    compound = DecimalField()
     other = TextField()
 
 
