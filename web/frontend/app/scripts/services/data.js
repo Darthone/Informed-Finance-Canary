@@ -10,9 +10,7 @@
 angular.module('ifcApp')
   .factory('data', function ($http) {
 
-    //var baseUrl = "http://localhost:5001/";
-    var baseUrl = "http://marsha:5001/";
-    //var baseUrl = "http://dariomarasco.zapto.org:5001/";
+    var baseUrl = "http://localhost:5001/";
     var articlesUrl = baseUrl + "articles?";
     var stockUrl = baseUrl + "stock?";
 

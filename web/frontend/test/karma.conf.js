@@ -31,7 +31,7 @@ module.exports = function(config) {
       'bower_components/angular-route/angular-route.js',
       'bower_components/angular-sanitize/angular-sanitize.js',
       'bower_components/angular-touch/angular-touch.js',
-      'bower_components/highcharts/highstocks.js',
+      'bower_components/highcharts/highcharts.js',
       'bower_components/moment/moment.js',
       'bower_components/bootstrap-daterangepicker/daterangepicker.js',
       'bower_components/ng-bs-daterangepicker/src/ng-bs-daterangepicker.js',

@@ -61,18 +61,21 @@ def preProcessing(stock_name, start_date, end_date):
 	return df
 
 def regressorOp(x, y):
+	"""
+	This will optimize the parameters for the algo
+	"""
 	regr_rbf = svm.SVR(kernel="rbf")
 	C = [1000, 10, 1]
 	gamma = [0.005, 0.004, 0.003, 0.002, 0.001]
 	epsilon = [0.1, 0.01]
 	parameters = {"C":C, "gamma":gamma, "epsilon":epsilon}
 	
-	gs = grid_search.GridSearchCV(regr_rbf, parameters, scoring="r2")
-	
+	gs = grid_search.GridSearchCV(regr_rbf, parameters, scoring="r2")	
 	gs.fit(x, y)
 
 	print "Best Estimator:\n", gs.best_estimator_
 	print "Type: ", type(gs.best_estimator_)
+
 	return gs.best_estimator_
 
 for i in range(1):
@@ -94,7 +97,6 @@ for i in range(1):
 
 	#print test_df[:240]
 
-		
 	#X_train, X_test, y_train, y_test = cross_validation.train_test_split(X, y, test_size=0.5)
 	
 	# regression optimization 

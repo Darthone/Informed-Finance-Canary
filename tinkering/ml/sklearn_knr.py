@@ -22,13 +22,17 @@ def addDailyReturn(dataset):
 	dataset['UpDown'] = (dataset['Adj_Close']-dataset['Adj_Close'].shift(1))/dataset['Adj_Close'].shift(1)
 	print dataset['UpDown'][240:]
 
-	# will be denoted by 3 when transformed
-	dataset.UpDown[dataset.UpDown > 0] = "sell"
+	# will be denoted by 5 when transformed
+	dataset.UpDown[dataset.UpDown > 0.05] = "sell"
+
+	dataset.UpDown[(dataset.UpDown > 0) & (dataset.UpDown < 0.05)] = "week sell"
 
 	dataset.UpDown[dataset.UpDown == 0] = "hold"
+	
+	dataset.UpDown[(dataset.UpDown < 0) & (dataset.UpDown > -0.03)] = "week buy"
 
-	dataset.UpDown[dataset.UpDown < 0] = "buy"
-	#print dataset['UpDown'][:10]
+	dataset.UpDown[dataset.UpDown < -0.03] = "buy"
+	print dataset['UpDown'][:10]
 	dataset.UpDown = le.fit(dataset.UpDown).transform(dataset.UpDown)
 
 	#print dataset['UpDown']
@@ -81,7 +85,7 @@ def trade(array):
 			print 'Price: ', current_price
 			print 'Daily Return Idicator: ', current_updown
 			if stance == 'none':
-				if current_updown < 1.5: #buy stock condition
+				if current_updown < 2: #buy stock condition
 					#check first if we have enough money
 					print 'buy triggered'
 					price_bought = current_price
@@ -91,7 +95,7 @@ def trade(array):
 						starting_price = price_bought
 					trade_count += 1
 			elif stance == 'holding':
-				if current_updown > 2.5: #sell stock condition
+				if current_updown > 3: #sell stock condition
 					if current_price > price_bought:
 						print 'sell triggered'
 						price_sold = current_price
@@ -138,7 +142,7 @@ for i in range(1):
 	trade(trade_array)
 	
 	# performing the algorithm 
-	clf = neighbors.KNeighborsRegressor()
+	clf = neighbors.KNeighborsClassifier()
 	clf.fit(X_train,y_train)
 
 	y_pred = clf.predict(X_test)

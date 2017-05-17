@@ -1,5 +1,10 @@
 #!/usr/bin/env python
+"""
+    Backend rest server for IFC
 
+    How to use:
+        - source the top level virtual environment and run
+"""
 import ujson as json
 
 import pandas as pd
