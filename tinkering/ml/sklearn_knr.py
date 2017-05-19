@@ -142,7 +142,7 @@ for i in range(1):
 	trade(trade_array)
 	
 	# performing the algorithm 
-	clf = neighbors.KNeighborsClassifier()
+	clf = svm.SVC()
 	clf.fit(X_train,y_train)
 
 	y_pred = clf.predict(X_test)
