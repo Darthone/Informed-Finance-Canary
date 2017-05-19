@@ -1,26 +1,32 @@
 #!/usr/bin/env python
-from common import memoize
-#from DateTime import date, timedelta
+from datetime import datetime
 #from ifc.db import StockFeature, database
 
 import logging
-#import peewee
-import yahoo_finance
+import io
+import requests
+import pandas as pd
 
-def get_data_for_sym_from_yahoo(ticker_sym, start, end):
-    """ returns a list of dicts for stock data formatted as:
-            {u'Volume': u'28720000', u'Symbol': u'YHOO', u'Adj_Close': u'35.83', u'High': u'35.89', u'Low': u'34.12', u'Date': u'2014-04-29', u'Close': u'35.83', u'Open': u'34.37'}
-        Dates must be in format of YYYY-mm-dd """
-    try:
-        return yahoo_finance.Share(ticker_sym).get_historical(start, end)
-    except yahoo_finance.YQLResponseMalformedError:
-        logging.error("Malformed Url")
-        return []
+from ifc.common import memoize
+
+def get_data_from_google(ticker_sym, start, end):
+    """ Returns a data frame of data for a given stock between two dates """
+    url = "https://www.google.com/finance/historical?q=%s&startdate=%s&enddate=%s&output=csv" % (ticker_sym, start, end)
+    s = requests.get(url).content
+    df = pd.read_csv(io.StringIO(s.decode('utf-8')))
+    df['Date'] = pd.to_datetime(df['Date'])
+    df['epoch'] = (df['Date'] - datetime(1970,1,1)).dt.total_seconds() * 1000
+    df.set_index('Date')
+    df['Adj_Close'] = df['Close'] # google's api doens't provide so just assume it's the same
+    cols = ['High', 'Low', 'Volume', 'Open', 'Close', 'Adj_Close']
+    for c in cols: # cast columns to numeric
+        df[c] = pd.to_numeric(df[c])
+    return df.iloc[::-1] # reverse the dataframe so index 0 is the earliest date
 
 #@memoize
-def get_data_for_sym(ticker_sym, start, end):
-    return list(reversed(get_data_for_sym_from_yahoo(ticker_sym, start, end)))
-	#res = StockFeature.select().where(Relationship.from_user == self))
+#def get_data_for_sym(ticker_sym, start, end):
+#    return list(reversed(get_data_for_sym_from_yahoo(ticker_sym, start, end)))
+#	#res = StockFeature.select().where(Relationship.from_user == self))
 
 """
 def fill_db_with_data(ticker_sym, days_back=3650):

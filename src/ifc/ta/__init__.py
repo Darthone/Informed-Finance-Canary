@@ -1,23 +1,13 @@
 import bisect
-from ifc.stockData import get_data_for_sym
+import ifc.stockData as stockData
 import pandas as pd
 import numpy as np
 from datetime import datetime
 
-def dicts_to_df(list_of_dicts):
-    """ convert data from yahoo finance """
-    df = pd.DataFrame(list_of_dicts)
-    df.drop('Symbol', axis=1, inplace=True)
-    df['Date'] = pd.to_datetime(df['Date'])
-    df['epoch'] = (df['Date'] - datetime(1970,1,1)).dt.total_seconds() * 1000
-    df.set_index('Date')
-    cols = ['High', 'Low', 'Volume', 'Open', 'Close', 'Adj_Close']
-    for c in cols:
-        df[c] = pd.to_numeric(df[c])
-    return df
-
 def get_series(ticker_sym, start, end):
-    return Series(dicts_to_df(get_data_for_sym(ticker_sym, start, end)))
+    df = stockData.get_data_from_google(ticker_sym, start, end)
+    print df
+    return Series(stockData.get_data_from_google(ticker_sym, start, end))
 
 class Series(object):
     """ used to represent a series of days """

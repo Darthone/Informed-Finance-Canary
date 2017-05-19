@@ -19,6 +19,7 @@ from playhouse.shortcuts import model_to_dict
 
 from ifc.ta import get_series
 from ifc.db import *
+from ifc.nlp import tfidf
 
 app = Flask(__name__)
 CORS(app)
@@ -38,30 +39,31 @@ class Articles(Resource):
         articles = StockArticle.select().join(Article).where(StockArticle.stock == sym, 
                            Article.date > datetime.strptime(args['start'], "%Y-%m-%d").date(), 
                            Article.date < datetime.strptime(args['end'], "%Y-%m-%d").date()).order_by(Article.date)
+        corpusDict = {article.article_id : article.article.content for article in articles }
+        corpus = corpusDict.values()
+        corpusKeys = corpusDict.keys()
+        tfidf_records = tfidf(corpus, corpusKeys, True)
+
         ret = {'data':[]}
         tmp = []
         dup = {}
         for a in articles:
             if not dup.has_key(a.article.title): # this is a hack, dupes should not exist in the first place
-                f = [x for x in ArticleFeature.select().join(Article).where(Article.title == a.article.title)]
-                print "here", dir(f), f
+                #f = [x for x in ArticleFeature.select().join(Article).where(Article.title == a.article.title)]
                 item = {
                     "author": a.article.author.name,
                     "date": a.article.date.strftime("%Y-%m-%d"),
                     "title": a.article.title,
                     "content": a.article.content,
                     "source": a.article.source,
-                    "keywords": [],
-                    "sentiment": {}
+                    "keywords": tfidf_records[a.article_id][1],
                 }
-                if len(f) == 1:
-                    f = f[0]
-                    item["sentiment"] = {
-                        "pos": float(f.positive) * 10,
-                        "net": float(f.neutral) * 10,
-                        "neg": float(f.negative) * 10,
-                        "comp": float(f.compound) * 10
-                        }
+                item["sentiment"] = {
+                    "pos": tfidf_records[a.article_id][0]['positive'] * 10,
+                    "net":  tfidf_records[a.article_id][0]['neutral']* 10,
+                    "neg":  tfidf_records[a.article_id][0]['negative']* 10,
+                    "comp": tfidf_records[a.article_id][0]['compound'] * 10
+                    }
                 tmp.append(item)
                 dup[a.article.title] = ""
         ret['data'] = list(reversed(tmp))
