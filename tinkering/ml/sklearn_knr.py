@@ -29,9 +29,9 @@ def addDailyReturn(dataset):
 
 	dataset.UpDown[dataset.UpDown == 0] = "hold"
 	
-	dataset.UpDown[(dataset.UpDown < 0) & (dataset.UpDown > -0.03)] = "week buy"
+	dataset.UpDown[(dataset.UpDown < 0) & (dataset.UpDown > -0.02)] = "week buy"
 
-	dataset.UpDown[dataset.UpDown < -0.03] = "buy"
+	dataset.UpDown[dataset.UpDown < -0.02] = "buy"
 	print dataset['UpDown'][:10]
 	dataset.UpDown = le.fit(dataset.UpDown).transform(dataset.UpDown)
 
@@ -61,6 +61,9 @@ def preProcessing(stock_name, start_date, end_date):
 	df.drop(['mavg_10'],1, inplace=True)
 	df.drop(['mavg_30'],1, inplace=True)
 	df.drop(['rsi_14'],1, inplace=True)
+	df.drop(['epoch'],1, inplace=True)
+	df.drop(['macd_12_26'],1, inplace=True)
+	df.drop(['signal_9'],1, inplace=True)
 	
 	return df
 
@@ -126,8 +129,8 @@ for i in range(1):
 	#calling in date ranges plus stock name to be pulled
 	ticker = raw_input('Enter a stock ticker then press "Enter":\n')	
 
-	train_df = preProcessing(ticker, "2015-04-17", "2016-04-17")
-	test_df = preProcessing(ticker, "2016-04-17", "2017-04-17")
+	train_df = preProcessing(ticker, "2015-01-01", "2015-12-31")
+	test_df = preProcessing(ticker, "2016-01-01", "2016-10-28")
 
 	print test_df[:5]	
 
@@ -137,12 +140,12 @@ for i in range(1):
 	X_test = np.array(test_df.drop(['UpDown'],1))
 	y_test = np.array(test_df['UpDown'])
 
-	trade_array = np.array(train_df.drop(['Open'],1))
+	trade_array = np.array(test_df.drop(['Open'],1))
 	print trade_array
 	trade(trade_array)
 	
 	# performing the algorithm 
-	clf = svm.SVC()
+	clf = neighbors.KNeighborsClassifier()
 	clf.fit(X_train,y_train)
 
 	y_pred = clf.predict(X_test)
