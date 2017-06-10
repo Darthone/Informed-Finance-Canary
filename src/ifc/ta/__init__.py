@@ -6,7 +6,6 @@ from datetime import datetime
 
 def get_series(ticker_sym, start, end):
     df = stockData.get_data_from_google(ticker_sym, start, end)
-    print df
     return Series(stockData.get_data_from_google(ticker_sym, start, end))
 
 class Series(object):

@@ -74,6 +74,7 @@ def get_summary(start, end, sym):
     return ret
 
 def get_backtesting(start, end, data):
+	#TODO 
     ret = {
         "price": data.df['Adj_Close'][len(data.df) - 1],
         "indicator": random.randint(1,5),

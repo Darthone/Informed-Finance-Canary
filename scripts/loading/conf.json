@@ -1,6 +1,6 @@
 {
     "watch": [
-        "../../work/handled/stock/"
+        "/hostname/senior-design/handled/stock/"
     ],
     "done_prefix": "../../work/loaded/handled",
     "error": "../../work/loaded/error"
